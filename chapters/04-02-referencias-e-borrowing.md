@@ -26,7 +26,11 @@ fn calculate_length(s: &String) -> usize {
 }
 ```
 
-Primeiro, observe que todo o código de tupla na declaração da variável e no valor de retorno da função desapareceu. Em segundo lugar, note que passamos `&s1` para `calculate_length` e, em sua definição, recebemos `&String` em vez de `String`. Esses e-comerciais (`&`) representam referências e permitem que você se refira a algum valor sem tomar ownership dele.
+Primeiro, observe que todo o código de tupla na declaração da variável e no valor de retorno da função desapareceu. Em segundo lugar, note que passamos `&s1` para `calculate_length` e, em sua definição, recebemos `&String` em vez de `String`. Esses e-comerciais (`&`) representam referências e permitem que você se refira a algum valor sem tomar ownership dele. A Figura 4-6 ilustra esse conceito.
+
+![Três tabelas: a tabela de s contém apenas um ponteiro para a tabela de s1. A tabela de s1 contém os dados na stack de s1 e aponta para os dados da string na heap.](https://doc.rust-lang.org/book/img/trpl04-06.svg)
+
+*Figura 4-6: Diagrama de `&String` `s` apontando para `String` `s1`*
 
 > **Nota:** O oposto de referenciar usando `&` é _dereferenciar_, o que é feito com o operador de dereferência, `*`. Veremos alguns usos do operador de dereferência no Capítulo 8 e discutiremos os detalhes de dereferenciação no Capítulo 15.
 
