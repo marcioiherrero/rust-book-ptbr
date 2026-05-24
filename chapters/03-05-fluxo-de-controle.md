@@ -62,7 +62,7 @@ condition was false
 
 A condição de um `if` deve ser obrigatoriamente do tipo `bool`. Caso contrário, ocorrerá um erro de compilação.
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {
@@ -166,7 +166,7 @@ The value of number is: 5
 
 Lembre-se de que blocos de código resultam no valor da última expressão contida neles, e números sozinhos também são expressões. Neste caso, o valor de toda a expressão `if` depende de qual bloco de código será executado. Isso significa que os valores produzidos por cada ramificação (ou "braço") do `if` devem ser do mesmo tipo. No Exemplo 3-2, os resultados tanto do `if` quanto do `else` eram inteiros do tipo `i32`. Se os tipos forem diferentes, como no exemplo a seguir, ocorrerá um erro:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {

@@ -128,7 +128,7 @@ Definições de funções também são declarações; ou seja, o exemplo acima i
 
 Declarações **não retornam valores**. Portanto, você não pode atribuir uma declaração `let` a outra variável, como o código a seguir tenta fazer; isso vai gerar um erro:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {
@@ -232,7 +232,7 @@ Em segundo lugar, a função `five` não tem parâmetros e define o tipo do valo
 
 Vejamos outro exemplo:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {

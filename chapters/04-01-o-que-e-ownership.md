@@ -180,7 +180,7 @@ Como dissemos antes, quando uma variável sai de escopo, Rust chama automaticame
 
 Para garantir segurança de memória, depois da linha `let s2 = s1;`, Rust considera `s1` como não mais válida. Portanto, Rust não precisa liberar nada quando `s1` sai de escopo. Veja o que acontece quando você tenta usar `s1` depois que `s2` foi criada; não funcionará:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {

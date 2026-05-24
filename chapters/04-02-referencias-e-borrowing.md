@@ -59,7 +59,7 @@ Chamamos a ação de criar uma referência de _borrowing_. Como na vida real, se
 
 Então, o que acontece se tentarmos modificar algo que estamos emprestando? Experimente o código na Listagem 4-6. Spoiler: não funciona!
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {
@@ -119,7 +119,7 @@ Primeiro, mudamos `s` para `mut`. Depois, criamos uma referência mutável com `
 
 Referências mutáveis têm uma grande restrição: se você tem uma referência mutável a um valor, não pode ter nenhuma outra referência a esse valor. Este código que tenta criar duas referências mutáveis a `s` vai falhar:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 let mut s = String::from("hello");
@@ -173,6 +173,8 @@ let r2 = &mut s;
 ```
 
 O Rust impõe uma regra similar para combinar referências mutáveis e imutáveis. Este código resulta em um erro:
+
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 let mut s = String::from("hello");
@@ -233,7 +235,7 @@ Em linguagens com ponteiros, é fácil criar erroneamente um _ponteiro dangling_
 
 Vamos tentar criar uma referência dangling para ver como o Rust as previne com um erro em tempo de compilação:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn main() {
@@ -276,6 +278,8 @@ for it to be borrowed from
 ```
 
 Vamos dar uma olhada mais de perto em exatamente o que está acontecendo em cada etapa do nosso código `dangle`:
+
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn dangle() -> &String { // dangle retorna uma referência a uma String

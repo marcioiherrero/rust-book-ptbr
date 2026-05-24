@@ -194,7 +194,7 @@ fn second_word(s: &String) -> &str {
 
 Agora temos uma API direta que é muito mais difícil de usar incorretamente, porque o compilador garantirá que as referências à `String` permaneçam válidas. Lembre-se do bug no programa da Listagem 4-8, quando obtivemos o índice do fim da primeira palavra, mas depois limpamos a string e nosso índice ficou inválido? Esse código era logicamente incorreto, mas não mostrava erros imediatos. Os problemas apareceriam depois se continuássemos tentando usar o índice da primeira palavra com uma string esvaziada. Slices tornam esse bug impossível e nos avisam muito antes de que há um problema no código. Usar a versão com slice de `first_word` gera um erro em tempo de compilação:
 
-**Arquivo: src/main.rs**
+**Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
 fn first_word(s: &String) -> &str {

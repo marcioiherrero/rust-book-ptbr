@@ -12,7 +12,7 @@ Quando uma variável é imutável, depois que um valor é associado a um nome, e
 
 Em seguida, dentro do diretório `variables`, abra o arquivo `src/main.rs` e substitua o código pelo seguinte (que ainda **não vai compilar**):
 
-Arquivo: src/main.rs
+Arquivo: src/main.rs (Este código não compila!)
 ```rust
 fn main() {
     let x = 5;
@@ -151,7 +151,7 @@ A primeira variável `spaces` é do tipo texto (`&str`), enquanto a segunda é u
 
 Se tentarmos fazer o mesmo usando `mut`, o código não irá compilar:
 
-Código inválido usando mut
+Arquivo: src/main.rs (Este código não compila!)
 ```rust
 let mut spaces = "   ";
 spaces = spaces.len();

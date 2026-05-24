@@ -294,7 +294,7 @@ Nesse exemplo, a variável chamada `first` receberá o valor `1`, pois esse é o
 
 Vamos ver o que acontece se você tentar acessar um elemento de um array que está fora dos limites dele. Imagine que você execute o código a seguir, semelhante ao jogo de adivinhação do Capítulo 2, para obter um índice do array digitado pelo usuário:
 
-Arquivo: src/main.rs
+Arquivo: src/main.rs (Este código entra em pânico!)
 ```rust
 use std::io;
 
