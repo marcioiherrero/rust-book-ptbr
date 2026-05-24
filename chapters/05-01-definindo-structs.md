@@ -253,9 +253,9 @@ Para definir `AlwaysEqual`, usamos a palavra-chave `struct`, o nome desejado e e
 >
 > Também é possível que structs armazenem referências a dados pertencentes a outra coisa, mas para isso é necessário usar _lifetimes_, um recurso do Rust que discutiremos no Capítulo 10. Lifetimes garantem que os dados referenciados por uma struct sejam válidos enquanto a struct existir. Digamos que você tente armazenar uma referência em uma struct sem especificar lifetimes, como no seguinte código em `src/main.rs`; isso não funcionará:
 >
-> **Arquivo: src/main.rs**
+> **Arquivo: src/main.rs (Este código não compila!)**
 >
-> ```rust,ignore,does_not_compile
+> ```rust
 > struct User {
 >     active: bool,
 >     username: &str,
