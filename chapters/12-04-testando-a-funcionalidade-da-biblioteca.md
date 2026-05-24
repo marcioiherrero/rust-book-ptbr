@@ -1,0 +1,234 @@
+---
+title: "Testando a funcionalidade da biblioteca"
+chapter_code: 12-04
+slug: testando-a-funcionalidade-da-biblioteca
+---
+
+# Adicionando Funcionalidade com Desenvolvimento Orientado a Testes
+
+Agora que temos a lógica de busca em _src/lib.rs_ separada da função `main`, é muito mais fácil escrever testes para a funcionalidade central do nosso código. Podemos chamar funções diretamente com vários argumentos e verificar valores de retorno sem precisar chamar nosso binário pela linha de comando.
+
+Nesta seção, adicionaremos a lógica de busca ao programa `minigrep` usando o processo de desenvolvimento orientado a testes (TDD) com os seguintes passos:
+
+1. Escrever um teste que falha e executá-lo para garantir que falha pelo motivo que você espera.
+2. Escrever ou modificar apenas código suficiente para fazer o novo teste passar.
+3. Refatorar o código que você acabou de adicionar ou mudar e garantir que os testes continuem passando.
+4. Repetir a partir do passo 1!
+
+Embora seja apenas uma de muitas formas de escrever software, TDD pode ajudar a orientar o design do código. Escrever o teste antes de escrever o código que faz o teste passar ajuda a manter alta cobertura de testes durante o processo.
+
+Conduziremos por TDD a implementação da funcionalidade que de fato fará a busca pela string de consulta no conteúdo do arquivo e produzirá uma lista de linhas que correspondem à consulta. Adicionaremos esta funcionalidade em uma função chamada `search`.
+
+### Escrevendo um teste que falha
+
+Em _src/lib.rs_, adicionaremos um módulo `tests` com uma função de teste, como fizemos no Capítulo 11. A função de teste especifica o comportamento que queremos que a função `search` tenha: receberá uma consulta e o texto a ser pesquisado e retornará apenas as linhas do texto que contêm a consulta. A Listagem 12-15 mostra este teste.
+
+**Arquivo: src/lib.rs (Este código não compila!)**
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    unimplemented!();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(vec!["safe, fast, productive."], search(query, contents));
+    }
+}
+```
+
+[Listagem 12-15](#listagem-12-15): Criando um teste que falha para a função `search` com a funcionalidade que desejamos
+
+Este teste busca pela string `"duct"`. O texto que estamos pesquisando tem três linhas, apenas uma das quais contém `"duct"` (observe que a barra invertida após a aspas dupla de abertura diz ao Rust para não colocar um caractere de nova linha no início do conteúdo deste literal de string). Afirmamos que o valor retornado pela função `search` contém apenas a linha que esperamos.
+
+Se executarmos este teste, ele falhará no momento porque a macro `unimplemented!` entra em pânico com a mensagem “not implemented”. De acordo com os princípios de TDD, daremos um passo pequeno de adicionar apenas código suficiente para o teste não entrar em pânico ao chamar a função, definindo a função `search` para sempre retornar um vetor vazio, como mostrado na Listagem 12-16. Então, o teste deve compilar e falhar porque um vetor vazio não corresponde a um vetor contendo a linha `"safe, fast, productive."`.
+
+**Arquivo: src/lib.rs**
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    vec![]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(vec!["safe, fast, productive."], search(query, contents));
+    }
+}
+```
+
+[Listagem 12-16](#listagem-12-16): Definindo apenas o suficiente da função `search` para que chamá-la não entre em pânico
+
+Agora vamos discutir por que precisamos definir um lifetime explícito `'a` na assinatura de `search` e usar esse lifetime com o argumento `contents` e o valor de retorno. Lembre-se no Capítulo 10 de que parâmetros de lifetime especificam qual lifetime do argumento está conectada ao lifetime do valor de retorno. Neste caso, indicamos que o vetor retornado deve conter slices de string que referenciam slices do argumento `contents` (em vez do argumento `query`).
+
+Em outras palavras, dizemos ao Rust que os dados retornados pela função `search` viverão enquanto os dados passados à função `search` no argumento `contents` viverem. Isso é importante! Os dados referenciados _por_ um slice precisam ser válidos para que a referência seja válida; se o compilador assumisse que estamos fazendo slices de string de `query` em vez de `contents`, faria sua verificação de segurança incorretamente.
+
+Se esquecermos as anotações de lifetime e tentarmos compilar esta função, obteremos este erro:
+
+```bash
+$ cargo build
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+error[E0106]: missing lifetime specifier
+ --> src/lib.rs:1:51
+  |
+1 | pub fn search(query: &str, contents: &str) -> Vec<&str> {
+  |                      ----            ----         ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `query` or `contents`
+help: consider introducing a named lifetime parameter
+  |
+1 | pub fn search<'a>(query: &'a str, contents: &'a str) -> Vec<&'a str> {
+  |              ++++         ++                 ++              ++
+
+For more information about this error, try `rustc --explain E0106`.
+error: could not compile `minigrep` (lib) due to 1 previous error
+```
+
+O Rust não pode saber qual dos dois parâmetros precisamos para a saída, então precisamos dizer explicitamente. Observe que o texto de ajuda sugere especificar o mesmo parâmetro de lifetime para todos os parâmetros e o tipo de saída, o que está incorreto! Como `contents` é o parâmetro que contém todo o nosso texto e queremos retornar as partes desse texto que correspondem, sabemos que `contents` é o único parâmetro que deve ser conectado ao valor de retorno usando a sintaxe de lifetime.
+
+Outras linguagens de programação não exigem que você conecte argumentos a valores de retorno na assinatura, mas esta prática ficará mais fácil com o tempo. Você pode querer comparar este exemplo com os exemplos na seção Validando referências com lifetimes do Capítulo 10.
+
+### Escrevendo código para fazer o teste passar
+
+No momento, nosso teste está falhando porque sempre retornamos um vetor vazio. Para corrigir isso e implementar `search`, nosso programa precisa seguir estes passos:
+
+1. Iterar por cada linha de `contents`.
+2. Verificar se a linha contém nossa string de consulta.
+3. Se contiver, adicioná-la à lista de valores que estamos retornando.
+4. Se não contiver, não fazer nada.
+5. Retornar a lista de resultados que correspondem.
+
+Vamos trabalhar cada passo, começando por iterar pelas linhas.
+
+#### Iterando pelas linhas com o método `lines`
+
+O Rust tem um método útil para lidar com iteração linha a linha de strings, convenientemente chamado `lines`, que funciona como mostrado na Listagem 12-17. Observe que isso ainda não compilará.
+
+**Arquivo: src/lib.rs (Este código não compila!)**
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    for line in contents.lines() {
+        // do something with line
+    }
+}
+```
+
+[Listagem 12-17](#listagem-12-17): Iterando por cada linha em `contents`
+
+O método `lines` retorna um iterator. Falaremos sobre iterators em profundidade no Capítulo 13. Mas lembre-se de que você viu esta forma de usar um iterator na Listagem 3-5, onde usamos um loop `for` com um iterator para executar algum código em cada item de uma coleção.
+
+#### Buscando a consulta em cada linha
+
+Em seguida, verificaremos se a linha atual contém nossa string de consulta. Felizmente, strings têm um método útil chamado `contains` que faz isso por nós! Adicione uma chamada ao método `contains` na função `search`, como mostrado na Listagem 12-18. Observe que isso ainda não compilará.
+
+**Arquivo: src/lib.rs (Este código não compila!)**
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    for line in contents.lines() {
+        if line.contains(query) {
+            // do something with line
+        }
+    }
+}
+```
+
+[Listagem 12-18](#listagem-12-18): Adicionando funcionalidade para ver se a linha contém a string em `query`
+
+No momento, estamos construindo funcionalidade. Para o código compilar, precisamos retornar um valor do corpo como indicamos que faríamos na assinatura da função.
+
+#### Armazenando linhas correspondentes
+
+Para terminar esta função, precisamos de uma forma de armazenar as linhas correspondentes que queremos retornar. Para isso, podemos criar um vetor mutável antes do loop `for` e chamar o método `push` para armazenar uma `line` no vetor. Após o loop `for`, retornamos o vetor, como mostrado na Listagem 12-19.
+
+**Arquivo: src/lib.rs**
+
+```rust
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+    let mut results = Vec::new();
+
+    for line in contents.lines() {
+        if line.contains(query) {
+            results.push(line);
+        }
+    }
+
+    results
+}
+```
+
+[Listagem 12-19](#listagem-12-19): Armazenando as linhas que correspondem para podermos retorná-las
+
+Agora a função `search` deve retornar apenas as linhas que contêm `query`, e nosso teste deve passar. Vamos executar o teste:
+
+```bash
+$ cargo test
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.33s
+     Running unittests src/lib.rs (target/debug/deps/minigrep-9cd200e5fac0fc94)
+
+running 1 test
+test tests::one_result ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+```
+
+Nosso teste passou, então sabemos que funciona!
+
+Neste ponto, poderíamos considerar oportunidades de refatorar a implementação da função de busca mantendo os testes passando para manter a mesma funcionalidade. O código na função de busca não é tão ruim, mas não aproveita alguns recursos úteis de iterators. Voltaremos a este exemplo no Capítulo 13, onde exploraremos iterators em detalhes e veremos como melhorá-lo.
+
+Agora o programa inteiro deve funcionar! Vamos tentá-lo, primeiro com uma palavra que deve retornar exatamente uma linha do poema de Emily Dickinson: _frog_.
+
+```bash
+$ cargo run -- frog poem.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s
+     Running `target/debug/minigrep frog poem.txt`
+How public, like a frog
+```
+
+Legal! Agora vamos tentar uma palavra que corresponderá a várias linhas, como _body_:
+
+```bash
+$ cargo run -- body poem.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep body poem.txt`
+I'm nobody! Who are you?
+Are you nobody, too?
+How dreary to be somebody!
+```
+
+E, por fim, vamos garantir que não obtemos linhas quando buscamos uma palavra que não está em lugar nenhum do poema, como _monomorphization_:
+
+```bash
+$ cargo run -- monomorphization poem.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep monomorphization poem.txt`
+```
+
+Excelente! Construímos nossa própria mini versão de uma ferramenta clássica e aprendemos muito sobre como estruturar aplicações. Também aprendemos um pouco sobre entrada e saída de arquivo, lifetimes, testes e parse de linha de comando.
+
+Para arredondar este projeto, demonstraremos brevemente como trabalhar com variáveis de ambiente e como imprimir em erro padrão, ambos úteis quando você escreve programas de linha de comando.
