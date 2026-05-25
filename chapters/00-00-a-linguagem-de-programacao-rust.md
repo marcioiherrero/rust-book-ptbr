@@ -4,6 +4,7 @@ title: "A linguagem de programação Rust"
 chapter_code: 00-00
 slug: a-linguagem-de-programacao-rust
 challenge_day: 1
+reading_minutes: 1
 ---
 
 # A Linguagem de Programação Rust
