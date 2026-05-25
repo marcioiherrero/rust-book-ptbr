@@ -2,6 +2,8 @@
 title: "Introdução"
 chapter_code: 00-02
 slug: introducao
+challenge_day: 1
+reading_minutes: 12
 ---
 
 # Introdução
