@@ -2,6 +2,8 @@
 title: "Prefácio"
 chapter_code: 00-01
 slug: prefacio
+challenge_day: 1
+reading_minutes: 3
 ---
 
 # Prefácio
