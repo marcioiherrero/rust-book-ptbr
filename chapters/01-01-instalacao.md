@@ -2,6 +2,8 @@
 title: "Instalação"
 chapter_code: 01-01
 slug: instalacao
+challenge_day: 1
+reading_minutes: 8
 ---
 
 # Instalação
