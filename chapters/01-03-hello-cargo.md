@@ -2,6 +2,8 @@
 title: "Hello, Cargo!"
 chapter_code: 01-03
 slug: hello-cargo
+challenge_day: 1
+reading_minutes: 13
 ---
 
 # Hello, Cargo!
