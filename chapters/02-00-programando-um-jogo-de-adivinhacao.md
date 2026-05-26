@@ -566,7 +566,7 @@ Arquivo: src/main.rs
 
 Como você pode ver, movemos tudo do prompt de entrada de palpite em diante para dentro de um loop. Certifique-se de indentar as linhas dentro do loop mais quatro espaços cada e execute o programa novamente. O programa agora pedirá outro palpite para sempre, o que na verdade introduz um novo problema. Não parece que o usuário pode sair!
 
-O usuário sempre poderia interromper o programa usando o atalho de teclado Ctrl+C. Mas há outra maneira de escapar deste monstro insaciável, como mencionado na discussão sobre `parse` em "Comparando o Palpite com o Número Secreto": se o usuário inserir uma resposta não numérica, o programa travará. Podemos aproveitar isso para permitir que o usuário saia, como mostrado aqui:
+O usuário sempre poderia interromper o programa usando o atalho de teclado Ctrl+C. Mas há outra maneira de escapar deste monstro insaciável, como mencionado na discussão sobre `parse` em [Comparando o palpite com o número secreto](#comparando-o-palpite-com-o-numero-secreto): se o usuário inserir uma resposta não numérica, o programa travará. Podemos aproveitar isso para permitir que o usuário saia, como mostrado aqui:
 
 ```bash
 $ cargo run
