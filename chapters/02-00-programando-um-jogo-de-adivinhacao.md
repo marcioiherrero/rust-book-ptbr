@@ -2,7 +2,7 @@
 title: "Programando um jogo de adivinhação"
 chapter_code: 02-00
 slug: programando-um-jogo-de-adivinhacao
-challenge_day: 1
+challenge_day: 2
 reading_minutes: 75
 ---
 
