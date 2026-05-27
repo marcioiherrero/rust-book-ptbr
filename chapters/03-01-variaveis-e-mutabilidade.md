@@ -25,16 +25,28 @@ fn main() {
 
 [Listagem 3-1](#listagem-3-1): Exemplo de código tentando alterar uma variável imutável
 
-Salve o arquivo e execute o programa com:
+Salve o arquivo e execute o programa com `cargo run`. Você deverá receber uma mensagem de erro relacionada à imutabilidade, parecida com esta:
 
-```bash
+```
 $ cargo run
-```
-
-Você deverá receber uma mensagem de erro relacionada à imutabilidade, parecida com esta:
-
-```
+   Compiling variables v0.1.0 (file:///projects/variables)
 error[E0384]: cannot assign twice to immutable variable `x`
+ --> src/main.rs:4:5
+  |
+2 |     let x = 5;
+  |         - first assignment to `x`
+3 |     println!("The value of x is: {x}");
+4 |     x = 6;
+  |     ^^^^^ cannot assign twice to immutable variable
+  |
+help: consider making this binding mutable
+  |
+2 |     let mut x = 5;
+  |         +++
+
+For more information about this error, try `rustc --explain E0384`.
+error: could not compile `variables` (bin "variables") due to 1 previous error
+
 ```
 
 Esse exemplo mostra como o compilador ajuda você a encontrar erros no seu programa. Erros de compilação podem ser frustrantes, mas eles só significam que o programa ainda não está fazendo, de forma segura, o que você quer que ele faça — isso não quer dizer que você seja um mau programador. Até programadores experientes em Rust ainda recebem erros do compilador.
