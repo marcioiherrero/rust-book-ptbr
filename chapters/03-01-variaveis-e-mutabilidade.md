@@ -67,8 +67,7 @@ Com isso, seu código fica mais fácil de raciocinar.
 
 Mas a mutabilidade pode ser muito útil e também pode tornar o código mais conveniente
 de escrever. Embora as variáveis sejam imutáveis por padrão, você pode torná-las mutáveis
-adicionando `mut` antes do nome da variável, como fez no [Capítulo
-2][storing-values-with-variables]<!-- ignore -->. Adicionar `mut` também comunica sua
+adicionando `mut` antes do nome da variável, como fez no [Capítulo 2](/livro/cap02-00-programando-um-jogo-de-adivinhacao#armazenando-valores-com-variáveis). Adicionar `mut` também comunica sua
 intenção para quem vier a ler o código no futuro, indicando que outras partes do código
 vão mudar o valor dessa variável.
 
@@ -77,13 +76,23 @@ Por exemplo, vamos alterar _src/main.rs_ para o seguinte:
 <span class="filename">Filename: src/main.rs</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
 ```
 
 Quando executamos o programa agora, obtemos isto:
 
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
+$ cargo run
+   Compiling variables v0.1.0 (file:///projects/variables)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/debug/variables`
+The value of x is: 5
+The value of x is: 6
 ```
 
 Podemos alterar o valor associado a `x` de `5` para `6` quando `mut` é usado.
@@ -103,7 +112,7 @@ Primeiro, não é permitido usar `mut` com constantes. Constantes não são apen
 imutáveis por padrão: elas são sempre imutáveis. Você declara constantes usando
 a palavra-chave `const`, em vez de `let`, e o tipo do valor _deve_ ser anotado.
 Vamos cobrir tipos e anotações de tipo na próxima seção,
-[“Tipos de dados”][data-types]<!-- ignore -->, então não se preocupe com os detalhes
+[“Tipos de dados”](/livro/cap03-02-tipos-de-dados#tipos-de-dados), então não se preocupe com os detalhes
 agora. Por enquanto, basta saber que é obrigatório sempre anotar o tipo.
 
 Constantes podem ser declaradas em qualquer escopo, inclusive no escopo global,
@@ -127,7 +136,7 @@ underscores entre as palavras. O compilador consegue avaliar um conjunto limitad
 de operações em tempo de compilação, o que nos permite escrever esse valor de um
 jeito mais fácil de entender e verificar, em vez de definir a constante diretamente
 como 10.800. Consulte a [seção sobre avaliação de constantes na Rust
-Reference][const-eval] para mais informações sobre quais operações podem ser usadas
+Reference](https://doc.rust-lang.org/reference/const_eval.html) para mais informações sobre quais operações podem ser usadas
 ao declarar constantes.
 
 Constantes são válidas durante todo o tempo de execução do programa, dentro do escopo
@@ -143,8 +152,7 @@ futuro.
 
 ### Sombreamento
 
-Como você viu no tutorial do jogo de adivinhação no [Capítulo
-2][comparing-the-guess-to-the-secret-number]<!-- ignore -->, você pode declarar uma
+Como você viu no tutorial do jogo de adivinhação no [Capítulo 2](/livro/cap02-00-programando-um-jogo-de-adivinhacao#comparando-o-palpite-com-o-numero-secreto), você pode declarar uma
 nova variável com o mesmo nome de uma variável anterior. Rustaceans dizem que a primeira
 variável foi _sombreada_ (_shadowed_) pela segunda, o que significa que a segunda variável
 é a que o compilador enxerga quando você usa aquele nome. Na prática, a segunda variável
@@ -155,7 +163,18 @@ reutilizando o mesmo nome e repetindo o uso da palavra-chave `let`, como a segui
 <span class="filename">Filename: src/main.rs</span>
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
 ```
 
 Esse programa primeiro associa `x` ao valor `5`. Depois, cria uma nova variável `x`
@@ -166,7 +185,12 @@ por `2` para dar a `x` o valor `12`. Quando esse escopo termina, o sombreamento 
 e `x` volta a ser `6`. Quando executamos esse programa, ele mostra o seguinte:
 
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
+$ cargo run
+   Compiling variables v0.1.0 (file:///projects/variables)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running `target/debug/variables`
+The value of x in the inner scope is: 12
+The value of x is: 6
 ```
 
 Sombreamento é diferente de marcar uma variável com `mut`, porque receberemos um erro
@@ -181,7 +205,8 @@ usuária indicar quantos espaços ela quer entre um texto digitando caracteres d
 depois queremos armazenar essa entrada como um número:
 
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
+let spaces = "   ";
+let spaces = spaces.len();
 ```
 
 A primeira variável `spaces` é do tipo string, e a segunda variável `spaces` é do tipo
@@ -191,13 +216,25 @@ No entanto, se tentarmos usar `mut` para isso, como mostrado aqui, teremos um er
 tempo de compilação:
 
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/src/main.rs:here}}
+let mut spaces = "   ";
+spaces = spaces.len();
 ```
 
 O erro diz que não temos permissão para mudar o tipo de uma variável:
 
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
+$ cargo run
+   Compiling variables v0.1.0 (file:///projects/variables)
+error[E0308]: mismatched types
+ --> src/main.rs:3:14
+  |
+2 |     let mut spaces = "   ";
+  |                      ----- expected due to this value
+3 |     spaces = spaces.len();
+  |              ^^^^^^^^^^^^ expected `&str`, found `usize`
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `variables` (bin "variables") due to 1 previous error
 ```
 
 Agora que exploramos como variáveis funcionam, vamos olhar para mais tipos de dados
