@@ -149,7 +149,7 @@ fn main() {
 
 No entanto, este código produz um aviso:
 
-```bash
+```console
 $ cargo run
    Compiling iterators v0.1.0 (file:///projects/iterators)
 warning: unused `Map` that must be used

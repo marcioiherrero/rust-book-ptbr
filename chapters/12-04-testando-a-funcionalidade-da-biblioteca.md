@@ -89,7 +89,7 @@ Em outras palavras, dizemos ao Rust que os dados retornados pela função `searc
 
 Se esquecermos as anotações de lifetime e tentarmos compilar esta função, obteremos este erro:
 
-```bash
+```console
 $ cargo build
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
 error[E0106]: missing lifetime specifier
@@ -192,7 +192,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 
 Agora a função `search` deve retornar apenas as linhas que contêm `query`, e nosso teste deve passar. Vamos executar o teste:
 
-```bash
+```console
 $ cargo test
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 1.33s
@@ -210,7 +210,7 @@ Neste ponto, poderíamos considerar oportunidades de refatorar a implementação
 
 Agora o programa inteiro deve funcionar! Vamos tentá-lo, primeiro com uma palavra que deve retornar exatamente uma linha do poema de Emily Dickinson: _frog_.
 
-```bash
+```console
 $ cargo run -- frog poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s
@@ -220,7 +220,7 @@ How public, like a frog
 
 Legal! Agora vamos tentar uma palavra que corresponderá a várias linhas, como _body_:
 
-```bash
+```console
 $ cargo run -- body poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
@@ -232,7 +232,7 @@ How dreary to be somebody!
 
 E, por fim, vamos garantir que não obtemos linhas quando buscamos uma palavra que não está em lugar nenhum do poema, como _monomorphization_:
 
-```bash
+```console
 $ cargo run -- monomorphization poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s

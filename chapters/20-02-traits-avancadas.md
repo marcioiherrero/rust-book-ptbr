@@ -294,7 +294,7 @@ Especificar o nome da trait antes do nome do método deixa claro para Rust qual 
 
 Executar este código imprime o seguinte:
 
-```bash
+```console
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.46s
@@ -342,7 +342,7 @@ Implementamos em `baby_name` associada a `Dog` a lógica de nomear todos os filh
 
 Em `main`, chamamos `Dog::baby_name`, que chama a função associada definida diretamente em `Dog`. Este código imprime:
 
-```bash
+```console
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.54s
@@ -384,7 +384,7 @@ fn main() {
 
 Como `Animal::baby_name` não tem parâmetro `self`, e pode haver outros tipos que implementam `Animal`, Rust não descobre qual implementação de `Animal::baby_name` queremos. Receberemos este erro do compilador:
 
-```bash
+```console
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
 error[E0790]: cannot call associated function on trait without specifying the corresponding `impl` type
@@ -439,7 +439,7 @@ fn main() {
 
 Fornecemos a Rust uma anotação de tipo entre colchetes angulares, indicando que queremos chamar `baby_name` da trait `Animal` como implementada em `Dog`, tratando o tipo `Dog` como `Animal` nesta chamada. Este código imprime o que queremos:
 
-```bash
+```console
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
@@ -529,7 +529,7 @@ fn main() {
 
 Recebemos um erro dizendo que `Display` é exigida mas não implementada:
 
-```bash
+```console
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
 error[E0277]: `Point` doesn't implement `std::fmt::Display`

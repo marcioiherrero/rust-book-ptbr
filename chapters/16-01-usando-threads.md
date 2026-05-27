@@ -191,7 +191,7 @@ fn main() {
 
 A closure usa `v`, então capturará `v` e o tornará parte do ambiente da closure. Como `thread::spawn` executa esta closure em uma nova thread, deveríamos poder acessar `v` dentro dessa nova thread. Mas quando compilamos este exemplo, obtemos o seguinte erro:
 
-```bash
+```console
 $ cargo run
    Compiling threads v0.1.0 (file:///projects/threads)
 error[E0373]: closure may outlive the current function, but it borrows `v`, which is owned by the current function
@@ -280,7 +280,7 @@ fn main() {
 
 Poderíamos ser tentados a tentar a mesma coisa para corrigir o código na Listagem 16-4, onde a thread principal chamou `drop`, usando uma closure `move`. No entanto, esta correção não funcionará porque o que a Listagem 16-4 tenta fazer é proibido por uma razão diferente. Se adicionássemos `move` à closure, moveríamos `v` para o ambiente da closure, e não poderíamos mais chamar `drop` nele na thread principal. Obteríamos este erro do compilador em vez disso:
 
-```bash
+```console
 $ cargo run
    Compiling threads v0.1.0 (file:///projects/threads)
 error[E0382]: use of moved value: `v`

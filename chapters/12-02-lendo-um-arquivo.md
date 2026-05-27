@@ -62,7 +62,7 @@ Depois disso, adicionamos novamente uma instrução `println!` temporária que i
 
 Vamos executar este código com qualquer string como primeiro argumento de linha de comando (porque ainda não implementamos a parte de busca) e o arquivo _poem.txt_ como segundo argumento:
 
-```bash
+```console
 $ cargo run -- the poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s

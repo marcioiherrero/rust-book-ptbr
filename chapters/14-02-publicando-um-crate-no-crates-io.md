@@ -268,7 +268,7 @@ Criar uma estrutura de API pública útil é mais arte do que ciência, e você 
 
 Antes de publicar qualquer crate, você precisa criar uma conta em [crates.io](https://crates.io/) e obter um token de API. Para isso, visite a página inicial em [crates.io](https://crates.io/) e faça login via conta GitHub. (A conta GitHub é atualmente um requisito, mas o site pode suportar outras formas de criar conta no futuro.) Depois de logado, visite as configurações da sua conta em [https://crates.io/me/](https://crates.io/me/) e recupere sua chave de API. Em seguida, execute o comando `cargo login` e cole sua chave de API quando solicitado, assim:
 
-```bash
+```console
 $ cargo login
 abcdefghijklmnopqrstuvwxyz012345
 ```
@@ -290,7 +290,7 @@ name = "guessing_game"
 
 Mesmo que tenha escolhido um nome único, quando executar `cargo publish` para publicar o crate neste ponto, receberá um aviso e depois um erro:
 
-```bash
+```console
 $ cargo publish
     Updating crates.io index
 warning: manifest has no description, license, license-file, documentation, homepage or repository.
@@ -341,7 +341,7 @@ Tenha cuidado, porque uma publicação é _permanente_. A versão nunca pode ser
 
 Execute o comando `cargo publish` novamente. Deve ter sucesso agora:
 
-```bash
+```console
 $ cargo publish
     Updating crates.io index
    Packaging guessing_game v0.1.0 (file:///projects/guessing_game)
@@ -372,7 +372,7 @@ _Fazer yank_ de uma versão impede que novos projetos dependam dessa versão, pe
 
 Para fazer yank de uma versão de um crate, no diretório do crate que você publicou anteriormente, execute `cargo yank` e especifique qual versão quer fazer yank. Por exemplo, se publicamos um crate chamado `guessing_game` versão 1.0.1 e queremos fazer yank, executaríamos o seguinte no diretório do projeto `guessing_game`:
 
-```bash
+```console
 $ cargo yank --vers 1.0.1
     Updating crates.io index
         Yank guessing_game@1.0.1
@@ -380,7 +380,7 @@ $ cargo yank --vers 1.0.1
 
 Adicionando `--undo` ao comando, você também pode desfazer um yank e permitir que projetos comecem a depender de uma versão novamente:
 
-```bash
+```console
 $ cargo yank --vers 1.0.1 --undo
     Updating crates.io index
       Unyank guessing_game@1.0.1

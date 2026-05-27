@@ -197,7 +197,7 @@ fn main() {
 
 Você receberá um erro como este, porque o Rust impede que você use a referência invalidada:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0382]: borrow of moved value: `s1`

@@ -16,7 +16,7 @@ Implementaremos um problema clássico de programação para iniciantes: um jogo 
 
 Para configurar um novo projeto, vá para o diretório *projects* que você criou no Capítulo 1 e crie um novo projeto usando Cargo, assim:
 
-```bash
+```console
 $ cargo new guessing_game
 $ cd guessing_game
 ```
@@ -46,7 +46,7 @@ fn main() {
 
 Agora vamos compilar este programa "Hello, world!" e executá-lo no mesmo passo usando o comando `cargo run`:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s
@@ -187,7 +187,7 @@ Se essa instância de `Result` for um valor `Ok`, o método `expect` vai extrair
 
 Se você não chamar `expect`, o programa ainda vai compilar, mas você receberá um aviso (*warning*).
 
-```bash
+```console
 $ cargo build
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
 warning: unused `Result` that must be used
@@ -238,7 +238,7 @@ Esse código iria imprimir `x = 5 and y + 2 = 12`.
 
 Vamos testar a primeira parte do jogo de adivinhação. Execute-o usando o comando `cargo run`:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.44s
@@ -273,7 +273,7 @@ O Cargo considera que essas versões possuem APIs públicas compatíveis com a v
 
 Agora, sem alterar nada do código, vamos compilar o projeto, como mostrado na Listagem 2-2.
 
-```bash
+```console
 $ cargo build
   Updating crates.io index
    Locking 15 packages to latest Rust 1.85.0 compatible versions
@@ -310,7 +310,7 @@ Se você executar `cargo build` imediatamente novamente sem fazer nenhuma altera
 
 Se você abrir o arquivo *src/main.rs*, fizer uma mudança trivial, e então salvá-lo e compilar novamente, você verá apenas duas linhas de saída:
 
-```bash
+```console
 $ cargo build
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
@@ -334,7 +334,7 @@ Como o arquivo `Cargo.lock` é essencial para garantir builds reproduzíveis, no
 
 Quando você realmente quiser atualizar um crate, o Cargo fornece o comando `update`, que ignorará o arquivo *Cargo.lock* e descobrirá todas as versões mais recentes que se encaixam nas suas especificações no *Cargo.toml*. O Cargo então escreverá essas versões no arquivo *Cargo.lock*. Caso contrário, por padrão, o Cargo procurará apenas versões maiores que `0.8.5` e menores que `0.9.0`. Se o crate `rand` lançou as duas novas versões `0.8.6` e `0.999.0`, você veria o seguinte se executasse `cargo update`:
 
-```bash
+```console
 $ cargo update
     Updating crates.io index
      Locking 1 package to latest Rust 1.85.0 compatible version
@@ -394,7 +394,7 @@ A segunda nova linha imprime o número secreto. Isso é útil enquanto estamos d
 
 Tente executar o programa algumas vezes:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s
@@ -455,7 +455,7 @@ Quando o código compara 50 a 38, o método `cmp` retornará `Ordering::Greater`
 
 No entanto, o código na Listagem 2-4 ainda não compilará. Vamos tentar:
 
-```bash
+```console
 $ cargo build
    Compiling libc v0.2.86
    Compiling getrandom v0.2.2
@@ -525,7 +525,7 @@ O método `parse` só funcionará em caracteres que podem logicamente ser conver
 
 Vamos executar o programa agora:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.26s
@@ -570,7 +570,7 @@ Como você pode ver, movemos tudo do prompt de entrada de palpite em diante para
 
 O usuário sempre poderia interromper o programa usando o atalho de teclado Ctrl+C. Mas há outra maneira de escapar deste monstro insaciável, como mencionado na discussão sobre `parse` em [Comparando o palpite com o número secreto](#comparando-o-palpite-com-o-numero-secreto): se o usuário inserir uma resposta não numérica, o programa travará. Podemos aproveitar isso para permitir que o usuário saia, como mostrado aqui:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
@@ -655,7 +655,7 @@ Se `parse` não conseguir transformar a string em um número, retornará um valo
 
 Agora tudo no programa deve funcionar como esperado. Vamos tentar:
 
-```bash
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s

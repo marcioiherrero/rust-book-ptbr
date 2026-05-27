@@ -29,7 +29,7 @@ fn main() {
 
 Se `some_option_value` fosse um valor `None`, ele falharia ao casar com o padrão `Some(x)`, o que significa que o padrão é refutável. No entanto, a instrução `let` só pode aceitar um padrão irrefutável porque não há nada válido que o código possa fazer com um valor `None`. Em tempo de compilação, Rust reclamará que tentamos usar um padrão refutável onde um padrão irrefutável é exigido:
 
-```bash
+```console
 $ cargo run
    Compiling patterns v0.1.0 (file:///projects/patterns)
 error[E0005]: refutable pattern in local binding
@@ -87,7 +87,7 @@ fn main() {
 
 Rust reclama que não faz sentido usar `let...else` com um padrão irrefutável:
 
-```bash
+```console
 $ cargo run
    Compiling patterns v0.1.0 (file:///projects/patterns)
 warning: irrefutable `let...else` pattern

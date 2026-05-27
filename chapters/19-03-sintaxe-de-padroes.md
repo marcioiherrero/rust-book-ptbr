@@ -569,7 +569,7 @@ fn main() {
 
 Ao compilar este exemplo, recebemos este erro:
 
-```bash
+```console
 $ cargo run
    Compiling patterns v0.1.0 (file:///projects/patterns)
 error: `..` can only be used once per tuple pattern

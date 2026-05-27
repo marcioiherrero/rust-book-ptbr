@@ -79,7 +79,7 @@ fn change(some_string: &String) {
 
 Veja o erro:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0596]: cannot borrow `*some_string` as mutable, as it is behind a `&` reference
@@ -134,7 +134,7 @@ println!("{}, {}", r1, r2);
 
 Veja o erro:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0499]: cannot borrow `s` as mutable more than once at a time
@@ -190,7 +190,7 @@ println!("{}, {}, and {}", r1, r2, r3);
 
 Veja o erro:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
@@ -253,7 +253,7 @@ fn dangle() -> &String {
 
 Veja o erro:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0106]: missing lifetime specifier

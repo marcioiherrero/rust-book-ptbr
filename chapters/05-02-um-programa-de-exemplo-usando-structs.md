@@ -34,7 +34,7 @@ fn area(width: u32, height: u32) -> u32 {
 
 Agora, execute este programa com `cargo run`:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.42s
@@ -203,7 +203,7 @@ fn main() {
 
 Agora, quando executamos o programa, não obtemos erros e vemos a seguinte saída:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
@@ -213,7 +213,7 @@ rect1 is Rectangle { width: 30, height: 50 }
 
 Ótimo! Não é a saída mais bonita, mas mostra os valores de todos os campos desta instância, o que definitivamente ajudaria durante a depuração. Quando temos structs maiores, é útil ter uma saída um pouco mais fácil de ler; nesses casos, podemos usar `{:#?}` em vez de `{:?}` na string do `println!`. Neste exemplo, usar o estilo `{:#?}` produzirá a seguinte saída:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
@@ -252,7 +252,7 @@ fn main() {
 
 Podemos colocar `dbg!` em torno da expressão `30 * scale` e, como `dbg!` devolve o ownership do valor da expressão, o campo `width` receberá o mesmo valor que se não tivéssemos a chamada a `dbg!` ali. Não queremos que `dbg!` tome ownership de `rect1`, então usamos uma referência a `rect1` na próxima chamada. Veja como fica a saída deste exemplo:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.61s

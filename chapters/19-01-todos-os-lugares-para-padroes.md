@@ -83,7 +83,7 @@ fn main() {
 
 Tentar compilar este código resulta neste erro de tipo:
 
-```bash
+```console
 $ cargo run
    Compiling patterns v0.1.0 (file:///projects/patterns)
 error[E0308]: mismatched types
@@ -196,7 +196,7 @@ fn main() {
 
 O código na Listagem 19-5 imprimirá o seguinte:
 
-```bash
+```console
 $ cargo run
    Compiling patterns v0.1.0 (file:///projects/patterns)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.52s

@@ -36,7 +36,7 @@ Opcionalmente, também podemos incluir uma expressão `else` para fornecer um bl
 
 Ao executar o código acima, você verá a seguinte saída:
 
-```bash
+```console
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
@@ -52,7 +52,7 @@ let number = 7;
 
 A saída será:
 
-```bash
+```console
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
@@ -76,7 +76,7 @@ fn main() {
 
 Desta vez, a condição do `if` passa a valer `3`, e o Rust lança um erro.
 
-```bash
+```console
 $ cargo run
 error[E0308]: mismatched types
  --> src/main.rs:4:8
@@ -125,7 +125,7 @@ fn main() {
 
 Este programa possui quatro caminhos possíveis. Após executá-lo, você deverá ver a seguinte saída.
 
-```bash
+```console
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
@@ -156,7 +156,7 @@ _Listagem 3-2: Atribuindo o resultado de uma expressão `if` a uma variável_
 
 A variável `number` será associada a um valor com base no resultado da expressão condicional (`if`). Execute este código para ver o que acontece:
 
-```bash
+```console
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
@@ -180,7 +180,7 @@ fn main() {
 
 Ao tentar compilar este código, receberemos um erro. Os blocos `if` e `else` possuem tipos diferentes, e o Rust indica exatamente onde encontrar o problema no programa:
 
-```bash
+```console
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
 error[E0308]: `if` and `else` have incompatible types
@@ -221,7 +221,7 @@ fn main() {
 
 Quando executarmos esse programa, veremos a palavra `again!` sendo impressa continuamente, até que interrompamos o programa manualmente. A maioria dos terminais suporta o atalho de teclado `Ctrl`+`C` para interromper um programa que está preso em um loop infinito. Experimente:
 
-```bash
+```console
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s
@@ -297,7 +297,7 @@ fn main() {
 
 O `loop` externo tem o rótulo `'counting_up` e fará a contagem crescente de 0 a 2. O `loop` interno, sem rótulo, fará a contagem decrescente de 10 a 9. O primeiro `break` sem rótulo encerrará apenas o `loop` interno. O comando `break 'counting_up;` encerrará o laço externo. Este código imprime:
 
-```bash
+```console
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.58s
@@ -360,7 +360,7 @@ _Listagem 3-4: Percorrendo cada elemento de uma coleção usando um loop `while`
 
 Neste código, a contagem é feita percorrendo os elementos do array. Começa no índice 0 e repete o processo até atingir o índice final do array (ou seja, quando a condição `index < 5` não for mais verdadeira). Executar este código imprimirá todos os elementos do array.
 
-```bash
+```console
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s

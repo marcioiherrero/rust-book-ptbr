@@ -133,7 +133,7 @@ fn main() {
 
 Precisamos chamar a função `dangerous` dentro de um bloco `unsafe` separado. Se tentarmos chamar `dangerous` sem o bloco `unsafe`, receberemos um erro:
 
-```bash
+```console
 $ cargo run
    Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
 error[E0133]: call to unsafe function `dangerous` is unsafe and requires unsafe block
@@ -199,7 +199,7 @@ Em seguida, retornamos dois slices mutáveis em uma tupla: um do início do slic
 
 Quando tentarmos compilar o código da Listagem 20-5, receberemos um erro:
 
-```bash
+```console
 $ cargo run
    Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
 error[E0499]: cannot borrow `*values` as mutable more than once at a time
@@ -434,7 +434,7 @@ Usar Miri exige uma build nightly do Rust (sobre a qual falamos mais no [Apêndi
 
 Para um exemplo de quão útil isso pode ser, considere o que acontece quando a executamos contra a Listagem 20-7.
 
-```bash
+```console
 $ cargo +nightly miri run
    Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s

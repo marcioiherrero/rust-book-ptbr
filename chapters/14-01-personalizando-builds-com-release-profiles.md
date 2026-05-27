@@ -12,7 +12,7 @@ O Cargo tem dois perfis principais: o perfil `dev` que o Cargo usa quando você 
 
 Esses nomes de perfil podem ser familiares pela saída das suas compilações:
 
-```bash
+```console
 $ cargo build
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
 $ cargo build --release

@@ -83,7 +83,7 @@ Especificamos a expressão de closure `|| self.most_stocked()` como argumento de
 
 Executar este código imprime o seguinte:
 
-```bash
+```console
 $ cargo run
    Compiling shirt-company v0.1.0 (file:///projects/shirt-company)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
@@ -172,7 +172,7 @@ fn main() {
 
 O compilador nos dá este erro:
 
-```bash
+```console
 $ cargo run
    Compiling closure-example v0.1.0 (file:///projects/closure-example)
 error[E0308]: mismatched types
@@ -235,7 +235,7 @@ Este exemplo também ilustra que uma variável pode se ligar a uma definição d
 
 Como podemos ter várias referências imutáveis a `list` ao mesmo tempo, `list` ainda é acessível do código antes da definição da closure, depois da definição da closure mas antes da closure ser chamada, e depois da closure ser chamada. Este código compila, executa e imprime:
 
-```bash
+```console
 $ cargo run
    Compiling closure-example v0.1.0 (file:///projects/closure-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s
@@ -268,7 +268,7 @@ fn main() {
 
 Este código compila, executa e imprime:
 
-```bash
+```console
 $ cargo run
    Compiling closure-example v0.1.0 (file:///projects/closure-example)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s
@@ -369,7 +369,7 @@ fn main() {
 
 Este código imprime:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.41s
@@ -427,7 +427,7 @@ fn main() {
 
 Esta é uma forma contorcida e artificial (que não funciona) de tentar contar quantas vezes `sort_by_key` chama a closure ao ordenar `list`. Este código tenta fazer essa contagem empurrando `value`—um `String` do ambiente da closure—no vetor `sort_operations`. A closure captura `value` e então move `value` para fora da closure transferindo a posse de `value` para o vetor `sort_operations`. Esta closure pode ser chamada uma vez; tentar chamá-la uma segunda vez não funcionaria, porque `value` não estaria mais no ambiente para ser empurrado para `sort_operations` novamente! Portanto, esta closure só implementa `FnOnce`. Quando tentamos compilar este código, obtemos este erro de que `value` não pode ser movido para fora da closure porque a closure deve implementar `FnMut`:
 
-```bash
+```console
 $ cargo run
    Compiling rectangles v0.1.0 (file:///projects/rectangles)
 error[E0507]: cannot move out of `value`, a captured variable in an `FnMut` closure

@@ -32,7 +32,7 @@ Podemos chamar qualquer função que tenhamos definido usando seu nome seguido d
 
 Vamos criar um novo projeto binário chamado `functions` para explorar funções com mais detalhes. Coloque o exemplo de `another_function` em `src/main.rs` e execute-o. Você deverá ver a seguinte saída:
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s
@@ -63,7 +63,7 @@ fn another_function(x: i32) {
 
 Tente executar este programa; você deverá obter a seguinte saída:
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.21s
@@ -93,7 +93,7 @@ Este exemplo cria uma função chamada `print_labeled_measurement` com dois par�
 
 Vamos tentar executar este código. Substitua o programa que está atualmente no arquivo _src/main.rs_ do seu projeto de funções pelo exemplo anterior e execute-o usando o comando `cargo run`.
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
@@ -138,7 +138,7 @@ fn main() {
 
 Ao executar este programa, o erro que você receberá será semelhante a este:
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
 error: expected expression, found `let` statement
@@ -214,7 +214,7 @@ fn main() {
 
 Não há chamadas de função, macros ou mesmo instruções `let` dentro da função `five` — apenas o número `5` por si só. Essa é uma função perfeitamente válida em Rust. Observe que o tipo de retorno da função também é especificado como `-> i32`. Tente executar este código; a saída deve ser semelhante a esta:
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
@@ -248,7 +248,7 @@ fn plus_one(x: i32) -> i32 {
 
 A compilação deste código produzirá um erro, conforme mostrado abaixo:
 
-```bash
+```console
 $ cargo run
    Compiling functions v0.1.0 (file:///projects/functions)
 error[E0308]: mismatched types

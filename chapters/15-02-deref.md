@@ -34,7 +34,7 @@ A variável `x` guarda um valor `i32` `5`. Definimos `y` igual a uma referência
 
 Se tentássemos escrever `assert_eq!(5, y);` em vez disso, obteríamos este erro de compilação:
 
-```bash
+```console
 $ cargo run
    Compiling deref-example v0.1.0 (file:///projects/deref-example)
 error[E0277]: can't compare `{integer}` with `&{integer}`
@@ -130,7 +130,7 @@ fn main() {
 
 Aqui está o erro de compilação resultante:
 
-```bash
+```console
 $ cargo run
    Compiling deref-example v0.1.0 (file:///projects/deref-example)
 error[E0614]: type `MyBox<{integer}>` cannot be dereferenced

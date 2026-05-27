@@ -20,7 +20,7 @@ Abra um terminal e digite os seguintes comandos para criar um diretório *projec
 
 Para Linux, macOS e PowerShell no Windows, digite:
 
-```bash
+```console
 $ mkdir ~/projects
 $ cd ~/projects
 $ mkdir hello_world
@@ -51,7 +51,7 @@ fn main() {
 
 Salve o arquivo e volte para o terminal no diretório *~/projects/hello_world*. No Linux ou macOS, digite os seguintes comandos para compilar e executar o arquivo:
 
-```bash
+```console
 $ rustc main.rs
 $ ./main
 Hello, world!
@@ -105,7 +105,7 @@ Você acabou de executar um programa recém-criado, então vamos examinar cada e
 
 Antes de executar um programa em Rust, você precisa compilá-lo usando o compilador Rust, digitando o comando `rustc` e passando o nome do arquivo-fonte, assim:
 
-```bash
+```console
 $ rustc main.rs
 ```
 
@@ -114,7 +114,7 @@ Se você vem de C ou C++, perceberá que isso é semelhante ao `gcc` ou `clang`.
 No Linux, macOS e PowerShell no Windows, você pode ver o executável usando o comando `ls` no terminal:
 
 
-```bash
+```console
 $ ls
 main  main.rs
 ```
@@ -130,7 +130,7 @@ main.rs
 
 Isso mostra o arquivo-fonte (*.rs*), o executável (*main* ou *main.exe*) e, no Windows, um arquivo de depuração (*.pdb*). A partir daqui, você executa o arquivo *main* ou *main.exe*, assim:
 
-```bash
+```console
 $ ./main   # ou .\main no Windows
 ```
 

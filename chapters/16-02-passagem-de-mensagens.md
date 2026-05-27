@@ -131,7 +131,7 @@ fn main() {
 
 Aqui, tentamos imprimir `val` depois de enviá-lo pelo channel via `tx.send`. Permitir isso seria uma má ideia: depois que o valor foi enviado para outra thread, essa thread poderia modificá-lo ou descartá-lo antes de tentarmos usar o valor novamente. Potencialmente, as modificações da outra thread poderiam causar erros ou resultados inesperados devido a dados inconsistentes ou inexistentes. No entanto, o Rust nos dá um erro se tentarmos compilar o código da Listagem 16-9:
 
-```bash
+```console
 $ cargo run
    Compiling message-passing v0.1.0 (file:///projects/message-passing)
 error[E0382]: borrow of moved value: `val`

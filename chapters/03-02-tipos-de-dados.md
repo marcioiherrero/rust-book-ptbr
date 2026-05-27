@@ -16,7 +16,7 @@ let guess: u32 = "42".parse().expect("Not a number!");
 
 Se não adicionarmos a anotação `: u32`, o Rust exibirá um erro informando que o compilador precisa de mais informações para determinar o tipo correto.
 
-```bash
+```console
 $ cargo build
    Compiling no_type_annotations v0.1.0 (file:///projects/no_type_annotations)
 error[E0284]: type annotations needed

@@ -55,7 +55,7 @@ Vamos tentar compilar a Listagem 7-3 e descobrir por que ainda não compila! Os 
 
 [Listagem 7-4](#listagem-7-4): Erros do compilador ao compilar o código da Listagem 7-3
 
-```bash
+```console
 $ cargo build
    Compiling restaurant v0.1.0 (file:///projects/restaurant)
 error[E0603]: module `hosting` is private
@@ -128,7 +128,7 @@ Infelizmente, o código da Listagem 7-5 ainda resulta em erros do compilador, co
 
 [Listagem 7-6](#listagem-7-6): Erros do compilador ao compilar o código da Listagem 7-5
 
-```bash
+```console
 $ cargo build
    Compiling restaurant v0.1.0 (file:///projects/restaurant)
 error[E0603]: function `add_to_waitlist` is private

@@ -38,7 +38,7 @@ Primeiro, fazemos loop por cada um dos `workers` do pool de threads. Usamos `&mu
 
 Aqui está o erro que obtemos ao compilar este código:
 
-```bash
+```console
 $ cargo check
     Checking hello v0.1.0 (file:///projects/hello)
 error[E0507]: cannot move out of `worker.thread` which is behind a mutable reference
@@ -201,7 +201,7 @@ O método `take` é definido na trait `Iterator` e limita a iteração aos prime
 
 Inicie o servidor com `cargo run` e faça três requisições. A terceira requisição deve dar erro e, em seu terminal, você deverá ver uma saída semelhante a esta:
 
-```bash
+```console
 $ cargo run
    Compiling hello v0.1.0 (file:///projects/hello)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.41s

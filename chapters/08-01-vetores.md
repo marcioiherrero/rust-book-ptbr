@@ -137,7 +137,7 @@ fn main() {
 
 Compilar este código resultará neste erro:
 
-```bash
+```console
 $ cargo run
    Compiling collections v0.1.0 (file:///projects/collections)
 error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable

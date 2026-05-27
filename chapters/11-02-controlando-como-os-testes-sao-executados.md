@@ -18,7 +18,7 @@ Por exemplo, digamos que cada um dos seus testes executa algum código que cria 
 
 Se você não quiser executar os testes em paralelo ou quiser controle mais fino sobre o número de threads usadas, pode enviar a flag `--test-threads` e o número de threads que deseja usar ao binário de teste. Veja o exemplo a seguir:
 
-```bash
+```console
 $ cargo test -- --test-threads=1
 ```
 
@@ -62,7 +62,7 @@ mod tests {
 
 Quando executamos esses testes com `cargo test`, veremos a seguinte saída:
 
-```bash
+```console
 $ cargo test
    Compiling silly-function v0.1.0 (file:///projects/silly-function)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.58s
@@ -96,13 +96,13 @@ Observe que em lugar nenhum desta saída vemos `I got the value 4`, que é impre
 
 Se quisermos ver valores impressos para testes que passam também, podemos dizer ao Rust para mostrar a saída de testes bem-sucedidos com `--show-output`:
 
-```bash
+```console
 $ cargo test -- --show-output
 ```
 
 Quando executamos os testes da Listagem 11-10 novamente com a flag `--show-output`, vemos a seguinte saída:
 
-```bash
+```console
 $ cargo test -- --show-output
    Compiling silly-function v0.1.0 (file:///projects/silly-function)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.60s
@@ -184,7 +184,7 @@ mod tests {
 
 Se executarmos os testes sem passar argumentos, como vimos antes, todos os testes executarão em paralelo:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.62s
@@ -208,7 +208,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 Podemos passar o nome de qualquer função de teste a `cargo test` para executar apenas esse teste:
 
-```bash
+```console
 $ cargo test one_hundred
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.69s
@@ -228,7 +228,7 @@ Não podemos especificar os nomes de vários testes desta forma; apenas o primei
 
 Podemos especificar parte de um nome de teste, e qualquer teste cujo nome corresponda a esse valor será executado. Por exemplo, como dois dos nomes dos nossos testes contêm `add`, podemos executar esses dois executando `cargo test add`:
 
-```bash
+```console
 $ cargo test add
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.61s
@@ -274,7 +274,7 @@ mod tests {
 
 Depois de `#[test]`, adicionamos a linha `#[ignore]` ao teste que queremos excluir. Agora, quando executamos nossos testes, `it_works` executa, mas `expensive_test` não:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.60s
@@ -295,7 +295,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 A função `expensive_test` é listada como `ignored`. Se quisermos executar apenas os testes ignorados, podemos usar `cargo test -- --ignored`:
 
-```bash
+```console
 $ cargo test -- --ignored
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.61s

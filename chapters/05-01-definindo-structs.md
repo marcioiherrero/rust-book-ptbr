@@ -289,7 +289,7 @@ Para definir `AlwaysEqual`, usamos a palavra-chave `struct`, o nome desejado e e
 >
 > O compilador reclamará de que precisa de especificadores de lifetime:
 >
-> ```bash
+> ```console
 > $ cargo run
 >    Compiling structs v0.1.0 (file:///projects/structs)
 > error[E0106]: missing lifetime specifier

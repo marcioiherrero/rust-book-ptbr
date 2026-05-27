@@ -52,7 +52,7 @@ fn main() {
 
 Se você tentasse compilar este código, obteria o seguinte erro:
 
-```bash
+```console
 $ cargo run
    Compiling borrowing v0.1.0 (file:///projects/borrowing)
 error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
@@ -221,7 +221,7 @@ No teste, estamos testando o que acontece quando o `LimitTracker` é informado p
 
 No entanto, há um problema com este teste, como mostrado aqui:
 
-```bash
+```console
 $ cargo test
    Compiling limit-tracker v0.1.0 (file:///projects/limit-tracker)
 error[E0596]: cannot borrow `self.sent_messages` as mutable, as it is behind a `&` reference
@@ -431,7 +431,7 @@ mod tests {
 
 Criamos uma variável `one_borrow` para o smart pointer `RefMut<T>` retornado por `borrow_mut`. Depois, criamos outro empréstimo mutável da mesma forma na variável `two_borrow`. Isso faz duas referências mutáveis no mesmo escopo, o que não é permitido. Quando executamos os testes de nossa biblioteca, o código na Listagem 15-23 compilará sem erros, mas o teste falhará:
 
-```bash
+```console
 $ cargo test
    Compiling limit-tracker v0.1.0 (file:///projects/limit-tracker)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.91s
@@ -508,7 +508,7 @@ Depois de criarmos as listas em `a`, `b` e `c`, queremos adicionar 10 ao valor e
 
 Quando imprimimos `a`, `b` e `c`, podemos ver que todos têm o valor modificado de `15` em vez de `5`:
 
-```bash
+```console
 $ cargo run
    Compiling cons-list v0.1.0 (file:///projects/cons-list)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.63s

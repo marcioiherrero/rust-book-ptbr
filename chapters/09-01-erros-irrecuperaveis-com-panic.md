@@ -31,7 +31,7 @@ fn main() {
 
 Quando você executar o programa, verá algo assim:
 
-```bash
+```console
 $ cargo run
    Compiling panic v0.1.0 (file:///projects/panic)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.25s
@@ -68,7 +68,7 @@ Em C, tentar ler além do fim de uma estrutura de dados é comportamento indefin
 
 Para proteger seu programa desse tipo de vulnerabilidade, se você tentar ler um elemento em um índice que não existe, o Rust interromperá a execução e se recusará a continuar. Vamos tentar e ver:
 
-```bash
+```console
 $ cargo run
    Compiling panic v0.1.0 (file:///projects/panic)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.27s
@@ -87,7 +87,7 @@ A linha `note:` nos diz que podemos definir a variável de ambiente `RUST_BACKTR
 
 [Listagem 9-2](#listagem-9-2): O backtrace gerado por uma chamada a `panic!` exibido quando a variável de ambiente `RUST_BACKTRACE` está definida
 
-```bash
+```console
 $ RUST_BACKTRACE=1 cargo run
 thread 'main' panicked at src/main.rs:4:6:
 index out of bounds: the len is 3 but the index is 99

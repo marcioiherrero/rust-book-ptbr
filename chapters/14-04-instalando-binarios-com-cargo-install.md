@@ -12,7 +12,7 @@ Todos os binários instalados com `cargo install` são armazenados na pasta _bin
 
 Por exemplo, no Capítulo 12 mencionamos que existe uma implementação em Rust da ferramenta `grep` chamada `ripgrep` para buscar em arquivos. Para instalar `ripgrep`, podemos executar o seguinte:
 
-```bash
+```console
 $ cargo install ripgrep
     Updating crates.io index
   Downloaded ripgrep v14.1.1

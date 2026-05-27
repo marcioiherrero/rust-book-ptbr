@@ -101,7 +101,7 @@ Na thread principal, coletamos todos os join handles. Então, como fizemos na Li
 
 Insinuamos que este exemplo não compilaria. Agora vamos descobrir por quê!
 
-```bash
+```console
 $ cargo run
    Compiling shared-state v0.1.0 (file:///projects/shared-state)
 error[E0382]: borrow of moved value: `counter`
@@ -171,7 +171,7 @@ fn main() {
 
 Mais uma vez, compilamos e obtemos... erros diferentes! O compilador está nos ensinando muito:
 
-```bash
+```console
 $ cargo run
    Compiling shared-state v0.1.0 (file:///projects/shared-state)
 error[E0277]: `Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely

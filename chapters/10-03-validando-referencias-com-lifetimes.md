@@ -39,7 +39,7 @@ fn main() {
 
 O escopo externo declara uma variável chamada `r` sem valor inicial, e o escopo interno declara uma variável chamada `x` com valor inicial `5`. Dentro do escopo interno, tentamos definir o valor de `r` como referência a `x`. Depois, o escopo interno termina e tentamos imprimir o valor em `r`. Este código não compilará, porque o valor ao qual `r` se refere saiu de escopo antes de tentarmos usá-lo. Esta é a mensagem de erro:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0597]: `x` does not live long enough
@@ -159,7 +159,7 @@ fn longest(x: &str, y: &str) -> &str {
 
 Em vez disso, obtemos o seguinte erro que fala sobre lifetimes:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0106]: missing lifetime specifier
@@ -286,7 +286,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 Quando tentarmos compilar este código, obteremos este erro:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0597]: `string2` does not live long enough
@@ -354,7 +354,7 @@ fn longest<'a>(x: &str, y: &str) -> &'a str {
 
 Mesmo tendo especificado um parâmetro de lifetime `'a` para o tipo de retorno, esta implementação falhará ao compilar porque o lifetime do valor retornado não está relacionado ao lifetime dos parâmetros. Esta é a mensagem de erro que obtemos:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0515]: cannot return value referencing local variable `result`

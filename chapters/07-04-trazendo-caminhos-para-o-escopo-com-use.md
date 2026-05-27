@@ -58,7 +58,7 @@ mod customer {
 
 O erro do compilador mostra que o atalho não se aplica mais dentro do módulo `customer`:
 
-```bash
+```console
 $ cargo build
    Compiling restaurant v0.1.0 (file:///projects/restaurant)
 error[E0433]: failed to resolve: use of unresolved module or unlinked crate `hosting`

@@ -22,7 +22,7 @@ Neste capítulo e ao longo do livro, mostraremos alguns comandos usados no termi
 
 Se você estiver usando Linux ou macOS, abra um terminal e digite o seguinte comando:
 
-```bash
+```console
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
@@ -36,7 +36,7 @@ Você também precisará de um *linker*, que é um programa que o Rust usa para 
 
 No macOS, você pode obter um compilador C executando:
 
-```bash
+```console
 $ xcode-select --install
 ```
 
@@ -52,7 +52,7 @@ O restante deste livro usa comandos que funcionam tanto no *cmd.exe* quanto no P
 
 Para verificar se o Rust foi instalado corretamente, abra um terminal e digite:
 
-```bash
+```console
 $ rustc --version
 ```
 
@@ -78,7 +78,7 @@ No PowerShell:
 
 No Linux e macOS:
 
-```bash
+```console
 $ echo $PATH
 ```
 
@@ -88,13 +88,13 @@ Se tudo estiver correto e o Rust ainda não funcionar, há vários lugares onde 
 
 Depois que o Rust estiver instalado via `rustup`, atualizar para uma nova versão lançada é fácil. No terminal, execute:
 
-```bash
+```console
 $ rustup update
 ```
 
 Para desinstalar o Rust e o `rustup`, execute:
 
-```bash
+```console
 $ rustup self uninstall
 ```
 
@@ -112,7 +112,7 @@ Este livro não faz suposições sobre quais ferramentas você usa para escrever
 
 Em vários exemplos, usaremos pacotes Rust além da biblioteca padrão. Para acompanhar esses exemplos, você precisará ter uma conexão com a internet ou baixar essas dependências antecipadamente. Para fazer isso, execute os seguintes comandos:
 
-```bash
+```console
 $ cargo new get-dependencies
 $ cd get-dependencies
 $ cargo add rand@0.8.5 trpl@0.2.0

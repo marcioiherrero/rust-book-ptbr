@@ -16,7 +16,7 @@ TCP é o protocolo de nível mais baixo que descreve os detalhes de como a infor
 
 Nosso servidor web precisa escutar uma conexão TCP, então essa é a primeira parte com a qual trabalharemos. A biblioteca padrão oferece um módulo `std::net` que nos permite fazer isso. Vamos criar um novo projeto da forma usual:
 
-```bash
+```console
 $ cargo new hello
      Created binary (application) `hello` project
 $ cd hello
@@ -123,7 +123,7 @@ O navegador sinaliza o fim de uma requisição HTTP enviando dois caracteres de 
 
 Vamos tentar este código! Inicie o programa e faça uma requisição em um navegador web novamente. Observe que ainda receberemos uma página de erro no navegador, mas a saída do nosso programa no terminal agora se parecerá com isto:
 
-```bash
+```console
 $ cargo run
    Compiling hello v0.1.0 (file:///projects/hello)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.42s

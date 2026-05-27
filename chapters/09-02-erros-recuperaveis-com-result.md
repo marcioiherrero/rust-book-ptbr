@@ -66,7 +66,7 @@ Quando o resultado é `Ok`, este código retornará o valor interno `file` fora 
 
 O outro braço do `match` lida com o caso em que obtemos um valor `Err` de `File::open`. Neste exemplo, escolhemos chamar a macro `panic!`. Se não houver arquivo chamado _hello.txt_ no nosso diretório atual e executarmos este código, veremos a seguinte saída da macro `panic!`:
 
-```bash
+```console
 $ cargo run
    Compiling error-handling v0.1.0 (file:///projects/error-handling)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.73s
@@ -338,7 +338,7 @@ fn main() {
 
 Este código abre um arquivo, o que pode falhar. O operador `?` segue o valor `Result` retornado por `File::open`, mas esta função `main` tem o tipo de retorno `()`, não `Result`. Quando compilamos este código, obtemos a seguinte mensagem de erro:
 
-```bash
+```console
 $ cargo run
    Compiling error-handling v0.1.0 (file:///projects/error-handling)
 error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)

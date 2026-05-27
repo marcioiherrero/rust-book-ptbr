@@ -216,7 +216,7 @@ fn main() {
 
 Não tratamos o caso `None`, então este código causará um bug. Felizmente, é um bug que o Rust sabe detectar. Se tentarmos compilar este código, receberemos este erro:
 
-```bash
+```console
 $ cargo run
    Compiling enums v0.1.0 (file:///projects/enums)
 error[E0004]: non-exhaustive patterns: `None` not covered

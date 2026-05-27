@@ -279,7 +279,7 @@ fn main() {
 
 Se executarmos este código, recebemos uma mensagem de erro como esta:
 
-```bash
+```console
 $ cargo run
    Compiling enums v0.1.0 (file:///projects/enums)
 error[E0277]: cannot add `Option<i8>` to `i8`

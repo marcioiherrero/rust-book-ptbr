@@ -102,7 +102,7 @@ Modificamos `a` para que aponte para `b` em vez de `Nil`, criando um ciclo. Faze
 
 Quando executamos este código, mantendo o último `println!` comentado por enquanto, obteremos esta saída:
 
-```bash
+```console
 $ cargo run
    Compiling cons-list v0.1.0 (file:///projects/cons-list)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.53s

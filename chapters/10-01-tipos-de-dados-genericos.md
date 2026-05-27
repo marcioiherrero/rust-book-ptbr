@@ -106,7 +106,7 @@ fn main() {
 
 Se compilarmos este código agora, obteremos este erro:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0369]: binary operation `>` cannot be applied to type `&T`
@@ -173,7 +173,7 @@ fn main() {
 
 Neste exemplo, quando atribuímos o valor inteiro `5` a `x`, informamos ao compilador que o tipo genérico `T` será um inteiro para esta instância de `Point<T>`. Depois, quando especificamos `4.0` para `y`, que definimos para ter o mesmo tipo que `x`, obteremos um erro de incompatibilidade de tipos como este:
 
-```bash
+```console
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0308]: mismatched types

@@ -218,7 +218,7 @@ fn main() {
 
 Erro:
 
-```bash
+```console
 $ cargo run
    Compiling gui v0.1.0 (file:///projects/gui)
 error[E0277]: the trait bound `String: Draw` is not satisfied

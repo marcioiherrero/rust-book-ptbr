@@ -24,7 +24,7 @@ Exploraremos alguns aspectos de como os testes funcionam experimentando com o te
 
 Vamos criar um novo projeto de biblioteca chamado `adder` que somará dois números:
 
-```bash
+```console
 $ cargo new adder --lib
      Created library `adder` project
 $ cd adder
@@ -63,7 +63,7 @@ O corpo da função de exemplo usa a macro `assert_eq!` para afirmar que `result
 
 O comando `cargo test` executa todos os testes do nosso projeto, como mostrado na Listagem 11-2.
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.57s
@@ -116,7 +116,7 @@ mod tests {
 
 Depois, execute `cargo test` novamente. A saída agora mostra `exploration` em vez de `it_works`:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.59s
@@ -166,7 +166,7 @@ mod tests {
 
 Execute os testes novamente com `cargo test`. A saída deve parecer com a Listagem 11-4, que mostra que nosso teste `exploration` passou e `another` falhou.
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.72s
@@ -274,7 +274,7 @@ Observe a linha `use super::*;` dentro do módulo `tests`. O módulo `tests` é 
 
 Nomeamos nosso teste `larger_can_hold_smaller` e criamos as duas instâncias de `Rectangle` que precisamos. Depois, chamamos a macro `assert!` e passamos o resultado de chamar `larger.can_hold(&smaller)`. Esta expressão deve retornar `true`, então nosso teste deve passar. Vamos descobrir!
 
-```bash
+```console
 $ cargo test
    Compiling rectangle v0.1.0 (file:///projects/rectangle)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
@@ -314,7 +314,7 @@ Passou! Vamos adicionar outro teste, desta vez afirmando que um retângulo menor
 
 Como o resultado correto da função `can_hold` neste caso é `false`, precisamos negar esse resultado antes de passá-lo à macro `assert!`. Assim, nosso teste passará se `can_hold` retornar `false`:
 
-```bash
+```console
 $ cargo test
    Compiling rectangle v0.1.0 (file:///projects/rectangle)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
@@ -347,7 +347,7 @@ impl Rectangle {
 
 Executar os testes agora produz o seguinte:
 
-```bash
+```console
 $ cargo test
    Compiling rectangle v0.1.0 (file:///projects/rectangle)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
@@ -407,7 +407,7 @@ mod tests {
 
 Vamos verificar se passa!
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.58s
@@ -439,7 +439,7 @@ pub fn add_two(a: u64) -> u64 {
 
 Execute os testes novamente:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.61s
@@ -514,7 +514,7 @@ pub fn greeting(name: &str) -> String {
 
 Executar este teste produz o seguinte:
 
-```bash
+```console
 $ cargo test
    Compiling greeter v0.1.0 (file:///projects/greeter)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.91s
@@ -557,7 +557,7 @@ Este resultado só indica que a asserção falhou e em qual linha a asserção e
 
 Agora, quando executarmos o teste, obteremos uma mensagem de erro mais informativa:
 
-```bash
+```console
 $ cargo test
    Compiling greeter v0.1.0 (file:///projects/greeter)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.93s
@@ -628,7 +628,7 @@ mod tests {
 
 Colocamos o atributo `#[should_panic]` após o atributo `#[test]` e antes da função de teste a que se aplica. Vejamos o resultado quando este teste passa:
 
-```bash
+```console
 $ cargo test
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.58s
@@ -664,7 +664,7 @@ impl Guess {
 
 Quando executamos o teste da Listagem 11-8, ele falhará:
 
-```bash
+```console
 $ cargo test
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.62s
@@ -755,7 +755,7 @@ impl Guess {
 
 Desta vez, quando executamos o teste `should_panic`, ele falhará:
 
-```bash
+```console
 $ cargo test
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s

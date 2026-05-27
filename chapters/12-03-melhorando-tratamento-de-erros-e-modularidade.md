@@ -181,7 +181,7 @@ Atualizamos `main` onde chamávamos `parse_config` para chamar `Config::new` em 
 
 Agora trabalharemos em corrigir nosso tratamento de erros. Lembre-se de que tentar acessar os valores no vetor `args` nos índices 1 ou 2 fará o programa entrar em pânico se o vetor contiver menos de três itens. Tente executar o programa sem argumentos; ficará assim:
 
-```bash
+```console
 $ cargo run
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
@@ -223,7 +223,7 @@ Este código é semelhante à função `Guess::new` que escrevemos na Listagem 9
 
 Com essas poucas linhas extras de código em `new`, vamos executar o programa sem argumentos novamente para ver como o erro parece agora:
 
-```bash
+```console
 $ cargo run
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
@@ -324,7 +324,7 @@ Nesta listagem, usamos um método que ainda não cobrimos em detalhes: `unwrap_o
 
 Adicionamos uma nova linha `use` para trazer `process` da biblioteca padrão para o escopo. O código no closure que será executado no caso de erro tem apenas duas linhas: imprimimos o valor `err` e então chamamos `process::exit`. A função `process::exit` interromperá o programa imediatamente e retornará o número passado como código de status de saída. Isso é semelhante ao tratamento baseado em `panic!` que usamos na Listagem 12-8, mas não obtemos toda a saída extra. Vamos tentar:
 
-```bash
+```console
 $ cargo run
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
@@ -460,7 +460,7 @@ Terceiro, a função `run` agora retorna um valor `Ok` no caso de sucesso. Decla
 
 Quando você executa este código, ele compilará, mas exibirá um aviso:
 
-```bash
+```console
 $ cargo run -- the poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
 warning: unused `Result` that must be used

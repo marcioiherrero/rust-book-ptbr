@@ -22,7 +22,7 @@ Um package pode conter quantos binary crates quiser, mas no máximo apenas um li
 
 Vamos ver o que acontece quando criamos um package. Primeiro, digitamos o comando `cargo new my-project`:
 
-```bash
+```console
 $ cargo new my-project
      Created binary (application) `my-project` package
 $ ls my-project

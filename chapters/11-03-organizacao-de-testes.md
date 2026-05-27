@@ -116,7 +116,7 @@ Cada arquivo no diretório _tests_ é uma crate separada, então precisamos traz
 
 Não precisamos anotar nenhum código em _tests/integration_test.rs_ com `#[cfg(test)]`. O Cargo trata o diretório _tests_ de forma especial e compila arquivos neste diretório apenas quando executamos `cargo test`. Execute `cargo test` agora:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 1.31s
@@ -151,7 +151,7 @@ Cada arquivo de teste de integração tem sua própria seção, então se adicio
 
 Ainda podemos executar uma função de teste de integração particular especificando o nome da função de teste como argumento a `cargo test`. Para executar todos os testes em um arquivo de teste de integração particular, use o argumento `--test` de `cargo test` seguido do nome do arquivo:
 
-```bash
+```console
 $ cargo test --test integration_test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.64s
@@ -181,7 +181,7 @@ pub fn setup() {
 
 Quando executarmos os testes novamente, veremos uma nova seção na saída de teste para o arquivo _common.rs_, mesmo que este arquivo não contenha funções de teste nem tenhamos chamado a função `setup` de qualquer lugar:
 
-```bash
+```console
 $ cargo test
    Compiling adder v0.1.0 (file:///projects/adder)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.89s

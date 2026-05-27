@@ -12,7 +12,7 @@ No Capítulo 12, construímos um pacote que incluía um crate binário e um crat
 
 Um _workspace_ é um conjunto de pacotes que compartilham o mesmo _Cargo.lock_ e diretório de saída. Vamos fazer um projeto usando um workspace — usaremos código trivial para podermos nos concentrar na estrutura do workspace. Há várias formas de estruturar um workspace; mostraremos apenas uma forma comum. Teremos um workspace contendo um binário e duas bibliotecas. O binário, que fornecerá a funcionalidade principal, dependerá das duas bibliotecas. Uma biblioteca fornecerá uma função `add_one` e a outra biblioteca uma função `add_two`. Esses três crates farão parte do mesmo workspace. Começaremos criando um novo diretório para o workspace:
 
-```bash
+```console
 $ mkdir add
 $ cd add
 ```
@@ -28,7 +28,7 @@ resolver = "3"
 
 Em seguida, criaremos o crate binário `adder` executando `cargo new` dentro do diretório _add_:
 
-```bash
+```console
 $ cargo new adder
      Created binary (application) `adder` package
       Adding `adder` as member of workspace at `file:///projects/add`
@@ -60,7 +60,7 @@ O workspace tem um diretório _target_ no nível superior para onde os artefatos
 
 Em seguida, vamos criar outro pacote membro no workspace e chamá-lo `add_one`. Gere um novo crate de biblioteca chamado `add_one`:
 
-```bash
+```console
 $ cargo new add_one --lib
      Created library `add_one` package
       Adding `add_one` as member of workspace at `file:///projects/add`
@@ -129,7 +129,7 @@ fn main() {
 
 Vamos compilar o workspace executando `cargo build` no diretório _add_ de nível superior!
 
-```bash
+```console
 $ cargo build
    Compiling add_one v0.1.0 (file:///projects/add/add_one)
    Compiling adder v0.1.0 (file:///projects/add/adder)
@@ -138,7 +138,7 @@ $ cargo build
 
 Para executar o crate binário a partir do diretório _add_, podemos especificar qual pacote no workspace queremos executar usando o argumento `-p` e o nome do pacote com `cargo run`:
 
-```bash
+```console
 $ cargo run -p adder
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.00s
      Running `target/debug/adder`
@@ -159,7 +159,7 @@ rand = "0.8.5"
 
 Agora podemos adicionar `use rand;` ao arquivo _add_one/src/lib.rs_, e compilar o workspace inteiro executando `cargo build` no diretório _add_ trará e compilará o crate `rand`. Obteremos um aviso porque não estamos referenciando o `rand` que trouxemos para o escopo:
 
-```bash
+```console
 $ cargo build
     Updating crates.io index
   Downloaded rand v0.8.5
@@ -181,7 +181,7 @@ warning: `add_one` (lib) generated 1 warning (run `cargo fix --lib -p add_one` t
 
 O _Cargo.lock_ de nível superior agora contém informação sobre a dependência de `add_one` em `rand`. No entanto, mesmo que `rand` seja usado em algum lugar do workspace, não podemos usá-lo em outros crates no workspace a menos que adicionemos `rand` aos arquivos _Cargo.toml_ deles também. Por exemplo, se adicionarmos `use rand;` ao arquivo _adder/src/main.rs_ para o pacote `adder`, obteremos um erro:
 
-```bash
+```console
 $ cargo build
   --snip--
    Compiling adder v0.1.0 (file:///projects/add/adder)
@@ -220,7 +220,7 @@ mod tests {
 
 Agora execute `cargo test` no diretório _add_ de nível superior. Executar `cargo test` em um workspace estruturado assim executará os testes de todos os crates no workspace:
 
-```bash
+```console
 $ cargo test
    Compiling add_one v0.1.0 (file:///projects/add/add_one)
    Compiling adder v0.1.0 (file:///projects/add/adder)
@@ -249,7 +249,7 @@ A primeira seção da saída mostra que o teste `it_works` no crate `add_one` pa
 
 Também podemos executar testes para um crate específico em um workspace a partir do diretório de nível superior usando a flag `-p` e especificando o nome do crate que queremos testar:
 
-```bash
+```console
 $ cargo test -p add_one
     Finished `test` profile [unoptimized + debuginfo] target(s) in 0.00s
      Running unittests src/lib.rs (target/debug/deps/add_one-93c49ee75dc46543)

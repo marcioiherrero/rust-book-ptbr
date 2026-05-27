@@ -92,7 +92,7 @@ Em seguida, adicionamos uma chamada a `to_lowercase` em cada `line` para colocar
 
 Vamos ver se esta implementação passa nos testes:
 
-```bash
+```console
 $ cargo test
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 1.33s
@@ -180,7 +180,7 @@ Passamos o valor na variável `ignore_case` para a instância de `Config` para q
 
 Vamos tentar! Primeiro, executaremos nosso programa sem a variável de ambiente definida e com a consulta `to`, que deve corresponder a qualquer linha que contenha a palavra _to_ em minúsculas:
 
-```bash
+```console
 $ cargo run -- to poem.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s
@@ -191,25 +191,25 @@ How dreary to be somebody!
 
 Parece que ainda funciona! Agora vamos executar o programa com `IGNORE_CASE` definida como `1`, mas com a mesma consulta `to`:
 
-```bash
+```console
 $ IGNORE_CASE=1 cargo run -- to poem.txt
 ```
 
 Se você estiver usando PowerShell, precisará definir a variável de ambiente e executar o programa como comandos separados:
 
-```bash
+```console
 PS> $Env:IGNORE_CASE=1; cargo run -- to poem.txt
 ```
 
 Isso fará `IGNORE_CASE` persistir pelo restante da sessão do shell. Pode ser removida com o cmdlet `Remove-Item`:
 
-```bash
+```console
 PS> Remove-Item Env:IGNORE_CASE
 ```
 
 Devemos obter linhas que contêm _to_ e que podem ter letras maiúsculas:
 
-```bash
+```console
 Are you nobody, too?
 How dreary to be somebody!
 To tell your name the livelong day

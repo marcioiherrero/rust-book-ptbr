@@ -18,7 +18,7 @@ Programas de linha de comando devem enviar mensagens de erro ao fluxo de erro pa
 
 Para demonstrar este comportamento, executaremos o programa com `>` e o caminho do arquivo _output.txt_, para o qual queremos redirecionar o fluxo de saída padrão. Não passaremos argumentos, o que deve causar um erro:
 
-```bash
+```console
 $ cargo run > output.txt
 ```
 
@@ -58,7 +58,7 @@ fn main() {
 
 Vamos agora executar o programa novamente da mesma forma, sem argumentos e redirecionando saída padrão com `>`:
 
-```bash
+```console
 $ cargo run > output.txt
 Problem parsing arguments: not enough arguments
 ```
@@ -67,7 +67,7 @@ Agora vemos o erro na tela e _output.txt_ não contém nada, que é o comportame
 
 Vamos executar o programa novamente com argumentos que não causam erro, mas ainda redirecionando saída padrão para um arquivo, assim:
 
-```bash
+```console
 $ cargo run -- to poem.txt > output.txt
 ```
 

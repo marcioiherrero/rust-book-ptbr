@@ -145,7 +145,7 @@ fn main() {
 
 Este código imprimirá `Hello, Macro! My name is Pancakes!` quando terminarmos. O primeiro passo é fazer um novo crate de biblioteca, assim:
 
-```bash
+```console
 $ cargo new hello_macro --lib
 ```
 
@@ -193,7 +193,7 @@ Além disso, ainda não podemos fornecer a função `hello_macro` com implementa
 
 O próximo passo é definir a macro procedural. No momento em que escrevemos, macros procedurais precisam estar em seu próprio crate. Eventualmente, esta restrição pode ser removida. A convenção para estruturar crates e crates de macro é a seguinte: para um crate chamado `foo`, um crate de macro procedural `derive` personalizado é chamado `foo_derive`. Vamos iniciar um novo crate chamado `hello_macro_derive` dentro do nosso projeto `hello_macro`:
 
-```bash
+```console
 $ cargo new hello_macro_derive --lib
 ```
 

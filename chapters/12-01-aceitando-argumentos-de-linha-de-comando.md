@@ -8,7 +8,7 @@ slug: aceitando-argumentos-de-linha-de-comando
 
 Vamos criar um novo projeto com, como sempre, `cargo new`. Chamaremos nosso projeto de `minigrep` para distingui-lo da ferramenta `grep` que você talvez já tenha no sistema:
 
-```bash
+```console
 $ cargo new minigrep
      Created binary (application) `minigrep` project
 $ cd minigrep
@@ -16,7 +16,7 @@ $ cd minigrep
 
 A primeira tarefa é fazer `minigrep` aceitar seus dois argumentos de linha de comando: o caminho do arquivo e uma string para buscar. Ou seja, queremos poder executar nosso programa com `cargo run`, dois hífens para indicar que os argumentos seguintes são do nosso programa e não do `cargo`, uma string para buscar e um caminho para o arquivo a ser pesquisado, assim:
 
-```bash
+```console
 $ cargo run -- searchstring example-filename.txt
 ```
 
@@ -53,7 +53,7 @@ Na primeira linha de `main`, chamamos `env::args` e imediatamente usamos `collec
 
 Por fim, imprimimos o vetor usando a macro de debug. Vamos tentar executar o código primeiro sem argumentos e depois com dois argumentos:
 
-```bash
+```console
 $ cargo run
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.61s
@@ -63,7 +63,7 @@ $ cargo run
 ]
 ```
 
-```bash
+```console
 $ cargo run -- needle haystack
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.57s
@@ -105,7 +105,7 @@ Como vimos ao imprimir o vetor, o nome do programa ocupa o primeiro valor no vet
 
 Imprimimos temporariamente os valores dessas variáveis para provar que o código está funcionando como pretendemos. Vamos executar este programa novamente com os argumentos `test` e `sample.txt`:
 
-```bash
+```console
 $ cargo run -- test sample.txt
    Compiling minigrep v0.1.0 (file:///projects/minigrep)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.0s

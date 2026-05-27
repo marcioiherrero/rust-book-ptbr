@@ -233,7 +233,7 @@ fn main() {
 
 Este código resultará no seguinte erro:
 
-```bash
+```console
 $ cargo run
    Compiling collections v0.1.0 (file:///projects/collections)
 error[E0277]: the type `str` cannot be indexed by `{integer}`
@@ -326,7 +326,7 @@ Aqui, `s` será um `&str` que contém os primeiros 4 bytes da string. Mencionamo
 
 Se tentássemos fatiar apenas parte dos bytes de um caractere com algo como `&hello[0..1]`, o Rust entraria em pânico em tempo de execução da mesma forma que se um índice inválido fosse acessado em um vetor:
 
-```bash
+```console
 $ cargo run
    Compiling collections v0.1.0 (file:///projects/collections)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s

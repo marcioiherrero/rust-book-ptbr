@@ -14,7 +14,7 @@ Os programas mais simples em Rust, como o que escrevemos até agora, não têm d
 
 Como a grande maioria dos projetos em Rust usa o Cargo, o restante deste livro assume que você também está usando o Cargo. O Cargo já vem instalado com o Rust se você utilizou os instaladores oficiais discutidos na seção "Instalação". Se você instalou o Rust por outros meios, verifique se o Cargo está instalado digitando o seguinte no terminal:
 
-```bash
+```console
 $ cargo --version
 ```
 
@@ -24,7 +24,7 @@ Se você vir um número de versão, ótimo! Se aparecer um erro, como `command n
 
 Vamos criar um novo projeto usando o Cargo e ver como ele difere do nosso projeto original "Hello, world!". Volte ao diretório onde você costuma armazenar seus projetos e execute os comandos abaixo:
 
-```bash
+```console
 $ cargo new hello_cargo
 $ cd hello_cargo
 ```
@@ -79,7 +79,7 @@ Se você começou um projeto sem Cargo, pode convertê-lo facilmente. Basta move
 
 Agora vamos ver o que muda quando compilamos e executamos o programa **"Hello, world!"** usando o Cargo! A partir do diretório *hello_cargo*, compile seu projeto digitando o seguinte comando:
 
-```bash
+```console
 $ cargo build
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
@@ -87,7 +87,7 @@ $ cargo build
 
 Esse comando cria um arquivo executável em *target/debug/hello_cargo* (ou *target\debug\hello_cargo.exe* no Windows), em vez de criá-lo no diretório atual. Como a compilação padrão é uma compilação de *debug*, o Cargo coloca o binário em um diretório chamado *debug*. Você pode executar o arquivo executável com o seguinte comando:
 
-```bash
+```console
 $ ./target/debug/hello_cargo # ou .\target\debug\hello_cargo.exe no Windows
 Hello, world!
 ```
@@ -96,7 +96,7 @@ Se tudo correr bem, `Hello, world!` deverá ser exibido no terminal. Executar `c
 
 Acabamos de compilar um projeto com `cargo build` e executá-lo com `./target/debug/hello_cargo`, mas também podemos usar `cargo run` para compilar o código e depois executar o binário resultante, tudo em um único comando:
 
-```bash
+```console
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
      Running `target/debug/hello_cargo`
@@ -107,7 +107,7 @@ Usar `cargo run` é mais conveniente do que ter que lembrar de executar `cargo b
 
 Observe que desta vez não vimos nenhuma saída indicando que o Cargo estava compilando o *hello_cargo*. O Cargo percebeu que os arquivos não haviam mudado, então não recompilou o projeto e apenas executou o binário. Se você tivesse modificado o código-fonte, o Cargo teria recompilado o projeto antes de executá-lo, e você teria visto uma saída como esta:
 
-```bash
+```console
 $ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs
@@ -117,7 +117,7 @@ Hello, world!
 
 O Cargo também fornece um comando chamado `cargo check`. Esse comando verifica rapidamente seu código para garantir que ele compila, mas não produz um executável:
 
-```bash
+```console
 $ cargo check
    Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
@@ -145,7 +145,7 @@ Em projetos simples, o Cargo não oferece muito mais valor do que usar apenas o 
 
 Mesmo que o projeto *hello_cargo* seja simples, ele já utiliza grande parte das ferramentas reais que você usará ao longo da sua carreira com Rust. Para trabalhar em qualquer projeto existente, você pode usar os seguintes comandos:
 
-```bash
+```console
 $ git clone example.org/someproject
 $ cd someproject
 $ cargo build

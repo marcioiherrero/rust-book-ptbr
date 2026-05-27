@@ -226,7 +226,7 @@ fn main() {
 
 Veja o erro do compilador:
 
-```bash
+```console
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable

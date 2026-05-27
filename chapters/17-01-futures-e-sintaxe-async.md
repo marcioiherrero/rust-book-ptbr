@@ -26,7 +26,7 @@ Em alguns casos, o `trpl` também renomeia ou envolve APIs originais para você 
 
 Crie um novo projeto binário chamado `hello-async` e adicione o crate `trpl` como dependência:
 
-```bash
+```console
 $ cargo new hello-async
 $ cd hello-async
 $ cargo add trpl
