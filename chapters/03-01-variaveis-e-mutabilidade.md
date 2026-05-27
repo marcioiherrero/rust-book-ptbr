@@ -126,10 +126,6 @@ fn main() {
     println!("The value of x is: {x}");
 }
 ```
-<a id="listagem-3-4"></a>
-
-[Listagem 3-4](#listagem-3-4): Exemplo de sombreamento de variáveis em diferentes escopos
-
 Nesse programa, primeiro associamos o valor `5` à variável `x`. Em seguida, criamos uma **nova variável `x`** usando novamente `let x =`, pegando o valor anterior e somando 1, o que faz com que `x` passe a valer `6`.
 
 Depois disso, dentro de um escopo interno criado pelas chaves `{ }`, a terceira instrução `let` também sombreia `x`, criando mais uma nova variável. Dessa vez, o valor anterior é multiplicado por 2, fazendo com que `x` tenha o valor `12`. Quando esse escopo termina, o sombreamento acaba, e `x` volta a ter o valor `6`.
@@ -155,10 +151,6 @@ Exemplo de mudança de tipo com sombreamento
 let spaces = "   ";
 let spaces = spaces.len();
 ```
-<a id="listagem-3-5"></a>
-
-[Listagem 3-5](#listagem-3-5): Uso de sombreamento para mudar o tipo da variável
-
 A primeira variável `spaces` é do tipo texto (`&str`), enquanto a segunda é um número (`usize`). Isso evita a necessidade de nomes diferentes, como `spaces_str` e `spaces_num`.
 
 Se tentarmos fazer o mesmo usando `mut`, o código não irá compilar:
@@ -168,10 +160,6 @@ Arquivo: src/main.rs (Este código não compila!)
 let mut spaces = "   ";
 spaces = spaces.len();
 ```
-<a id="listagem-3-6"></a>
-
-[Listagem 3-6](#listagem-3-6): Erro ao tentar alterar o tipo de uma variável mutável
-
 O erro ocorre porque **não é permitido alterar o tipo de uma variável**.
 
 ```bash
