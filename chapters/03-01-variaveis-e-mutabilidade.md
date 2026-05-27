@@ -21,9 +21,6 @@ fn main() {
     println!("The value of x is: {x}");
 }
 ```
-<a id="listagem-3-1"></a>
-
-[Listagem 3-1](#listagem-3-1): Exemplo de código tentando alterar uma variável imutável
 
 Salve o arquivo e execute o programa com `cargo run`. Você deverá receber uma mensagem de erro relacionada à imutabilidade, parecida com esta:
 
