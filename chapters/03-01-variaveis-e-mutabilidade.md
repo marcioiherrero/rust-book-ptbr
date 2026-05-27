@@ -2,6 +2,8 @@
 title: "Variáveis e mutabilidade"
 chapter_code: 03-01
 slug: variaveis-e-mutabilidade
+challenge_day: 3
+reading_minutes: 14
 ---
 
 # Variáveis e mutabilidade
@@ -49,7 +51,7 @@ error: could not compile `variables` (bin "variables") due to 1 previous error
 Este exemplo mostra como o compilador ajuda você a encontrar erros nos seus programas.
 Erros de compilação podem ser frustrantes, mas, na prática, eles só querem dizer
 que seu programa ainda não está fazendo com segurança o que você quer que ele faça;
-eles _não_ significam que você seja um mau programador! Mesmo Rustaceans experientes
+eles _não_ significam que você seja um mau programador! Mesmo Rustáceoss experientes
 continuam recebendo erros do compilador.
 
 Você recebeu a mensagem de erro `` cannot assign twice to immutable variable `x` ``
@@ -112,7 +114,7 @@ Primeiro, não é permitido usar `mut` com constantes. Constantes não são apen
 imutáveis por padrão: elas são sempre imutáveis. Você declara constantes usando
 a palavra-chave `const`, em vez de `let`, e o tipo do valor _deve_ ser anotado.
 Vamos cobrir tipos e anotações de tipo na próxima seção,
-[“Tipos de dados”](/livro/cap03-02-tipos-de-dados#tipos-de-dados), então não se preocupe com os detalhes
+[Tipos de dados](/livro/cap03-02-tipos-de-dados#tipos-de-dados), então não se preocupe com os detalhes
 agora. Por enquanto, basta saber que é obrigatório sempre anotar o tipo.
 
 Constantes podem ser declaradas em qualquer escopo, inclusive no escopo global,
@@ -153,7 +155,7 @@ futuro.
 ### Sombreamento
 
 Como você viu no tutorial do jogo de adivinhação no [Capítulo 2](/livro/cap02-00-programando-um-jogo-de-adivinhacao#comparando-o-palpite-com-o-numero-secreto), você pode declarar uma
-nova variável com o mesmo nome de uma variável anterior. Rustaceans dizem que a primeira
+nova variável com o mesmo nome de uma variável anterior. Rustáceos dizem que a primeira
 variável foi _sombreada_ (_shadowed_) pela segunda, o que significa que a segunda variável
 é a que o compilador enxerga quando você usa aquele nome. Na prática, a segunda variável
 “encobre” a primeira, de modo que todos os usos daquele nome passam a se referir a ela
@@ -200,8 +202,7 @@ mas manter a variável imutável depois que essas transformações terminarem.
 
 A outra diferença entre `mut` e sombreamento é que, como estamos efetivamente criando
 uma nova variável quando usamos `let` novamente, podemos mudar o tipo do valor e ainda
-reutilizar o mesmo nome. Por exemplo, imagine que nosso programa peça para a pessoa
-usuária indicar quantos espaços ela quer entre um texto digitando caracteres de espaço;
+reutilizar o mesmo nome. Por exemplo, imagine que nosso programa peça para o usuário indicar quantos espaços ela quer entre um texto digitando caracteres de espaço;
 depois queremos armazenar essa entrada como um número:
 
 ```rust
