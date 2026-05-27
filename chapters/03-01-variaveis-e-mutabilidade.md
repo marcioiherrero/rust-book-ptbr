@@ -46,125 +46,159 @@ error: could not compile `variables` (bin "variables") due to 1 previous error
 
 ```
 
-Esse exemplo mostra como o compilador ajuda você a encontrar erros no seu programa. Erros de compilação podem ser frustrantes, mas eles só significam que o programa ainda não está fazendo, de forma segura, o que você quer que ele faça — isso não quer dizer que você seja um mau programador. Até programadores experientes em Rust ainda recebem erros do compilador.
+Este exemplo mostra como o compilador ajuda você a encontrar erros nos seus programas.
+Erros de compilação podem ser frustrantes, mas, na prática, eles só querem dizer
+que seu programa ainda não está fazendo com segurança o que você quer que ele faça;
+eles _não_ significam que você seja um mau programador! Mesmo Rustaceans experientes
+continuam recebendo erros do compilador.
 
-Você recebeu a mensagem de erro `cannot assign twice to immutable variable x` porque tentou atribuir um segundo valor à variável `x`, que é imutável.
+Você recebeu a mensagem de erro `` cannot assign twice to immutable variable `x` ``
+porque tentou atribuir um segundo valor à variável imutável `x`.
 
-> **Nota:** Erros detectados em tempo de compilação evitam bugs difíceis de encontrar mais tarde, especialmente quando diferentes partes do código fazem suposições diferentes sobre um mesmo valor.
+É importante receber erros em tempo de compilação quando tentamos alterar um valor
+marcado como imutável, porque exatamente esse tipo de situação pode levar a bugs.
+Se uma parte do código opera com a suposição de que um valor nunca vai mudar e outra
+parte do código muda esse valor, existe a possibilidade de a primeira parte não se
+comportar como foi projetada. A causa desse tipo de bug pode ser difícil de encontrar
+depois, especialmente quando o segundo trecho de código muda o valor apenas _às vezes_.
+O compilador Rust garante que, quando você afirma que um valor não vai mudar, ele
+realmente não vai mudar, então você não precisa ficar controlando isso por conta própria.
+Com isso, seu código fica mais fácil de raciocinar.
 
-É importante que esse tipo de erro seja detectado em tempo de compilação, porque essa situação pode facilmente levar a bugs. Imagine que uma parte do código assume que um valor nunca vai mudar, enquanto outra parte altera esse valor. O compilador do Rust garante que, quando você diz que um valor não vai mudar, ele realmente não muda, o que torna o código mais fácil de entender e de manter.
+Mas a mutabilidade pode ser muito útil e também pode tornar o código mais conveniente
+de escrever. Embora as variáveis sejam imutáveis por padrão, você pode torná-las mutáveis
+adicionando `mut` antes do nome da variável, como fez no [Capítulo
+2][storing-values-with-variables]<!-- ignore -->. Adicionar `mut` também comunica sua
+intenção para quem vier a ler o código no futuro, indicando que outras partes do código
+vão mudar o valor dessa variável.
 
-Por outro lado, a mutabilidade pode ser muito útil e tornar o código mais conveniente de escrever. Embora as variáveis sejam imutáveis por padrão, você pode torná-las mutáveis adicionando a palavra-chave `mut` antes do nome da variável, como você fez no [Capítulo 2](/livro/cap02-00-programando-um-jogo-de-adivinhacao). Isso também deixa clara a sua intenção para quem for ler o código no futuro.
+Por exemplo, vamos alterar _src/main.rs_ para o seguinte:
 
-Veja o exemplo abaixo:
+<span class="filename">Filename: src/main.rs</span>
 
-Arquivo: src/main.rs
 ```rust
-fn main() {
-    let mut x = 5;
-    println!("The value of x is: {x}");
-    x = 6;
-    println!("The value of x is: {x}");
-}
-```
-Ao executar o programa, o resultado será:
-
-```bash
-The value of x is: 5
-The value of x is: 6
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
 ```
 
-Nesse caso, é permitido alterar o valor associado a `x` de 5 para 6 porque usamos `mut`. No fim das contas, decidir se deve usar mutabilidade ou não depende de você e do que considera mais claro em cada situação.
+Quando executamos o programa agora, obtemos isto:
 
-## Declarando constantes
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
+```
 
-Assim como as variáveis imutáveis, constantes são valores associados a um nome e não podem ser alterados. Porém, existem algumas diferenças importantes entre constantes e variáveis.
+Podemos alterar o valor associado a `x` de `5` para `6` quando `mut` é usado.
+No fim das contas, decidir usar mutabilidade ou não depende de você e do que
+considera mais claro naquela situação específica.
 
-Primeiro, não é permitido usar `mut` com constantes. As constantes não são apenas imutáveis por padrão — elas são sempre imutáveis. Para declarar uma constante, usamos a palavra-chave `const` em vez de `let`, e o tipo do valor deve ser informado obrigatoriamente. Vamos falar mais sobre tipos e anotações de tipo na próxima seção, [Tipos de dados](/livro/cap03-02-tipos-de-dados), então não se preocupe com os detalhes agora. Por enquanto, basta saber que o tipo sempre precisa ser declarado.
+<!-- Old headings. Do not remove or links may break. -->
+<a id="constants"></a>
 
-Constantes podem ser declaradas em qualquer escopo, inclusive no escopo global. Isso as torna muito úteis para valores que precisam ser conhecidos por várias partes do código.
+### Declarando constantes
 
-Outra diferença importante é que constantes só podem receber expressões constantes, ou seja, valores que podem ser calculados em tempo de compilação, e não resultados que só seriam conhecidos durante a execução do programa.
+Assim como variáveis imutáveis, _constantes_ são valores associados a um nome
+e que não podem ser alterados, mas existem algumas diferenças entre constantes
+e variáveis.
 
-Veja um exemplo de declaração de constante:
+Primeiro, não é permitido usar `mut` com constantes. Constantes não são apenas
+imutáveis por padrão: elas são sempre imutáveis. Você declara constantes usando
+a palavra-chave `const`, em vez de `let`, e o tipo do valor _deve_ ser anotado.
+Vamos cobrir tipos e anotações de tipo na próxima seção,
+[“Tipos de dados”][data-types]<!-- ignore -->, então não se preocupe com os detalhes
+agora. Por enquanto, basta saber que é obrigatório sempre anotar o tipo.
 
-Exemplo de constante em Rust
+Constantes podem ser declaradas em qualquer escopo, inclusive no escopo global,
+o que as torna úteis para valores que muitas partes do código precisam conhecer.
+
+A última diferença é que constantes só podem ser definidas com uma expressão
+constante, e não com o resultado de um valor que só poderia ser calculado em
+tempo de execução.
+
+Aqui está um exemplo de declaração de constante:
+
 ```rust
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 ```
 
-O nome da constante é `THREE_HOURS_IN_SECONDS`, e seu valor é definido multiplicando 60 (segundos em um minuto) por 60 (minutos em uma hora) por 3 (o número de horas que queremos representar).
+O nome da constante é `THREE_HOURS_IN_SECONDS`, e seu valor é definido como o
+resultado de multiplicar 60 (o número de segundos em um minuto) por 60 (o número
+de minutos em uma hora) por 3 (o número de horas que queremos contar neste programa).
+A convenção de nomenclatura do Rust para constantes é usar tudo em maiúsculas, com
+underscores entre as palavras. O compilador consegue avaliar um conjunto limitado
+de operações em tempo de compilação, o que nos permite escrever esse valor de um
+jeito mais fácil de entender e verificar, em vez de definir a constante diretamente
+como 10.800. Consulte a [seção sobre avaliação de constantes na Rust
+Reference][const-eval] para mais informações sobre quais operações podem ser usadas
+ao declarar constantes.
 
-A convenção de nomes do Rust para constantes é usar letras maiúsculas, com underscores separando as palavras. O compilador do Rust consegue avaliar um conjunto limitado de operações em tempo de compilação, o que permite escrever esse valor de forma mais clara e fácil de entender, em vez de simplesmente usar o número `10_800`.
+Constantes são válidas durante todo o tempo de execução do programa, dentro do escopo
+em que foram declaradas. Essa característica torna constantes úteis para valores do
+domínio da sua aplicação que várias partes do programa talvez precisem conhecer, como
+o número máximo de pontos que qualquer jogador pode ganhar em um jogo, ou a velocidade
+da luz.
 
-Isso torna o código mais legível e menos propenso a erros. Para saber exatamente quais operações podem ser usadas, consulte a [seção sobre avaliação de constantes](https://doc.rust-lang.org/reference/const_eval.html) na documentação oficial do Rust.
+Dar nomes de constantes para valores fixos usados ao longo do programa ajuda a transmitir
+o significado desse valor para futuras pessoas mantenedoras do código. Também ajuda ter
+um único lugar no código para alterar, caso esse valor fixo precise ser atualizado no
+futuro.
 
-As constantes são válidas durante todo o tempo de execução do programa, dentro do escopo em que foram declaradas. Essa característica faz com que elas sejam ideais para representar valores importantes do domínio da aplicação, que várias partes do programa precisam conhecer.
+### Sombreamento
 
-> **Nota:** Constantes são especialmente úteis para valores como limites máximos, configurações globais ou números que não devem mudar ao longo da execução do programa.
+Como você viu no tutorial do jogo de adivinhação no [Capítulo
+2][comparing-the-guess-to-the-secret-number]<!-- ignore -->, você pode declarar uma
+nova variável com o mesmo nome de uma variável anterior. Rustaceans dizem que a primeira
+variável foi _sombreada_ (_shadowed_) pela segunda, o que significa que a segunda variável
+é a que o compilador enxerga quando você usa aquele nome. Na prática, a segunda variável
+“encobre” a primeira, de modo que todos os usos daquele nome passam a se referir a ela
+até que ela também seja sombreada ou que o escopo termine. Podemos sombrear uma variável
+reutilizando o mesmo nome e repetindo o uso da palavra-chave `let`, como a seguir:
 
-Dar nomes a valores fixos usados ao longo do programa, transformando-os em constantes, ajuda a deixar o significado desses valores mais claro para quem for manter o código no futuro. Além disso, se esse valor precisar ser alterado algum dia, você terá apenas um único lugar no código para fazer essa mudança.
+<span class="filename">Filename: src/main.rs</span>
 
-## Sombreamento (shadowing)
-
-Como você viu no tutorial do jogo de adivinhação no Capítulo 2, é possível declarar uma nova variável com o **mesmo nome** de uma variável anterior. Em Rust, dizemos que a primeira variável foi **sombreada** (*shadowed*) pela segunda. Isso significa que, a partir desse ponto, é a **variável mais recente** que o compilador considera quando você usa aquele nome.
-
-Na prática, a segunda variável "cobre" a primeira, e todas as referências ao nome passam a se referir a ela, até que essa variável também seja sombreada ou até que o escopo termine. Podemos fazer isso reutilizando o mesmo nome e usando novamente a palavra-chave `let`, como no exemplo a seguir:
-
-Arquivo: src/main.rs
 ```rust
-fn main() {
-    let x = 5;
-
-    let x = x + 1;
-
-    {
-        let x = x * 2;
-        println!("The value of x in the inner scope is: {x}");
-    }
-
-    println!("The value of x is: {x}");
-}
-```
-Nesse programa, primeiro associamos o valor `5` à variável `x`. Em seguida, criamos uma **nova variável `x`** usando novamente `let x =`, pegando o valor anterior e somando 1, o que faz com que `x` passe a valer `6`.
-
-Depois disso, dentro de um escopo interno criado pelas chaves `{ }`, a terceira instrução `let` também sombreia `x`, criando mais uma nova variável. Dessa vez, o valor anterior é multiplicado por 2, fazendo com que `x` tenha o valor `12`. Quando esse escopo termina, o sombreamento acaba, e `x` volta a ter o valor `6`.
-
-Ao executar o programa, a saída será:
-
-```bash
-$ cargo run
-The value of x in the inner scope is: 12
-The value of x is: 6
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}
 ```
 
-O sombreamento é diferente de tornar uma variável mutável com `mut`, pois o compilador gera um erro em tempo de compilação se você tentar reatribuir um valor sem usar a palavra-chave `let`. Com o sombreamento, podemos aplicar transformações a um valor e ainda manter a variável **imutável** depois disso.
+Esse programa primeiro associa `x` ao valor `5`. Depois, cria uma nova variável `x`
+ao repetir `let x =`, pegando o valor original e somando `1`, de modo que o valor de
+`x` passa a ser `6`. Em seguida, dentro de um escopo interno criado com chaves, a terceira
+instrução `let` também sombreia `x` e cria uma nova variável, multiplicando o valor anterior
+por `2` para dar a `x` o valor `12`. Quando esse escopo termina, o sombreamento interno acaba
+e `x` volta a ser `6`. Quando executamos esse programa, ele mostra o seguinte:
 
-> **Nota:** O sombreamento cria uma nova variável, enquanto `mut` permite alterar o valor da mesma variável.
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
+```
 
-Outra diferença importante entre `mut` e o sombreamento é que, ao criar uma nova variável com `let`, podemos **mudar o tipo do valor** e ainda reutilizar o mesmo nome.
+Sombreamento é diferente de marcar uma variável com `mut`, porque receberemos um erro
+em tempo de compilação se, por acidente, tentarmos reatribuir essa variável sem usar a
+palavra-chave `let`. Ao usar `let`, podemos fazer algumas transformações em um valor,
+mas manter a variável imutável depois que essas transformações terminarem.
 
-Por exemplo, imagine um programa que receba espaços digitados pelo usuário e, depois, queira armazenar a quantidade desses espaços como um número:
+A outra diferença entre `mut` e sombreamento é que, como estamos efetivamente criando
+uma nova variável quando usamos `let` novamente, podemos mudar o tipo do valor e ainda
+reutilizar o mesmo nome. Por exemplo, imagine que nosso programa peça para a pessoa
+usuária indicar quantos espaços ela quer entre um texto digitando caracteres de espaço;
+depois queremos armazenar essa entrada como um número:
 
-Exemplo de mudança de tipo com sombreamento
 ```rust
-let spaces = "   ";
-let spaces = spaces.len();
-```
-A primeira variável `spaces` é do tipo texto (`&str`), enquanto a segunda é um número (`usize`). Isso evita a necessidade de nomes diferentes, como `spaces_str` e `spaces_num`.
-
-Se tentarmos fazer o mesmo usando `mut`, o código não irá compilar:
-
-Arquivo: src/main.rs (Este código não compila!)
-```rust
-let mut spaces = "   ";
-spaces = spaces.len();
-```
-O erro ocorre porque **não é permitido alterar o tipo de uma variável**.
-
-```bash
-$ cargo run
-error[E0308]: mismatched types
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 
-Agora que já exploramos como as variáveis funcionam, podemos avançar para os outros tipos de dados que elas podem assumir.
+A primeira variável `spaces` é do tipo string, e a segunda variável `spaces` é do tipo
+número. Assim, o sombreamento evita que precisemos inventar nomes diferentes, como
+`spaces_str` e `spaces_num`; em vez disso, podemos reutilizar o nome mais simples `spaces`.
+No entanto, se tentarmos usar `mut` para isso, como mostrado aqui, teremos um erro em
+tempo de compilação:
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/src/main.rs:here}}
+```
+
+O erro diz que não temos permissão para mudar o tipo de uma variável:
+
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
+```
+
+Agora que exploramos como variáveis funcionam, vamos olhar para mais tipos de dados
+que elas podem ter.
