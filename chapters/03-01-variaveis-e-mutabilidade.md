@@ -51,7 +51,7 @@ error: could not compile `variables` (bin "variables") due to 1 previous error
 
 Esse exemplo mostra como o compilador ajuda você a encontrar erros no seu programa. Erros de compilação podem ser frustrantes, mas eles só significam que o programa ainda não está fazendo, de forma segura, o que você quer que ele faça — isso não quer dizer que você seja um mau programador. Até programadores experientes em Rust ainda recebem erros do compilador.
 
-Você recebeu a mensagem de erro *cannot assign twice to immutable variable `x`* porque tentou atribuir um segundo valor à variável `x`, que é imutável.
+Você recebeu a mensagem de erro `cannot assign twice to immutable variable x` porque tentou atribuir um segundo valor à variável `x`, que é imutável.
 
 > **Nota:** Erros detectados em tempo de compilação evitam bugs difíceis de encontrar mais tarde, especialmente quando diferentes partes do código fazem suposições diferentes sobre um mesmo valor.
 
