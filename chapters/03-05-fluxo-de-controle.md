@@ -21,9 +21,9 @@ fn main() {
     let number = 3;
 
     if number < 5 {
-        println!("condition was true");
+        println!("a condição é verdadeira (true)");
     } else {
-        println!("condition was false");
+        println!("a condition é falsa (false)");
     }
 }
 ```
@@ -151,8 +151,7 @@ fn main() {
     println!("The value of number is: {number}");
 }
 ```
-
-_Listagem 3-2: Atribuindo o resultado de uma expressão `if` a uma variável_
+[Listagem 3-2](#listagem-3-2): Exemplo de declaração da função `main` contendo uma única instrução.
 
 A variável `number` será associada a um valor com base no resultado da expressão condicional (`if`). Execute este código para ver o que acontece:
 
