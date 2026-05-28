@@ -24,8 +24,6 @@ fn another_function() {
 }
 ```
 
-_Listagem 1-1: exemplo de definição de função em Rust_
-
 Definimos uma função em Rust usando `fn`, seguido do nome da função e de um conjunto de parênteses. As chaves `{}` indicam ao compilador onde o corpo da função começa e termina.
 
 Podemos chamar qualquer função que tenhamos definido usando seu nome seguido de parênteses. Como `another_function` está definida no programa, ela pode ser chamada de dentro da função `main`. Note que definimos `another_function` depois da função `main` no código-fonte; também poderíamos tê-la definido antes. O Rust não se importa com a ordem em que você define suas funções, apenas que elas estejam definidas em algum lugar dentro de um _escopo_ que possa ser visto por quem as chama.
