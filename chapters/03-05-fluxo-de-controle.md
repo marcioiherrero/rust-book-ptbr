@@ -2,6 +2,8 @@
 title: "Fluxo de controle"
 chapter_code: 03-05
 slug: fluxo-de-controle
+challenge_day: 4
+reading_minutes: 26
 ---
 
 # Fluxo de controle
@@ -387,8 +389,7 @@ fn main() {
     }
 }
 ```
-
-_Listagem 3-5: Percorrendo cada elemento do array usando um loop `for`_
+[Listagem 354](#listagem-3-5): Percorrendo cada elemento do array usando um loop `for`.
 
 Ao executarmos este código, veremos a mesma saída que na Listagem 3-4. O ponto principal aqui é o ganho em segurança, eliminando bugs causados por acessos fora dos limites (out-of-bounds) ou iterações incompletas. O código de máquina gerado pelo `for` também pode ser mais eficiente, pois o índice não precisa ser comparado ao comprimento do array a cada iteração.
 
