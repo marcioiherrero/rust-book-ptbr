@@ -3,7 +3,7 @@ title: "Funções"
 chapter_code: 03-03
 slug: funcoes
 challenge_day: 3
-reading_minutes: 22
+reading_minutes: 14
 ---
 
 # Funções
