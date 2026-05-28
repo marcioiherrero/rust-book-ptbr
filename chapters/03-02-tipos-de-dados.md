@@ -2,6 +2,8 @@
 title: "Tipos de dados"
 chapter_code: 03-02
 slug: tipos-de-dados
+challenge_day: 3
+reading_minutes: 22
 ---
 
 # Tipos de dados
