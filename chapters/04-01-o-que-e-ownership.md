@@ -2,6 +2,8 @@
 title: "O que é ownership?"
 chapter_code: 04-01
 slug: o-que-e-ownership
+challenge_day: 5
+reading_minutes: 38
 ---
 
 # O que é ownership?
