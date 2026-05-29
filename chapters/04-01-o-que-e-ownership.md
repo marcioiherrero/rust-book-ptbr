@@ -168,7 +168,9 @@ Isso parece muito semelhante, então podemos supor que funciona da mesma forma: 
 
 Observe a Figura 4-1 para ver o que acontece com `String` por baixo dos panos. Uma `String` é composta por três partes, mostradas à esquerda: um ponteiro para a memória que contém o conteúdo da string, um comprimento (_length_) e uma capacidade (_capacity_). Esse grupo de dados fica armazenado na stack. À direita está a memória na heap que contém o conteúdo.
 
-*Figura 4-1: A representação na memória de uma `String` com o valor `"hello"` associada a `s1`. Duas tabelas: a primeira contém a representação de s1 na stack, com comprimento (5), capacidade (5) e um ponteiro para o primeiro valor da segunda tabela. A segunda tabela contém a representação dos dados da string na heap, byte a byte.*
+![Três tabelas: a tabela s1 na stack com ponteiro, comprimento e capacidade; seta do ponteiro para a heap com os bytes da string "hello".](https://doc.rust-lang.org/book/img/trpl04-01.svg)
+
+[Figura 4-1](#figura-4-1): A representação na memória de uma `String` com o valor `"hello"` associada a `s1`.*
 
 O comprimento é quanta memória, em bytes, o conteúdo da `String` está usando atualmente. A capacidade é a quantidade total de memória, em bytes, que a `String` recebeu do alocador. A diferença entre comprimento e capacidade importa, mas não neste contexto; por enquanto, podemos ignorar a capacidade.
 
