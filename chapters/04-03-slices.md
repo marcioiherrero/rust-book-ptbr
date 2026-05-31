@@ -10,11 +10,11 @@ _Slices_ permitem acessar uma parte contínua de uma coleção (como uma String 
 
 Aqui está um pequeno problema de programação: escreva uma função que receba uma string de palavras separadas por espaços e retorne a primeira palavra que encontrar nessa string. Se a função não encontrar um espaço na string, a string inteira deve ser uma palavra, então a string inteira deve ser retornada.
 
-> **Nota:** Para fins de introdução aos slices, assumimos apenas ASCII nesta seção; uma discussão mais completa sobre tratamento de UTF-8 está na seção Armazenando texto codificado em UTF-8 com Strings do Capítulo 8.
+> **Nota:** Para fins de introdução aos slices, assumimos apenas ASCII nesta seção; uma discussão mais completa sobre tratamento de UTF-8 está na seção [Armazenando texto codificado em UTF-8 com Strings](/livro/cap08-02-strings) do Capítulo 8.
 
 Vamos ver como escreveríamos a assinatura dessa função sem usar slices, para entender o problema que os slices vão resolver:
 
-```rust,ignore
+```rust
 fn first_word(s: &String) -> ?
 ```
 
@@ -44,13 +44,13 @@ fn main() {}
 
 Como precisamos percorrer a `String` elemento por elemento e verificar se um valor é um espaço, converteremos nossa `String` em um array de bytes usando o método `as_bytes`:
 
-```rust,ignore
+```rust
 let bytes = s.as_bytes();
 ```
 
 Em seguida, criamos um iterador sobre o array de bytes usando o método `iter`:
 
-```rust,ignore
+```rust
 for (i, &item) in bytes.iter().enumerate() {
 ```
 
@@ -60,7 +60,7 @@ Como o método `enumerate` retorna uma tupla, podemos usar padrões para desestr
 
 Dentro do loop `for`, procuramos o byte que representa o espaço usando a sintaxe de literal de byte. Se encontrarmos um espaço, retornamos a posição. Caso contrário, retornamos o comprimento da string usando `s.len()`.
 
-```rust,ignore
+```rust
         if item == b' ' {
             return i;
         }
@@ -106,7 +106,7 @@ Este programa compila sem erros e também compilaria se usássemos `word` depois
 
 Ter que se preocupar com o índice em `word` ficando dessincronizado com os dados em `s` é tedioso e propenso a erros! Gerenciar esses índices é ainda mais frágil se escrevermos uma função `second_word`. Sua assinatura teria que ser assim:
 
-```rust,ignore
+```rust
 fn second_word(s: &String) -> (usize, usize) {
 ```
 
@@ -130,6 +130,10 @@ fn main() {
 ```
 
 Em vez de uma referência à `String` inteira, `hello` é uma referência a uma porção da `String`, especificada no trecho extra `[0..5]`. Criamos slices usando um intervalo entre colchetes, especificando `[índice_inicial..índice_final]`, em que _`índice_inicial`_ é a primeira posição no slice e _`índice_final`_ é um a mais que a última posição no slice. Internamente, a estrutura de dados do slice armazena a posição inicial e o comprimento do slice, que corresponde a _`índice_final`_ menos _`índice_inicial`_. Assim, no caso de `let world = &s[6..11];`, `world` seria um slice que contém um ponteiro para o byte no índice 6 de `s` com um valor de comprimento 5.
+
+A Figura 4-7 ilustra isso num diagrama.
+
+![Três tabelas: s na stack apontando para a heap com "hello world"; world na stack com comprimento 5 apontando para o byte 6 na heap.](https://doc.rust-lang.org/book/img/trpl04-07.svg)
 
 *Figura 4-7: Um string slice referenciando parte de uma `String`. Três tabelas: uma tabela representa os dados na stack de s, que aponta para o byte no índice 0 em uma tabela dos dados da string "hello world" na heap. A terceira tabela representa os dados na stack do slice world, que tem um valor de comprimento 5 e aponta para o byte 6 da tabela de dados na heap.*
 
@@ -192,7 +196,7 @@ Agora, quando chamamos `first_word`, recebemos de volta um único valor ligado a
 
 Retornar um slice também funcionaria para uma função `second_word`:
 
-```rust,ignore
+```rust
 fn second_word(s: &String) -> &str {
 ```
 
@@ -261,7 +265,7 @@ O tipo de `s` aqui é `&str`: é um slice apontando para aquele ponto específic
 
 Saber que você pode obter slices de literais e valores `String` nos leva a mais uma melhoria em `first_word`: sua assinatura:
 
-```rust,ignore
+```rust
 fn first_word(s: &String) -> &str {
 ```
 
