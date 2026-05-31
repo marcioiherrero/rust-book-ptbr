@@ -200,7 +200,7 @@ Retornar um slice também funcionaria para uma função `second_word`:
 fn second_word(s: &String) -> &str {
 ```
 
-Agora temos uma API direta que é muito mais difícil de usar incorretamente, porque o compilador garantirá que as referências à `String` permaneçam válidas. Lembre-se do bug no programa da Listagem 4-8, quando obtivemos o índice do fim da primeira palavra, mas depois limpamos a string e nosso índice ficou inválido? Esse código era logicamente incorreto, mas não mostrava erros imediatos. Os problemas apareceriam depois se continuássemos tentando usar o índice da primeira palavra com uma string esvaziada. Slices tornam esse bug impossível e nos avisam muito antes de que há um problema no código. Usar a versão com slice de `first_word` gera um erro em tempo de compilação:
+Agora temos uma API simples e muito mais difícil de usar incorretamente, porque o compilador garante que as referências para dentro da `String` permaneçam válidas. Lembre-se do bug da Listagem 4-8: obtínhamos o índice do final da primeira palavra e depois limpávamos a string, fazendo com que esse índice se tornasse inválido. Aquele código estava logicamente errado, mas não produzia nenhum erro imediato. O problema só apareceria mais tarde, quando tentássemos usar o índice da primeira palavra em uma string que já havia sido esvaziada. Slices tornam esse tipo de bug impossível, além de avisarem muito mais cedo que existe um problema no código. Ao usar a versão de `first_word` que retorna um slice, o compilador emitirá um erro em tempo de compilação:
 
 **Arquivo: src/main.rs (Este código não compila!)**
 
