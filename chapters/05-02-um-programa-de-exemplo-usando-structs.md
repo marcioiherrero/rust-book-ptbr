@@ -148,7 +148,7 @@ fn main() {
 
 Quando compilamos este código, obtemos um erro com esta mensagem central:
 
-```text
+```console
 error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
 ```
 
@@ -156,7 +156,7 @@ A macro `println!` pode fazer muitos tipos de formatação e, por padrão, as ch
 
 Se continuarmos lendo os erros, encontraremos esta nota útil:
 
-```text
+```console
    |                        | `Rectangle` cannot be formatted with the default formatter
    |                        required by this formatting parameter
 ```
@@ -165,13 +165,13 @@ Vamos tentar! A chamada da macro `println!` agora ficará assim: `println!("rect
 
 Compile o código com essa alteração. Droga! Ainda obtemos um erro:
 
-```text
+```console
 error[E0277]: `Rectangle` doesn't implement `Debug`
 ```
 
 Mas, novamente, o compilador nos dá uma nota útil:
 
-```text
+```console
    |                        required by this formatting parameter
    |
 ```
