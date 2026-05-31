@@ -235,7 +235,7 @@ Embora erros de borrowing possam ser frustrantes às vezes, lembre-se de que é 
 
 ## Referências inválidas (dangling references)
 
-Em linguagens com ponteiros, é fácil criar erroneamente um _ponteiro inválido (dangling pointer)_ — um ponteiro que referencia uma localização na memória que pode ter sido entregue a outra pessoa — ao liberar alguma memória enquanto preserva um ponteiro para essa memória. No Rust, por outro lado, o compilador garante que referências nunca serão referências inválidas: se você tem uma referência a alguns dados, o compilador vai garantir que os dados não sairão de escopo antes da referência a esses dados.
+Em linguagens com ponteiros, é fácil criar erroneamente um _ponteiro inválido (dangling pointer)_ — um ponteiro que referencia uma localização na memória que pode ter sido entregue a outra pessoa — ao liberar alguma memória enquanto preserva um ponteiro para essa memória. No Rust, por outro lado, o compilador garante que referências nunca serão dangling references: se você tem uma referência a alguns dados, o compilador vai garantir que os dados não sairão de escopo antes da referência a esses dados.
 
 Vamos tentar criar uma referência inválida para ver como o Rust as previne com um erro em tempo de compilação:
 
