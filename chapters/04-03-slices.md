@@ -253,13 +253,13 @@ Lembre-se das regras de borrowing: se temos uma referência imutável para um va
 
 ### Literais de string como slices
 
-Lembre-se de que falamos sobre literais de string serem armazenados dentro do binário. Agora que sabemos sobre slices, podemos entender corretamente os literais de string:
+Lembre-se de que comentamos anteriormente que os literais de string são armazenados dentro do binário do programa. Agora que conhecemos os slices, podemos entender corretamente o que eles são:
 
 ```rust
 let s = "Hello, world!";
 ```
 
-O tipo de `s` aqui é `&str`: é um slice apontando para aquele ponto específico do binário. É por isso que literais de string são imutáveis; `&str` é uma referência imutável.
+O tipo de s nesse caso é `&str`. Isso significa que `s` é um slice de string que aponta para uma região específica do binário onde o texto "Hello, world!" está armazenado. Essa também é a razão pela qual literais de string são imutáveis: &`&str` é uma referência imutável.
 
 ### String slices como parâmetros
 
