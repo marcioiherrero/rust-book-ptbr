@@ -11,12 +11,10 @@ A sintaxe `if let` permite combinar `if` e `let` de uma forma menos verbosa para
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let config_max = Some(3u8);
-    match config_max {
-        Some(max) => println!("The maximum is configured to be {max}"),
-        _ => (),
-    }
+let config_max = Some(3u8);
+match config_max {
+    Some(max) => println!("The maximum is configured to be {max}"),
+    _ => (),
 }
 ```
 
@@ -31,11 +29,9 @@ Em vez disso, poderíamos escrever isso de forma mais curta usando `if let`. O c
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let config_max = Some(3u8);
-    if let Some(max) = config_max {
-        println!("The maximum is configured to be {max}");
-    }
+let config_max = Some(3u8);
+if let Some(max) = config_max {
+    println!("The maximum is configured to be {max}");
 }
 ```
 
@@ -45,32 +41,15 @@ Usar `if let` significa menos digitação, menos indentação e menos código bo
 
 Em outras palavras, você pode pensar em `if let` como açúcar sintático para um `match` que executa código quando o valor corresponde a um padrão e então ignora todos os outros valores.
 
-Podemos incluir um `else` com um `if let`. O bloco de código que acompanha o `else` é o mesmo que iria com o caso `_` na expressão `match` equivalente ao `if let` e `else`. Lembre-se da definição do enum `Coin` na Listagem 6-4, em que a variante `Quarter` também continha um valor `UsState`. Se quiséssemos contar todas as moedas que não são de 25 centavos que vemos enquanto também anunciamos o estado das moedas de 25 centavos, poderíamos fazer isso com uma expressão `match`, assim:
+Podemos incluir um `else` com um `if let`. O bloco de código que acompanha o `else` é o mesmo que iria com o caso `_` na expressão `match` equivalente ao `if let` e `else`. Lembre-se da definição do enum `Coin` na [Listagem 6-4](/livro/cap06-01-definindo-um-enum#listagem-6-4), em que a variante `Quarter` também continha um valor `UsState`. Se quiséssemos contar todas as moedas que não são quarters que vemos enquanto também anunciamos o estado das quarters, poderíamos fazer isso com uma expressão `match`, assim:
 
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
-fn main() {
-    let coin = Coin::Penny;
-    let mut count = 0;
-    match coin {
-        Coin::Quarter(state) => println!("State quarter from {state:?}!"),
-        _ => count += 1,
-    }
+let mut count = 0;
+match coin {
+    Coin::Quarter(state) => println!("State quarter from {state:?}!"),
+    _ => count += 1,
 }
 ```
 
@@ -79,28 +58,11 @@ Ou poderíamos usar uma expressão `if let` e `else`, assim:
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
-fn main() {
-    let coin = Coin::Penny;
-    let mut count = 0;
-    if let Coin::Quarter(state) = coin {
-        println!("State quarter from {state:?}!");
-    } else {
-        count += 1;
-    }
+let mut count = 0;
+if let Coin::Quarter(state) = coin {
+    println!("State quarter from {state:?}!");
+} else {
+    count += 1;
 }
 ```
 
@@ -111,19 +73,12 @@ O padrão comum é realizar algum cálculo quando um valor está presente e reto
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)] // para podermos inspecionar o estado em um instante
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
 impl UsState {
     fn existed_in(&self, year: u16) -> bool {
         match self {
             UsState::Alabama => year >= 1819,
             UsState::Alaska => year >= 1959,
-            // -- snip --
+            // --snip--
         }
     }
 }
@@ -134,30 +89,6 @@ Em seguida, poderíamos usar `if let` para fazer `match` no tipo de moeda, intro
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-impl UsState {
-    fn existed_in(&self, year: u16) -> bool {
-        match self {
-            UsState::Alabama => year >= 1819,
-            UsState::Alaska => year >= 1959,
-            // -- snip --
-        }
-    }
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
 fn describe_state_quarter(coin: Coin) -> Option<String> {
     if let Coin::Quarter(state) = coin {
         if state.existed_in(1900) {
@@ -167,12 +98,6 @@ fn describe_state_quarter(coin: Coin) -> Option<String> {
         }
     } else {
         None
-    }
-}
-
-fn main() {
-    if let Some(desc) = describe_state_quarter(Coin::Quarter(UsState::Alaska)) {
-        println!("{desc}");
     }
 }
 ```
@@ -186,30 +111,6 @@ Isso resolve o problema, mas empurrou o trabalho para o corpo da declaração `i
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-impl UsState {
-    fn existed_in(&self, year: u16) -> bool {
-        match self {
-            UsState::Alabama => year >= 1819,
-            UsState::Alaska => year >= 1959,
-            // -- snip --
-        }
-    }
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
 fn describe_state_quarter(coin: Coin) -> Option<String> {
     let state = if let Coin::Quarter(state) = coin {
         state
@@ -221,12 +122,6 @@ fn describe_state_quarter(coin: Coin) -> Option<String> {
         Some(format!("{state:?} is pretty old, for America!"))
     } else {
         Some(format!("{state:?} is relatively new."))
-    }
-}
-
-fn main() {
-    if let Some(desc) = describe_state_quarter(Coin::Quarter(UsState::Alaska)) {
-        println!("{desc}");
     }
 }
 ```
@@ -244,30 +139,6 @@ Na Listagem 6-9, você pode ver como a Listagem 6-8 fica ao usar `let...else` no
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-impl UsState {
-    fn existed_in(&self, year: u16) -> bool {
-        match self {
-            UsState::Alabama => year >= 1819,
-            UsState::Alaska => year >= 1959,
-            // -- snip --
-        }
-    }
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
 fn describe_state_quarter(coin: Coin) -> Option<String> {
     let Coin::Quarter(state) = coin else {
         return None;
@@ -277,12 +148,6 @@ fn describe_state_quarter(coin: Coin) -> Option<String> {
         Some(format!("{state:?} is pretty old, for America!"))
     } else {
         Some(format!("{state:?} is relatively new."))
-    }
-}
-
-fn main() {
-    if let Some(desc) = describe_state_quarter(Coin::Quarter(UsState::Alaska)) {
-        println!("{desc}");
     }
 }
 ```
@@ -297,8 +162,8 @@ Se você tiver uma situação em que a lógica do seu programa é verbosa demais
 
 ## Resumo
 
-Agora cobrimos como usar enums para criar tipos personalizados que podem ser um de um conjunto de valores enumerados. Mostramos como o tipo `Option<T>` da biblioteca padrão ajuda você a usar o sistema de tipos para evitar erros. Quando valores de enum têm dados dentro deles, você pode usar `match` ou `if let` para extrair e usar esses valores, dependendo de quantos casos precisa tratar.
+Agora cobrimos como usar enums para criar tipos personalizados que podem ser um de um conjunto de valores enumerados. Mostramos como o tipo `Option<T>` da biblioteca padrão ajuda você a usar o sistema de tipos para evitar erros. Quando valores de enum têm dados dentro deles, você pode usar `match` ou `if let` para extrair e usar esses valores, dependendo de quantos casos você precisa tratar.
 
 Seus programas Rust agora podem expressar conceitos no seu domínio usando structs e enums. Criar tipos personalizados para usar na sua API garante segurança de tipos: o compilador terá certeza de que suas funções só recebem valores do tipo que cada função espera.
 
-Para fornecer uma API bem organizada aos seus usuários, direta de usar e que exponha exatamente o que seus usuários precisarão, vamos agora passar para os módulos do Rust.
+Para fornecer uma API bem organizada aos seus usuários, direta de usar e que exponha exatamente o que seus usuários precisarão, vamos agora passar para os [módulos do Rust](/livro/cap07-00-gerenciando-projetos-crescentes-com-packages-crates-e-modulos).

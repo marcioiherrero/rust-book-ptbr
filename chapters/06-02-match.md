@@ -6,7 +6,7 @@ slug: match
 
 # A Construção de Fluxo de Controle `match`
 
-O Rust tem uma construção de fluxo de controle extremamente poderosa chamada `match` que permite comparar um valor contra uma série de padrões e então executar código com base em qual padrão corresponde. Padrões podem ser compostos de valores literais, nomes de variáveis, curingas e muitas outras coisas; o Capítulo 19 cobre todos os diferentes tipos de padrões e o que fazem. O poder de `match` vem da expressividade dos padrões e do fato de o compilador confirmar que todos os casos possíveis são tratados.
+O Rust tem uma construção de fluxo de controle extremamente poderosa chamada `match` que permite comparar um valor contra uma série de padrões e então executar código com base em qual padrão corresponde. Padrões podem ser compostos de valores literais, nomes de variáveis, curingas e muitas outras coisas; o [Capítulo 19](/livro/cap19-00-padroes-e-matching) cobre todos os diferentes tipos de padrões e o que fazem. O poder de `match` vem da expressividade dos padrões e do fato de o compilador confirmar que todos os casos possíveis são tratados.
 
 Pense em uma expressão `match` como uma máquina de classificar moedas: as moedas deslizam por um trilho com furos de tamanhos variados ao longo dele, e cada moeda cai no primeiro furo em que couber. Da mesma forma, valores passam por cada padrão em um `match`, e no primeiro padrão em que o valor “cabe”, o valor cai no bloco de código associado para ser usado durante a execução.
 
@@ -30,8 +30,6 @@ fn value_in_cents(coin: Coin) -> u8 {
         Coin::Quarter => 25,
     }
 }
-
-fn main() {}
 ```
 
 <a id="listagem-6-3"></a>
@@ -51,13 +49,6 @@ Normalmente não usamos chaves se o código do braço do `match` for curto, como
 **Arquivo: src/main.rs**
 
 ```rust
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter,
-}
-
 fn value_in_cents(coin: Coin) -> u8 {
     match coin {
         Coin::Penny => {
@@ -69,8 +60,6 @@ fn value_in_cents(coin: Coin) -> u8 {
         Coin::Quarter => 25,
     }
 }
-
-fn main() {}
 ```
 
 ### Padrões que fazem bind a valores
@@ -108,20 +97,6 @@ Na expressão `match` deste código, adicionamos uma variável chamada `state` a
 **Arquivo: src/main.rs**
 
 ```rust
-#[derive(Debug)]
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
-
 fn value_in_cents(coin: Coin) -> u8 {
     match coin {
         Coin::Penny => 1,
@@ -132,10 +107,6 @@ fn value_in_cents(coin: Coin) -> u8 {
             25
         }
     }
-}
-
-fn main() {
-    value_in_cents(Coin::Quarter(UsState::Alaska));
 }
 ```
 
@@ -152,18 +123,16 @@ Essa função é muito fácil de escrever, graças ao `match`, e ficará como na
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    fn plus_one(x: Option<i32>) -> Option<i32> {
-        match x {
-            None => None,
-            Some(i) => Some(i + 1),
-        }
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
     }
-
-    let five = Some(5);
-    let six = plus_one(five);
-    let none = plus_one(None);
 }
+
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
 ```
 
 <a id="listagem-6-5"></a>
@@ -201,16 +170,10 @@ Há outro aspecto do `match` que precisamos discutir: os padrões dos braços de
 **Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
-fn main() {
-    fn plus_one(x: Option<i32>) -> Option<i32> {
-        match x {
-            Some(i) => Some(i + 1),
-        }
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        Some(i) => Some(i + 1),
     }
-
-    let five = Some(5);
-    let six = plus_one(five);
-    let none = plus_one(None);
 }
 ```
 
@@ -250,18 +213,16 @@ Usando enums, também podemos tomar ações especiais para alguns valores partic
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let dice_roll = 9;
-    match dice_roll {
-        3 => add_fancy_hat(),
-        7 => remove_fancy_hat(),
-        other => move_player(other),
-    }
-
-    fn add_fancy_hat() {}
-    fn remove_fancy_hat() {}
-    fn move_player(num_spaces: u8) {}
+let dice_roll = 9;
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    other => move_player(other),
 }
+
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
+fn move_player(num_spaces: u8) {}
 ```
 
 Para os dois primeiros braços, os padrões são os valores literais `3` e `7`. Para o último braço que cobre todos os outros valores possíveis, o padrão é a variável que escolhemos chamar de `other`. O código que roda para o braço `other` usa a variável passando-a para a função `move_player`.
@@ -275,40 +236,36 @@ Vamos mudar as regras do jogo: agora, se você tirar qualquer coisa que não sej
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let dice_roll = 9;
-    match dice_roll {
-        3 => add_fancy_hat(),
-        7 => remove_fancy_hat(),
-        _ => reroll(),
-    }
-
-    fn add_fancy_hat() {}
-    fn remove_fancy_hat() {}
-    fn reroll() {}
+let dice_roll = 9;
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    _ => reroll(),
 }
+
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
+fn reroll() {}
 ```
 
 Este exemplo também atende ao requisito de exaustividade porque estamos ignorando explicitamente todos os outros valores no último braço; não esquecemos nada.
 
-Por fim, mudaremos as regras do jogo mais uma vez para que nada mais aconteça no seu turno se você tirar qualquer coisa que não seja 3 ou 7. Podemos expressar isso usando o valor unitário (o tipo tupla vazio que mencionamos na seção O tipo tupla do Capítulo 3) como o código que acompanha o braço `_`:
+Por fim, mudaremos as regras do jogo mais uma vez para que nada mais aconteça no seu turno se você tirar qualquer coisa que não seja 3 ou 7. Podemos expressar isso usando o valor unitário (o tipo tupla vazio que mencionamos na seção [O Tipo Tupla](/livro/cap03-02-tipos-de-dados#o-tipo-tupla-tuple)) como o código que acompanha o braço `_`:
 
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let dice_roll = 9;
-    match dice_roll {
-        3 => add_fancy_hat(),
-        7 => remove_fancy_hat(),
-        _ => (),
-    }
-
-    fn add_fancy_hat() {}
-    fn remove_fancy_hat() {}
+let dice_roll = 9;
+match dice_roll {
+    3 => add_fancy_hat(),
+    7 => remove_fancy_hat(),
+    _ => (),
 }
+
+fn add_fancy_hat() {}
+fn remove_fancy_hat() {}
 ```
 
 Aqui, estamos dizendo ao Rust explicitamente que não vamos usar nenhum outro valor que não corresponda a um padrão em um braço anterior, e não queremos executar nenhum código neste caso.
 
-Há mais sobre padrões e matching que cobriremos no Capítulo 19. Por enquanto, passaremos para a sintaxe `if let`, que pode ser útil em situações em que a expressão `match` é um pouco verbosa.
+Há mais sobre padrões e matching que cobriremos no [Capítulo 19](/livro/cap19-00-padroes-e-matching). Por enquanto, passaremos para a sintaxe `if let`, que pode ser útil em situações em que a expressão `match` é um pouco verbosa.
