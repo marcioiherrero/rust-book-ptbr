@@ -2,6 +2,8 @@
 title: "Definindo e instanciando structs"
 chapter_code: 05-01
 slug: definindo-structs
+challenge_day: 6
+reading_minutes: 18
 ---
 
 # Definindo e Instanciando Structs
