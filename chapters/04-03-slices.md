@@ -2,8 +2,6 @@
 title: "O tipo slice"
 chapter_code: 04-03
 slug: slices
-challenge_day: 6
-reading_minutes: 0
 ---
 
 # O tipo slice
