@@ -2,6 +2,8 @@
 title: "Um programa de exemplo usando structs"
 chapter_code: 05-02
 slug: um-programa-de-exemplo-usando-structs
+challenge_day: 6
+reading_minutes: 17
 ---
 
 # Um Programa de Exemplo Usando Structs
