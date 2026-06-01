@@ -2,6 +2,8 @@
 title: "Definindo um enum"
 chapter_code: 06-01
 slug: definindo-um-enum
+challenge_day: 7
+reading_minutes: 32
 ---
 
 # Definindo um Enum
