@@ -250,7 +250,7 @@ fn reroll() {}
 
 Este exemplo também atende ao requisito de exaustividade porque estamos ignorando explicitamente todos os outros valores no último braço; não esquecemos nada.
 
-Por fim, mudaremos as regras do jogo mais uma vez para que nada mais aconteça no seu turno se você tirar qualquer coisa que não seja 3 ou 7. Podemos expressar isso usando o valor unitário (o tipo tupla vazio que mencionamos na seção [O Tipo Tupla](/livro/cap03-02-tipos-de-dados#o-tipo-tupla-tuple)) como o código que acompanha o braço `_`:
+Por fim, mudaremos as regras do jogo mais uma vez para que nada mais aconteça no seu turno se você tirar qualquer coisa que não seja 3 ou 7. Podemos expressar isso usando o valor unitário (o tipo tupla vazio que mencionamos na seção [O tipo tupla (tuple)](/livro/cap03-02-tipos-de-dados#o-tipo-tupla-tuple)) como o código que acompanha o braço `_`:
 
 **Arquivo: src/main.rs**
 
