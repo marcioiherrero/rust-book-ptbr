@@ -52,9 +52,6 @@ Escolher entre caminho relativo e caminho absoluto é uma decisão que você tom
 Vamos tentar compilar a Listagem 7-3 e descobrir por que ela ainda não compila! Os erros que obtemos são mostrados na Listagem 7-4.
 
 <a id="listagem-7-4"></a>
-
-[Listagem 7-4](#listagem-7-4): Erros do compilador ao compilar o código da Listagem 7-3
-
 ```console
 $ cargo build
    Compiling restaurant v0.1.0 (file:///projects/restaurant)
@@ -89,6 +86,7 @@ note: the module `hosting` is defined here
 For more information about this error, try `rustc --explain E0603`.
 error: could not compile `restaurant` (lib) due to 2 previous errors
 ```
+[Listagem 7-4](#listagem-7-4): Erros do compilador ao compilar o código da Listagem 7-3
 
 As mensagens de erro dizem que o módulo `hosting` é privado. Em outras palavras, temos os caminhos corretos para o módulo `hosting` e para a função `add_to_waitlist`, mas o Rust não nos permite usá-los por causa das regras de privacidade. Em Rust, todos os itens (funções, métodos, structs, enums, módulos e constantes) são privados para os módulos pais por padrão. Se quiser tornar um item como função ou struct público, use a palavra-chave `pub`.
 
@@ -125,9 +123,6 @@ pub fn eat_at_restaurant() {
 Infelizmente, o código da Listagem 7-5 ainda resulta em erros do compilador, como mostrado na Listagem 7-6.
 
 <a id="listagem-7-6"></a>
-
-[Listagem 7-6](#listagem-7-6): Erros do compilador ao compilar o código da Listagem 7-5
-
 ```console
 $ cargo build
    Compiling restaurant v0.1.0 (file:///projects/restaurant)
@@ -158,6 +153,7 @@ note: the function `add_to_waitlist` is defined here
 For more information about this error, try `rustc --explain E0603`.
 error: could not compile `restaurant` (lib) due to 2 previous errors
 ```
+[Listagem 7-6](#listagem-7-6): Erros do compilador ao compilar o código da Listagem 7-5
 
 O que aconteceu? Adicionar `pub` antes de `mod hosting` torna o módulo público. Com essa mudança, se conseguimos acessar `front_of_house`, conseguimos acessar `hosting`. Mas o _conteúdo_ de `hosting` ainda continua privado; tornar o módulo público não torna seu conteúdo público automaticamente. O `pub` em um módulo apenas permite que código de seus módulos ancestrais o referencie, não que acesse seu código interno. Como módulos são contêineres, não há muito o que fazer apenas tornando o módulo público; precisamos ir além e tornar públicos também um ou mais itens dentro dele.
 
