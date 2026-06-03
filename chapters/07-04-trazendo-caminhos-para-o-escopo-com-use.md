@@ -2,6 +2,8 @@
 title: "Trazendo caminhos para o escopo com `use`"
 chapter_code: 07-04
 slug: trazendo-caminhos-para-o-escopo-com-use
+challenge_day: 9
+reading_minutes: 11
 ---
 
 # Trazendo Caminhos para o Escopo com a Palavra-chave `use`
