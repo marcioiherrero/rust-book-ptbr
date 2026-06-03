@@ -2,6 +2,8 @@
 title: "Caminhos para referenciar um item na árvore de módulos"
 chapter_code: 07-03
 slug: caminhos-para-referenciar-um-item-na-arvore-de-modulos
+challenge_day: 8
+reading_minutes: 20
 ---
 
 # Caminhos para Referenciar um Item na Árvore de Módulos
