@@ -2,6 +2,8 @@
 title: "Coleções comuns"
 chapter_code: 08-00
 slug: colecoes-comuns
+challenge_day: 10
+reading_minutes: 2
 ---
 
 # Coleções Comuns
@@ -10,8 +12,8 @@ A biblioteca padrão do Rust inclui várias estruturas de dados muito úteis, ch
 
 - Um _vetor_ permite armazenar um número variável de valores, lado a lado.
 - Uma _string_ é uma coleção de caracteres. Já mencionamos o tipo `String` antes, mas aqui vamos falar dela em profundidade.
-- Um _hash map_ permite associar um valor a uma chave específica. É uma implementação particular da estrutura de dados mais geral chamada _mapa_.
+- Um _hash map_ permite associar um valor a uma chave específica. É uma implementação particular da estrutura de dados mais geral chamada _map_.
 
 Para conhecer os demais tipos de coleção disponíveis na biblioteca padrão, consulte a documentação.
 
-Veremos como criar e atualizar vetores, strings e hash maps, e o que torna cada uma especial.
+Veremos como criar e atualizar vetores, strings e hash maps, e o que torna cada um especial.
