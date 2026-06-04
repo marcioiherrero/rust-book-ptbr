@@ -160,20 +160,7 @@ pub trait Summary {
     fn summarize_author(&self) -> String;
 
     fn summarize(&self) -> String {
-        format!("(Leia mais de {}...)", self.summarize_author())
-    }
-}
-
-pub struct SocialPost {
-    pub username: String,
-    pub content: String,
-    pub reply: bool,
-    pub repost: bool,
-}
-
-impl Summary for SocialPost {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
+        format!("(Read more from {}...)", self.summarize_author())
     }
 }
 ```
@@ -211,7 +198,7 @@ fn main() {
 }
 ```
 
-Este código imprime `1 new post: (Leia mais de @horse_ebooks...)`.
+Este código imprime `1 new post: (Read more from @horse_ebooks...)`.
 
 Observe que não é possível chamar a implementação padrão a partir de uma implementação substitutiva do mesmo método.
 
