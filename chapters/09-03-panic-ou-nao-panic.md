@@ -2,6 +2,8 @@
 title: "Panic ou não panic"
 chapter_code: 09-03
 slug: panic-ou-nao-panic
+challenge_day: 11
+reading_minutes: 4
 ---
 
 # Panic ou Não Panic
