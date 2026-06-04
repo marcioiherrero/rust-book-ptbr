@@ -91,17 +91,17 @@ fn main() {
     let post = SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "é claro, como você provavelmente já sabe, pessoas",
+            "of course, as you probably already know, people",
         ),
         reply: false,
         repost: false,
     };
 
-    println!("1 nova postagem: {}", post.summarize());
+    println!("1 new post: {}", post.summarize());
 }
 ```
 
-Este código imprime `1 nova postagem: horse_ebooks: é claro, como você provavelmente já sabe, pessoas`.
+Este código imprime `1 new post: horse_ebooks: of course, as you probably already know, people`.
 
 Outras crates que dependem da crate `aggregator` também podem trazer a trait `Summary` para o escopo para implementar `Summary` em seus próprios tipos. Uma restrição a observar é que só podemos implementar uma trait em um tipo se a trait ou o tipo, ou ambos, forem locais à nossa crate. Por exemplo, podemos implementar traits da biblioteca padrão como `Display` em um tipo personalizado como `SocialPost` como parte da funcionalidade da nossa crate `aggregator`, porque o tipo `SocialPost` é local à nossa crate `aggregator`. Também podemos implementar `Summary` em `Vec<T>` na nossa crate `aggregator` porque a trait `Summary` é local à nossa crate `aggregator`.
 
@@ -227,17 +227,17 @@ fn main() {
     let post = SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "é claro, como você provavelmente já sabe, pessoas",
+            "of course, as you probably already know, people",
         ),
         reply: false,
         repost: false,
     };
 
-    println!("1 nova postagem: {}", post.summarize());
+    println!("1 new post: {}", post.summarize());
 }
 ```
 
-Este código imprime `1 nova postagem: (Leia mais de @horse_ebooks...)`.
+Este código imprime `1 new post: (Leia mais de @horse_ebooks...)`.
 
 Observe que não é possível chamar a implementação padrão a partir de uma implementação substitutiva do mesmo método.
 
@@ -394,7 +394,7 @@ fn returns_summarizable() -> impl Summary {
     SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "é claro, como você provavelmente já sabe, pessoas",
+            "of course, as you probably already know, people",
         ),
         reply: false,
         repost: false,
@@ -458,7 +458,7 @@ fn returns_summarizable(switch: bool) -> impl Summary {
         SocialPost {
             username: String::from("horse_ebooks"),
             content: String::from(
-                "é claro, como você provavelmente já sabe, pessoas",
+                "of course, as you probably already know, people",
             ),
             reply: false,
             repost: false,
