@@ -118,29 +118,7 @@ Na [Listagem 10-14](#listagem-10-14), especificamos uma string padrão para o m�
 ```rust
 pub trait Summary {
     fn summarize(&self) -> String {
-        String::from("(Leia mais...)")
-    }
-}
-
-pub struct NewsArticle {
-    pub headline: String,
-    pub location: String,
-    pub author: String,
-    pub content: String,
-}
-
-impl Summary for NewsArticle {}
-
-pub struct SocialPost {
-    pub username: String,
-    pub content: String,
-    pub reply: bool,
-    pub repost: bool,
-}
-
-impl Summary for SocialPost {
-    fn summarize(&self) -> String {
-        format!("{}: {}", self.username, self.content)
+        String::from("(Read more...)")
     }
 }
 ```
@@ -169,7 +147,7 @@ let article = NewsArticle {
 println!("New article available! {}", article.summarize());
 ```
 
-Este código imprime `Nova matéria disponível! (Leia mais...)`.
+Este código imprime `New article available! (Read more...)`.
 
 Criar uma implementação padrão não exige que mudemos nada na implementação de `Summary` em `SocialPost` da [Listagem 10-13](#listagem-10-13). O motivo é que a sintaxe para substituir uma implementação padrão é a mesma da sintaxe para implementar um método de trait que não tem implementação padrão.
 
