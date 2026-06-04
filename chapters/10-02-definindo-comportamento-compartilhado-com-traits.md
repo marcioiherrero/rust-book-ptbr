@@ -218,7 +218,7 @@ Em vez de um tipo concreto para o parâmetro `item`, especificamos a palavra-cha
 
 #### Sintaxe de trait bound
 
-A sintaxe `impl Trait` funciona para casos simples, mas é na verdade açúcar sintático para uma forma mais longa conhecida como _trait bound_; parece com isto:
+A sintaxe `impl Trait` funciona para casos simples, mas é na verdade uma abreviação de uma forma mais longa conhecida como _trait bound_; parece com isto:
 
 ```rust
 pub fn notify<T: Summary>(item: &T) {
