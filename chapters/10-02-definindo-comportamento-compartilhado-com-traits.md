@@ -16,7 +16,7 @@ O comportamento de um tipo consiste nos métodos que podemos chamar nesse tipo. 
 
 Por exemplo, digamos que temos várias structs que armazenam vários tipos e quantidades de texto: uma struct `NewsArticle` que armazena uma matéria em um local particular e uma `SocialPost` que pode ter, no máximo, 280 caracteres, junto com metadados que indicam se foi uma postagem nova, um repost ou uma resposta a outra postagem.
 
-Queremos criar uma crate de biblioteca chamada `aggregator` que possa exibir resumos de dados que possam estar armazenados em uma instância de `NewsArticle` ou `SocialPost`. Para isso, precisamos de um resumo de cada tipo e solicitaremos esse resumo chamando um método `summarize` em uma instância. A Listagem 10-12 mostra a definição de uma trait pública `Summary` que expressa esse comportamento.
+Queremos criar uma crate de biblioteca chamada `aggregator` que possa exibir resumos de dados que possam estar armazenados em uma instância de `NewsArticle` ou `SocialPost`. Para isso, precisamos de um resumo de cada tipo e solicitaremos esse resumo chamando um método `summarize` em uma instância. A [Listagem 10-12](#listagem-10-12) mostra a definição de uma trait pública `Summary` que expressa esse comportamento.
 
 **Arquivo: src/lib.rs**
 
@@ -38,7 +38,7 @@ Uma trait pode ter vários métodos em seu corpo: as assinaturas de método são
 
 ### Implementando uma trait em um tipo
 
-Agora que definimos as assinaturas desejadas dos métodos da trait `Summary`, podemos implementá-la nos tipos do nosso agregador de mídia. A Listagem 10-13 mostra uma implementação da trait `Summary` na struct `NewsArticle` que usa o título, o autor e o local para criar o valor de retorno de `summarize`. Para a struct `SocialPost`, definimos `summarize` como o nome de usuário seguido do texto inteiro da postagem, assumindo que o conteúdo da postagem já está limitado a 280 caracteres.
+Agora que definimos as assinaturas desejadas dos métodos da trait `Summary`, podemos implementá-la nos tipos do nosso agregador de mídia. A [Listagem 10-13](#listagem-10-13) mostra uma implementação da trait `Summary` na struct `NewsArticle` que usa o título, o autor e o local para criar o valor de retorno de `summarize`. Para a struct `SocialPost`, definimos `summarize` como o nome de usuário seguido do texto inteiro da postagem, assumindo que o conteúdo da postagem já está limitado a 280 caracteres.
 
 **Arquivo: src/lib.rs**
 
@@ -56,7 +56,7 @@ pub struct NewsArticle {
 
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
+        format!("{}, por {} ({})", self.headline, self.author, self.location)
     }
 }
 
@@ -91,17 +91,17 @@ fn main() {
     let post = SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "of course, as you probably already know, people",
+            "é claro, como você provavelmente já sabe, pessoas",
         ),
         reply: false,
         repost: false,
     };
 
-    println!("1 new post: {}", post.summarize());
+    println!("1 nova postagem: {}", post.summarize());
 }
 ```
 
-Este código imprime `1 new post: horse_ebooks: of course, as you probably already know, people`.
+Este código imprime `1 nova postagem: horse_ebooks: é claro, como você provavelmente já sabe, pessoas`.
 
 Outras crates que dependem da crate `aggregator` também podem trazer a trait `Summary` para o escopo para implementar `Summary` em seus próprios tipos. Uma restrição a observar é que só podemos implementar uma trait em um tipo se a trait ou o tipo, ou ambos, forem locais à nossa crate. Por exemplo, podemos implementar traits da biblioteca padrão como `Display` em um tipo personalizado como `SocialPost` como parte da funcionalidade da nossa crate `aggregator`, porque o tipo `SocialPost` é local à nossa crate `aggregator`. Também podemos implementar `Summary` em `Vec<T>` na nossa crate `aggregator` porque a trait `Summary` é local à nossa crate `aggregator`.
 
@@ -111,14 +111,14 @@ Mas não podemos implementar traits externas em tipos externos. Por exemplo, nã
 
 Às vezes é útil ter comportamento padrão para alguns ou todos os métodos em uma trait, em vez de exigir implementações para todos os métodos em todo tipo. Então, ao implementar a trait em um tipo particular, podemos manter ou substituir o comportamento padrão de cada método.
 
-Na Listagem 10-14, especificamos uma string padrão para o método `summarize` da trait `Summary`, em vez de definir apenas a assinatura do método, como fizemos na Listagem 10-12.
+Na [Listagem 10-14](#listagem-10-14), especificamos uma string padrão para o método `summarize` da trait `Summary`, em vez de definir apenas a assinatura do método, como fizemos na [Listagem 10-12](#listagem-10-12).
 
 **Arquivo: src/lib.rs**
 
 ```rust
 pub trait Summary {
     fn summarize(&self) -> String {
-        String::from("(Read more...)")
+        String::from("(Leia mais...)")
     }
 }
 
@@ -160,22 +160,22 @@ use aggregator::{self, NewsArticle, Summary};
 
 fn main() {
     let article = NewsArticle {
-        headline: String::from("Penguins win the Stanley Cup Championship!"),
-        location: String::from("Pittsburgh, PA, USA"),
+        headline: String::from("Pinguins vencem o campeonato da Stanley Cup!"),
+        location: String::from("Pittsburgh, PA, EUA"),
         author: String::from("Iceburgh"),
         content: String::from(
-            "The Pittsburgh Penguins once again are the best \
-             hockey team in the NHL.",
+            "Os Pittsburgh Penguins mais uma vez são o melhor \
+             time de hóquei da NHL.",
         ),
     };
 
-    println!("New article available! {}", article.summarize());
+    println!("Nova matéria disponível! {}", article.summarize());
 }
 ```
 
-Este código imprime `New article available! (Read more...)`.
+Este código imprime `Nova matéria disponível! (Leia mais...)`.
 
-Criar uma implementação padrão não exige que mudemos nada na implementação de `Summary` em `SocialPost` da Listagem 10-13. O motivo é que a sintaxe para substituir uma implementação padrão é a mesma da sintaxe para implementar um método de trait que não tem implementação padrão.
+Criar uma implementação padrão não exige que mudemos nada na implementação de `Summary` em `SocialPost` da [Listagem 10-13](#listagem-10-13). O motivo é que a sintaxe para substituir uma implementação padrão é a mesma da sintaxe para implementar um método de trait que não tem implementação padrão.
 
 Implementações padrão podem chamar outros métodos na mesma trait, mesmo que esses outros métodos não tenham implementação padrão. Assim, uma trait pode fornecer muita funcionalidade útil e exigir apenas que quem implementa especifique uma pequena parte. Por exemplo, poderíamos definir a trait `Summary` para ter um método `summarize_author` cuja implementação é obrigatória, e então definir um método `summarize` com implementação padrão que chama o método `summarize_author`:
 
@@ -186,7 +186,7 @@ pub trait Summary {
     fn summarize_author(&self) -> String;
 
     fn summarize(&self) -> String {
-        format!("(Read more from {}...)", self.summarize_author())
+        format!("(Leia mais de {}...)", self.summarize_author())
     }
 }
 
@@ -227,23 +227,23 @@ fn main() {
     let post = SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "of course, as you probably already know, people",
+            "é claro, como você provavelmente já sabe, pessoas",
         ),
         reply: false,
         repost: false,
     };
 
-    println!("1 new post: {}", post.summarize());
+    println!("1 nova postagem: {}", post.summarize());
 }
 ```
 
-Este código imprime `1 new post: (Read more from @horse_ebooks...)`.
+Este código imprime `1 nova postagem: (Leia mais de @horse_ebooks...)`.
 
 Observe que não é possível chamar a implementação padrão a partir de uma implementação substitutiva do mesmo método.
 
 ### Usando traits como parâmetros
 
-Agora que você sabe definir e implementar traits, podemos explorar como usá-las para definir funções que aceitam muitos tipos diferentes. Usaremos a trait `Summary` que implementamos nos tipos `NewsArticle` e `SocialPost` da Listagem 10-13 para definir uma função `notify` que chama o método `summarize` em seu parâmetro `item`, que é de algum tipo que implementa a trait `Summary`. Para isso, usamos a sintaxe `impl Trait`, assim:
+Agora que você sabe definir e implementar traits, podemos explorar como usá-las para definir funções que aceitam muitos tipos diferentes. Usaremos a trait `Summary` que implementamos nos tipos `NewsArticle` e `SocialPost` da [Listagem 10-13](#listagem-10-13) para definir uma função `notify` que chama o método `summarize` em seu parâmetro `item`, que é de algum tipo que implementa a trait `Summary`. Para isso, usamos a sintaxe `impl Trait`, assim:
 
 **Arquivo: src/lib.rs**
 
@@ -261,7 +261,7 @@ pub struct NewsArticle {
 
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
+        format!("{}, por {} ({})", self.headline, self.author, self.location)
     }
 }
 
@@ -279,7 +279,7 @@ impl Summary for SocialPost {
 }
 
 pub fn notify(item: &impl Summary) {
-    println!("Breaking news! {}", item.summarize());
+    println!("Notícia urgente! {}", item.summarize());
 }
 ```
 
@@ -291,7 +291,7 @@ A sintaxe `impl Trait` funciona para casos simples, mas é na verdade açúcar s
 
 ```rust
 pub fn notify<T: Summary>(item: &T) {
-    println!("Breaking news! {}", item.summarize());
+    println!("Notícia urgente! {}", item.summarize());
 }
 ```
 
@@ -373,7 +373,7 @@ pub struct NewsArticle {
 
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
+        format!("{}, por {} ({})", self.headline, self.author, self.location)
     }
 }
 
@@ -394,7 +394,7 @@ fn returns_summarizable() -> impl Summary {
     SocialPost {
         username: String::from("horse_ebooks"),
         content: String::from(
-            "of course, as you probably already know, people",
+            "é claro, como você provavelmente já sabe, pessoas",
         ),
         reply: false,
         repost: false,
@@ -404,7 +404,7 @@ fn returns_summarizable() -> impl Summary {
 
 Ao usar `impl Summary` como tipo de retorno, especificamos que a função `returns_summarizable` retorna algum tipo que implementa a trait `Summary` sem nomear o tipo concreto. Neste caso, `returns_summarizable` retorna um `SocialPost`, mas o código que chama esta função não precisa saber disso.
 
-A capacidade de especificar um tipo de retorno apenas pela trait que implementa é especialmente útil no contexto de closures e iterators, que cobriremos no Capítulo 13. Closures e iterators criam tipos que só o compilador conhece ou tipos muito longos de especificar. A sintaxe `impl Trait` permite especificar concisamente que uma função retorna algum tipo que implementa a trait `Iterator` sem precisar escrever um tipo muito longo.
+A capacidade de especificar um tipo de retorno apenas pela trait que implementa é especialmente útil no contexto de closures e iterators, que cobriremos no [Capítulo 13](/livro/cap13-00-recursos-funcionais-iterators-e-closures). Closures e iterators criam tipos que só o compilador conhece ou tipos muito longos de especificar. A sintaxe `impl Trait` permite especificar concisamente que uma função retorna algum tipo que implementa a trait `Iterator` sem precisar escrever um tipo muito longo.
 
 Porém, você só pode usar `impl Trait` se estiver retornando um único tipo. Por exemplo, este código que retorna `NewsArticle` ou `SocialPost` com o tipo de retorno especificado como `impl Summary` não funcionaria:
 
@@ -424,7 +424,7 @@ pub struct NewsArticle {
 
 impl Summary for NewsArticle {
     fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
+        format!("{}, por {} ({})", self.headline, self.author, self.location)
     }
 }
 
@@ -445,20 +445,20 @@ fn returns_summarizable(switch: bool) -> impl Summary {
     if switch {
         NewsArticle {
             headline: String::from(
-                "Penguins win the Stanley Cup Championship!",
+                "Pinguins vencem o campeonato da Stanley Cup!",
             ),
-            location: String::from("Pittsburgh, PA, USA"),
+            location: String::from("Pittsburgh, PA, EUA"),
             author: String::from("Iceburgh"),
             content: String::from(
-                "The Pittsburgh Penguins once again are the best \
-                 hockey team in the NHL.",
+                "Os Pittsburgh Penguins mais uma vez são o melhor \
+                 time de hóquei da NHL.",
             ),
         }
     } else {
         SocialPost {
             username: String::from("horse_ebooks"),
             content: String::from(
-                "of course, as you probably already know, people",
+                "é claro, como você provavelmente já sabe, pessoas",
             ),
             reply: false,
             repost: false,
@@ -467,11 +467,11 @@ fn returns_summarizable(switch: bool) -> impl Summary {
 }
 ```
 
-Retornar `NewsArticle` ou `SocialPost` não é permitido devido a restrições em torno de como a sintaxe `impl Trait` é implementada no compilador. Cobriremos como escrever uma função com esse comportamento na seção Usando trait objects para abstrair comportamento compartilhado do Capítulo 18.
+Retornar `NewsArticle` ou `SocialPost` não é permitido devido a restrições em torno de como a sintaxe `impl Trait` é implementada no compilador. Cobriremos como escrever uma função com esse comportamento na seção [Usando trait objects para abstrair comportamento compartilhado](/livro/cap18-02-usando-trait-objects-para-abstrair-comportamento-compartilhado) do Capítulo 18.
 
 ### Usando trait bounds para implementar métodos condicionalmente
 
-Usando um trait bound com um bloco `impl` que usa parâmetros de tipo genérico, podemos implementar métodos condicionalmente para tipos que implementam as traits especificadas. Por exemplo, o tipo `Pair<T>` na Listagem 10-15 sempre implementa a função `new` para retornar uma nova instância de `Pair<T>` (lembre-se da seção Sintaxe de métodos do Capítulo 5 de que `Self` é um alias de tipo para o tipo do bloco `impl`, que neste caso é `Pair<T>`). Mas no próximo bloco `impl`, `Pair<T>` só implementa o método `cmp_display` se seu tipo interno `T` implementar a trait `PartialOrd`, que habilita comparação, _e_ a trait `Display`, que habilita impressão.
+Usando um trait bound com um bloco `impl` que usa parâmetros de tipo genérico, podemos implementar métodos condicionalmente para tipos que implementam as traits especificadas. Por exemplo, o tipo `Pair<T>` na [Listagem 10-15](#listagem-10-15) sempre implementa a função `new` para retornar uma nova instância de `Pair<T>` (lembre-se da seção [Sintaxe de métodos](/livro/cap05-03-sintaxe-de-metodos) do Capítulo 5 de que `Self` é um alias de tipo para o tipo do bloco `impl`, que neste caso é `Pair<T>`). Mas no próximo bloco `impl`, `Pair<T>` só implementa o método `cmp_display` se seu tipo interno `T` implementar a trait `PartialOrd`, que habilita comparação, _e_ a trait `Display`, que habilita impressão.
 
 **Arquivo: src/lib.rs**
 
@@ -492,9 +492,9 @@ impl<T> Pair<T> {
 impl<T: Display + PartialOrd> Pair<T> {
     fn cmp_display(&self) {
         if self.x >= self.y {
-            println!("The largest member is x = {}", self.x);
+            println!("O maior membro é x = {}", self.x);
         } else {
-            println!("The largest member is y = {}", self.y);
+            println!("O maior membro é y = {}", self.y);
         }
     }
 }
@@ -518,6 +518,6 @@ Como a biblioteca padrão tem esta implementação abrangente, podemos chamar o 
 let s = 3.to_string();
 ```
 
-Implementações abrangentes aparecem na documentação da trait na seção “Implementors”.
+Implementações abrangentes aparecem na documentação da trait na seção “Implementors” (Implementadores).
 
 Traits e trait bounds nos permitem escrever código que usa parâmetros de tipo genérico para reduzir duplicação, mas também especificar ao compilador que queremos que o tipo genérico tenha comportamento particular. O compilador pode então usar a informação de trait bound para verificar se todos os tipos concretos usados com nosso código fornecem o comportamento correto. Em linguagens com tipagem dinâmica, obteríamos um erro em tempo de execução se chamássemos um método em um tipo que não define o método. Mas o Rust move esses erros para tempo de compilação, de modo que somos forçados a corrigir os problemas antes mesmo de o código poder executar. Além disso, não precisamos escrever código que verifica comportamento em tempo de execução, porque já verificamos em tempo de compilação. Isso melhora o desempenho sem abrir mão da flexibilidade dos generics.

@@ -45,12 +45,12 @@ fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
     let result = largest_i32(&number_list);
-    println!("The largest number is {result}");
+    println!("O maior número é {result}");
 
     let char_list = vec!['y', 'm', 'a', 'q'];
 
     let result = largest_char(&char_list);
-    println!("The largest char is {result}");
+    println!("O maior caractere é {result}");
 }
 ```
 
@@ -58,7 +58,7 @@ fn main() {
 
 [Listagem 10-4](#listagem-10-4): Duas funções que diferem apenas nos nomes e nos tipos em suas assinaturas
 
-A função `largest_i32` é a que extraímos na Listagem 10-3 e que encontra o maior `i32` em um slice. A função `largest_char` encontra o maior `char` em um slice. Os corpos das funções têm o mesmo código; vamos eliminar a duplicação introduzindo um parâmetro de tipo genérico em uma única função.
+A função `largest_i32` é a que extraímos na [Listagem 10-3](/livro/cap10-00-tipos-genericos-traits-e-lifetimes#listagem-10-3) e que encontra o maior `i32` em um slice. A função `largest_char` encontra o maior `char` em um slice. Os corpos das funções têm o mesmo código; vamos eliminar a duplicação introduzindo um parâmetro de tipo genérico em uma única função.
 
 Para parametrizar os tipos em uma nova função única, precisamos nomear o parâmetro de tipo, assim como fazemos com parâmetros de valor em uma função. Você pode usar qualquer identificador como nome de parâmetro de tipo, mas usaremos `T` porque, por convenção, nomes de parâmetros de tipo em Rust são curtos, muitas vezes uma única letra, e a convenção de nomenclatura de tipos em Rust é UpperCamelCase. Abreviação de _type_, `T` é a escolha padrão da maioria dos programadores Rust.
 
@@ -91,12 +91,12 @@ fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
     let result = largest(&number_list);
-    println!("The largest number is {result}");
+    println!("O maior número é {result}");
 
     let char_list = vec!['y', 'm', 'a', 'q'];
 
     let result = largest(&char_list);
-    println!("The largest char is {result}");
+    println!("O maior caractere é {result}");
 }
 ```
 
@@ -211,7 +211,7 @@ Agora todas as instâncias de `Point` mostradas são permitidas! Você pode usar
 
 ### Em definições de enum
 
-Como fizemos com structs, podemos definir enums para armazenar tipos de dados genéricos em suas variantes. Vejamos novamente o enum `Option<T>` que a biblioteca padrão fornece, que usamos no Capítulo 6:
+Como fizemos com structs, podemos definir enums para armazenar tipos de dados genéricos em suas variantes. Vejamos novamente o enum `Option<T>` que a biblioteca padrão fornece, que usamos no [Capítulo 6](/livro/cap06-00-enums-e-pattern-matching):
 
 ```rust
 enum Option<T> {
@@ -222,7 +222,7 @@ enum Option<T> {
 
 Esta definição agora deve fazer mais sentido. Como você pode ver, o enum `Option<T>` é genérico sobre o tipo `T` e tem duas variantes: `Some`, que contém um valor do tipo `T`, e uma variante `None` que não contém nenhum valor. Ao usar o enum `Option<T>`, podemos expressar o conceito abstrato de um valor opcional e, como `Option<T>` é genérico, podemos usar essa abstração não importa qual seja o tipo do valor opcional.
 
-Enums também podem usar vários tipos genéricos. A definição do enum `Result` que usamos no Capítulo 9 é um exemplo:
+Enums também podem usar vários tipos genéricos. A definição do enum `Result` que usamos no [Capítulo 9](/livro/cap09-00-tratamento-de-erros) é um exemplo:
 
 ```rust
 enum Result<T, E> {
@@ -231,13 +231,13 @@ enum Result<T, E> {
 }
 ```
 
-O enum `Result` é genérico sobre dois tipos, `T` e `E`, e tem duas variantes: `Ok`, que contém um valor do tipo `T`, e `Err`, que contém um valor do tipo `E`. Esta definição torna conveniente usar o enum `Result` em qualquer lugar em que tenhamos uma operação que pode ter sucesso (retornar um valor de algum tipo `T`) ou falhar (retornar um erro de algum tipo `E`). Na verdade, foi o que usamos para abrir um arquivo na Listagem 9-3, onde `T` foi preenchido com o tipo `std::fs::File` quando o arquivo foi aberto com sucesso e `E` foi preenchido com o tipo `std::io::Error` quando houve problemas ao abrir o arquivo.
+O enum `Result` é genérico sobre dois tipos, `T` e `E`, e tem duas variantes: `Ok`, que contém um valor do tipo `T`, e `Err`, que contém um valor do tipo `E`. Esta definição torna conveniente usar o enum `Result` em qualquer lugar em que tenhamos uma operação que pode ter sucesso (retornar um valor de algum tipo `T`) ou falhar (retornar um erro de algum tipo `E`). Na verdade, foi o que usamos para abrir um arquivo na [Listagem 9-3](/livro/cap09-02-erros-recuperaveis-com-result#listagem-9-3), onde `T` foi preenchido com o tipo `std::fs::File` quando o arquivo foi aberto com sucesso e `E` foi preenchido com o tipo `std::io::Error` quando houve problemas ao abrir o arquivo.
 
 Quando reconhecer situações no código com várias definições de struct ou enum que diferem apenas nos tipos dos valores que armazenam, você pode evitar duplicação usando tipos genéricos.
 
 ### Em definições de método
 
-Podemos implementar métodos em structs e enums (como fizemos no Capítulo 5) e usar tipos genéricos em suas definições também. A Listagem 10-9 mostra a struct `Point<T>` que definimos na Listagem 10-6 com um método chamado `x` implementado nela.
+Podemos implementar métodos em structs e enums (como fizemos no [Capítulo 5](/livro/cap05-00-usando-structs-para-estruturar-dados-relacionados)) e usar tipos genéricos em suas definições também. A Listagem 10-9 mostra a struct `Point<T>` que definimos na Listagem 10-6 com um método chamado `x` implementado nela.
 
 **Arquivo: src/main.rs**
 
@@ -324,7 +324,7 @@ impl<X1, Y1> Point<X1, Y1> {
 
 fn main() {
     let p1 = Point { x: 5, y: 10.4 };
-    let p2 = Point { x: "Hello", y: 'c' };
+    let p2 = Point { x: "Olá", y: 'c' };
 
     let p3 = p1.mixup(p2);
 
@@ -336,7 +336,7 @@ fn main() {
 
 [Listagem 10-11](#listagem-10-11): Um método que usa tipos genéricos diferentes da definição de sua struct
 
-Em `main`, definimos um `Point` que tem um `i32` para `x` (com valor `5`) e um `f64` para `y` (com valor `10.4`). A variável `p2` é uma struct `Point` que tem um slice de string para `x` (com valor `"Hello"`) e um `char` para `y` (com valor `c`). Chamar `mixup` em `p1` com o argumento `p2` nos dá `p3`, que terá um `i32` para `x` porque `x` veio de `p1`. A variável `p3` terá um `char` para `y` porque `y` veio de `p2`. A chamada à macro `println!` imprimirá `p3.x = 5, p3.y = c`.
+Em `main`, definimos um `Point` que tem um `i32` para `x` (com valor `5`) e um `f64` para `y` (com valor `10.4`). A variável `p2` é uma struct `Point` que tem um slice de string para `x` (com valor `"Olá"`) e um `char` para `y` (com valor `c`). Chamar `mixup` em `p1` com o argumento `p2` nos dá `p3`, que terá um `i32` para `x` porque `x` veio de `p1`. A variável `p3` terá um `char` para `y` porque `y` veio de `p2`. A chamada à macro `println!` imprimirá `p3.x = 5, p3.y = c`.
 
 O propósito deste exemplo é demonstrar uma situação em que alguns parâmetros genéricos são declarados com `impl` e outros na definição do método. Aqui, os parâmetros genéricos `X1` e `Y1` são declarados após `impl` porque acompanham a definição da struct. Os parâmetros genéricos `X2` e `Y2` são declarados após `fn mixup` porque são relevantes apenas para o método.
 

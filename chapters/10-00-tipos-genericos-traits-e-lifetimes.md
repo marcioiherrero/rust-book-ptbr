@@ -8,7 +8,7 @@ slug: tipos-genericos-traits-e-lifetimes
 
 Toda linguagem de programação tem ferramentas para lidar efetivamente com a duplicação de conceitos. Em Rust, uma dessas ferramentas são os _generics_: substitutos abstratos de tipos concretos ou outras propriedades. Podemos expressar o comportamento de generics ou como eles se relacionam com outros generics sem saber o que estará no lugar deles ao compilar e executar o código.
 
-Funções podem receber parâmetros de algum tipo genérico, em vez de um tipo concreto como `i32` ou `String`, da mesma forma que recebem parâmetros com valores desconhecidos para executar o mesmo código em vários valores concretos. Na verdade, já usamos generics no Capítulo 6 com `Option<T>`, no Capítulo 8 com `Vec<T>` e `HashMap<K, V>`, e no Capítulo 9 com `Result<T, E>`. Neste capítulo, você explorará como definir seus próprios tipos, funções e métodos com generics!
+Funções podem receber parâmetros de algum tipo genérico, em vez de um tipo concreto como `i32` ou `String`, da mesma forma que recebem parâmetros com valores desconhecidos para executar o mesmo código em vários valores concretos. Na verdade, já usamos generics no [Capítulo 6](/livro/cap06-00-enums-e-pattern-matching) com `Option<T>`, no [Capítulo 8](/livro/cap08-00-colecoes-comuns) com `Vec<T>` e `HashMap<K, V>`, e no [Capítulo 9](/livro/cap09-00-tratamento-de-erros) com `Result<T, E>`. Neste capítulo, você explorará como definir seus próprios tipos, funções e métodos com generics!
 
 Primeiro, revisaremos como extrair uma função para reduzir duplicação de código. Em seguida, usaremos a mesma técnica para criar uma função genérica a partir de duas funções que diferem apenas nos tipos de seus parâmetros. Também explicaremos como usar tipos genéricos em definições de struct e enum.
 
@@ -36,7 +36,7 @@ fn main() {
         }
     }
 
-    println!("The largest number is {largest}");
+    println!("O maior número é {largest}");
 }
 ```
 
@@ -62,7 +62,7 @@ fn main() {
         }
     }
 
-    println!("The largest number is {largest}");
+    println!("O maior número é {largest}");
 
     let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
 
@@ -74,7 +74,7 @@ fn main() {
         }
     }
 
-    println!("The largest number is {largest}");
+    println!("O maior número é {largest}");
 }
 ```
 
@@ -107,12 +107,12 @@ fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
     let result = largest(&number_list);
-    println!("The largest number is {result}");
+    println!("O maior número é {result}");
 
     let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
 
     let result = largest(&number_list);
-    println!("The largest number is {result}");
+    println!("O maior número é {result}");
 }
 ```
 

@@ -111,7 +111,7 @@ Agora que você sabe onde estão os lifetimes das referências e como o Rust ana
 
 ### Lifetimes genéricos em funções
 
-Escreveremos uma função que retorna o slice de string mais longo entre dois. Esta função receberá dois slices de string e retornará um único slice de string. Depois de implementarmos a função `longest`, o código da Listagem 10-19 deve imprimir `The longest string is abcd`.
+Escreveremos uma função que retorna o slice de string mais longo entre dois. Esta função receberá dois slices de string e retornará um único slice de string. Depois de implementarmos a função `longest`, o código da Listagem 10-19 deve imprimir `A string mais longa é abcd`.
 
 **Arquivo: src/main.rs**
 
@@ -121,7 +121,7 @@ fn main() {
     let string2 = "xyz";
 
     let result = longest(string1.as_str(), string2);
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest(x: &str, y: &str) -> &str {
@@ -145,7 +145,7 @@ fn main() {
     let string2 = "xyz";
 
     let result = longest(string1.as_str(), string2);
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest(x: &str, y: &str) -> &str {
@@ -212,7 +212,7 @@ fn main() {
     let string2 = "xyz";
 
     let result = longest(string1.as_str(), string2);
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -240,12 +240,12 @@ Vejamos como as anotações de lifetime restringem a função `longest` passando
 
 ```rust
 fn main() {
-    let string1 = String::from("long string is long");
+    let string1 = String::from("string longa é longa");
 
     {
         let string2 = String::from("xyz");
         let result = longest(string1.as_str(), string2.as_str());
-        println!("The longest string is {result}");
+        println!("A string mais longa é {result}");
     }
 }
 
@@ -266,13 +266,13 @@ Em seguida, vamos tentar um exemplo que mostra que o lifetime da referência em 
 
 ```rust
 fn main() {
-    let string1 = String::from("long string is long");
+    let string1 = String::from("string longa é longa");
     let result;
     {
         let string2 = String::from("xyz");
         result = longest(string1.as_str(), string2.as_str());
     }
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -298,7 +298,7 @@ error[E0597]: `string2` does not live long enough
   |                                            ^^^^^^^ borrowed value does not live long enough
 7 |     }
   |     - `string2` dropped here while still borrowed
-8 |     println!("The longest string is {result}");
+8 |     println!("A string mais longa é {result}");
   |                                      ------ borrow later used here
 
 For more information about this error, try `rustc --explain E0597`.
@@ -323,7 +323,7 @@ fn main() {
     let string2 = "efghijklmnopqrstuvwxyz";
 
     let result = longest(string1.as_str(), string2);
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest<'a>(x: &'a str, y: &str) -> &'a str {
@@ -343,11 +343,11 @@ fn main() {
     let string2 = "xyz";
 
     let result = longest(string1.as_str(), string2);
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest<'a>(x: &str, y: &str) -> &'a str {
-    let result = String::from("really long string");
+    let result = String::from("string bem longa");
     result.as_str()
 }
 ```
@@ -386,7 +386,7 @@ struct ImportantExcerpt<'a> {
 }
 
 fn main() {
-    let novel = String::from("Call me Ishmael. Some years ago...");
+    let novel = String::from("Chamo-me Ishmael. Há alguns anos...");
     let first_sentence = novel.split('.').next().unwrap();
     let i = ImportantExcerpt {
         part: first_sentence,
@@ -422,18 +422,18 @@ fn first_word(s: &str) -> &str {
 }
 
 fn main() {
-    let my_string = String::from("hello world");
+    let my_string = String::from("olá mundo");
 
-    // first_word works on slices of `String`s
+    // first_word funciona com slices de `String`
     let word = first_word(&my_string[..]);
 
-    let my_string_literal = "hello world";
+    let my_string_literal = "olá mundo";
 
-    // first_word works on slices of string literals
+    // first_word funciona com slices de literais de string
     let word = first_word(&my_string_literal[..]);
 
-    // Because string literals *are* string slices already,
-    // this works too, without the slice syntax!
+    // Como literais de string *já são* slices de string,
+    // isto também funciona, sem a sintaxe de slice!
     let word = first_word(my_string_literal);
 }
 ```
@@ -526,7 +526,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 
 fn main() {
-    let novel = String::from("Call me Ishmael. Some years ago...");
+    let novel = String::from("Chamo-me Ishmael. Há alguns anos...");
     let first_sentence = novel.split('.').next().unwrap();
     let i = ImportantExcerpt {
         part: first_sentence,
@@ -547,13 +547,13 @@ struct ImportantExcerpt<'a> {
 
 impl<'a> ImportantExcerpt<'a> {
     fn announce_and_return_part(&self, announcement: &str) -> &str {
-        println!("Attention please: {announcement}");
+        println!("Atenção, por favor: {announcement}");
         self.part
     }
 }
 
 fn main() {
-    let novel = String::from("Call me Ishmael. Some years ago...");
+    let novel = String::from("Chamo-me Ishmael. Há alguns anos...");
     let first_sentence = novel.split('.').next().unwrap();
     let i = ImportantExcerpt {
         part: first_sentence,
@@ -568,7 +568,7 @@ Há dois lifetimes de entrada, então o Rust aplica a primeira regra de elisão 
 Um lifetime especial que precisamos discutir é `'static`, que indica que a referência afetada _pode_ viver durante toda a duração do programa. Todos os literais de string têm o lifetime `'static`, que podemos anotar assim:
 
 ```rust
-let s: &'static str = "I have a static lifetime.";
+let s: &'static str = "Tenho um lifetime estático.";
 ```
 
 O texto desta string é armazenado diretamente no binário do programa, que está sempre disponível. Portanto, o lifetime de todos os literais de string é `'static`.
@@ -591,9 +591,9 @@ fn main() {
     let result = longest_with_an_announcement(
         string1.as_str(),
         string2,
-        "Today is someone's birthday!",
+        "Hoje é aniversário de alguém!",
     );
-    println!("The longest string is {result}");
+    println!("A string mais longa é {result}");
 }
 
 fn longest_with_an_announcement<'a, T>(
@@ -604,7 +604,7 @@ fn longest_with_an_announcement<'a, T>(
 where
     T: Display,
 {
-    println!("Announcement! {ann}");
+    println!("Anúncio! {ann}");
     if x.len() > y.len() { x } else { y }
 }
 ```
