@@ -41,7 +41,7 @@ Se `File::open` tiver sucesso, `greeting_file_result` será um `Ok` com o handle
 
 Precisamos estender a Listagem 9-3 para agir de formas distintas conforme o retorno. A Listagem 9-4 usa `match`, ferramenta básica que vimos no Capítulo 6.
 
-**Arquivo: src/main.rs (Este código entra em pânico se `hello.txt` não existir!)**
+**Arquivo: src/main.rs**
 
 ```rust
 use std::fs::File;
