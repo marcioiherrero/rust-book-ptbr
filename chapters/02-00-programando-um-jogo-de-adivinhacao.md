@@ -350,7 +350,7 @@ rand = "0.999.0"
 
 Da próxima vez que você executar `cargo build`, o Cargo atualizará o registro de crates disponíveis e reavaliará seus requisitos de `rand` de acordo com a nova versão que você especificou.
 
-Há muito mais a dizer sobre o [Cargo](https://doc.rust-lang.org/cargo/) e [seu ecossistema](https://doc.rust-lang.org/cargo/reference/publishing.html), que discutiremos no Capítulo 14, mas por enquanto, isso é tudo que você precisa saber. O Cargo torna muito fácil reutilizar bibliotecas, então os Rustáceos conseguem escrever projetos menores que são montados a partir de vários pacotes.
+Há muito mais a dizer sobre o [Cargo](https://doc.rust-lang.org/cargo/) e [seu ecossistema](https://doc.rust-lang.org/cargo/reference/publishing.html), que discutiremos no Capítulo 14, mas por enquanto, isso é tudo que você precisa saber. O Cargo torna muito fácil reutilizar bibliotecas, então os rustáceos conseguem escrever projetos menores que são montados a partir de vários pacotes.
 
 ### Gerando um número aleatório
 

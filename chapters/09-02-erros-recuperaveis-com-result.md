@@ -181,7 +181,7 @@ thread 'main' panicked at src/main.rs:5:10:
 hello.txt should be included in this project: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ```
 
-Em código de produção, rustaceans costumam preferir `expect` a `unwrap` e dar contexto sobre por que a operação deveria sempre funcionar. Se a suposição falhar, a depuração fica mais fácil.
+Em código de produção, rustáceos costumam preferir `expect` a `unwrap` e dar contexto sobre por que a operação deveria sempre funcionar. Se a suposição falhar, a depuração fica mais fácil.
 
 ### Propagando erros
 

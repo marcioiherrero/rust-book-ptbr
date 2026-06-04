@@ -6,7 +6,7 @@ slug: strings
 
 # Armazenando Texto Codificado em UTF-8 com Strings
 
-Falamos sobre strings no Capítulo 4; agora vamos mergulhar mais fundo. Rustaceans iniciantes costumam travar em strings por três motivos combinados: a tendência do Rust a tornar visíveis erros potenciais, strings serem uma estrutura de dados mais complexa do que muitos programadores imaginam, e UTF-8. Juntos, esses fatores podem parecer intimidantes quando você vem de outras linguagens.
+Falamos sobre strings no Capítulo 4; agora vamos mergulhar mais fundo. Rustáceos iniciantes costumam travar em strings por três motivos combinados: a tendência do Rust a tornar visíveis erros potenciais, strings serem uma estrutura de dados mais complexa do que muitos programadores imaginam, e UTF-8. Juntos, esses fatores podem parecer intimidantes quando você vem de outras linguagens.
 
 Abordamos strings no contexto de coleções porque elas são implementadas como uma coleção de bytes, com métodos extras para trabalhar com esse conteúdo como texto. Nesta seção, veremos as operações comuns a todo tipo de coleção — criar, atualizar e ler — aplicadas a `String`. Também veremos o que torna `String` diferente das demais coleções: indexar uma `String` é complicado porque pessoas e computadores interpretam esses dados de formas distintas.
 
@@ -14,7 +14,7 @@ Abordamos strings no contexto de coleções porque elas são implementadas como 
 
 Primeiro, vamos definir o que queremos dizer com _string_. O Rust tem apenas um tipo string no núcleo da linguagem: a fatia de string `str`, geralmente usada na forma emprestada `&str`. No Capítulo 4, vimos fatias de string — referências a dados de texto codificados em UTF-8 armazenados em outro lugar. Literais de string, por exemplo, ficam no binário do programa e, portanto, são fatias de string.
 
-O tipo `String`, fornecido pela biblioteca padrão (e não embutido no núcleo da linguagem), é uma string UTF-8 expansível, mutável e com ownership. Quando rustaceans falam em “strings” em Rust, podem estar se referindo tanto a `String` quanto a `&str` — não apenas a um dos dois. Embora esta seção foque em `String`, ambos os tipos aparecem o tempo todo na biblioteca padrão, e tanto `String` quanto fatias de string usam codificação UTF-8.
+O tipo `String`, fornecido pela biblioteca padrão (e não embutido no núcleo da linguagem), é uma string UTF-8 expansível, mutável e com ownership. Quando rustáceos falam em “strings” em Rust, podem estar se referindo tanto a `String` quanto a `&str` — não apenas a um dos dois. Embora esta seção foque em `String`, ambos os tipos aparecem o tempo todo na biblioteca padrão, e tanto `String` quanto fatias de string usam codificação UTF-8.
 
 ### Criando uma nova string
 

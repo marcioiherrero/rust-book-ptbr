@@ -386,4 +386,4 @@ Poderíamos fazer mais aqui! Se quiser continuar aprimorando este projeto, aqui 
 
 ## Resumo
 
-Muito bem! Você chegou ao fim do livro! Queremos agradecer por nos acompanhar neste tour por Rust. Agora você está pronto para implementar seus próprios projetos Rust e ajudar com projetos de outras pessoas. Lembre-se de que há uma comunidade acolhedora de outros Rustaceans que adorariam ajudá-lo com quaisquer desafios que encontrar em sua jornada com Rust.
+Muito bem! Você chegou ao fim do livro! Queremos agradecer por nos acompanhar neste tour por Rust. Agora você está pronto para implementar seus próprios projetos Rust e ajudar com projetos de outras pessoas. Lembre-se de que há uma comunidade acolhedora de outros rustáceos que adorariam ajudá-lo com quaisquer desafios que encontrar em sua jornada com Rust.

@@ -271,7 +271,7 @@ Saber que é possível criar slices tanto de literais de string quanto de valore
 fn first_word(s: &String) -> &str {
 ```
 
-Um Rustáceo mais experiente escreveria a assinatura mostrada na Listagem 4-9, porque ela permite usar a mesma função tanto em valores `&String` quanto em valores `&str`.
+Um rustáceo mais experiente escreveria a assinatura mostrada na Listagem 4-9, porque ela permite usar a mesma função tanto em valores `&String` quanto em valores `&str`.
 
 **Arquivo: src/main.rs**
 

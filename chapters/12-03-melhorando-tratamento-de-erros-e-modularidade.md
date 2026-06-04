@@ -124,7 +124,7 @@ Há várias formas de gerenciar os dados `String`; a rota mais fácil, embora um
 
 > ### As trocas de usar `clone`
 >
-> Há uma tendência entre muitos Rustaceans de evitar usar `clone` para corrigir problemas de ownership por causa de seu custo em tempo de execução. No Capítulo 13, você aprenderá como usar métodos mais eficientes neste tipo de situação. Mas, por enquanto, está ok copiar algumas strings para continuar progredindo, porque você fará essas cópias apenas uma vez e sua string de consulta e caminho de arquivo são bem pequenos. É melhor ter um programa funcionando que seja um pouco ineficiente do que tentar hiperotimizar o código na primeira passagem. À medida que ganhar mais experiência com Rust, será mais fácil começar com a solução mais eficiente; por enquanto, é perfeitamente aceitável chamar `clone`.
+> Há uma tendência entre muitos rustáceos de evitar usar `clone` para corrigir problemas de ownership por causa de seu custo em tempo de execução. No Capítulo 13, você aprenderá como usar métodos mais eficientes neste tipo de situação. Mas, por enquanto, está ok copiar algumas strings para continuar progredindo, porque você fará essas cópias apenas uma vez e sua string de consulta e caminho de arquivo são bem pequenos. É melhor ter um programa funcionando que seja um pouco ineficiente do que tentar hiperotimizar o código na primeira passagem. À medida que ganhar mais experiência com Rust, será mais fácil começar com a solução mais eficiente; por enquanto, é perfeitamente aceitável chamar `clone`.
 
 Atualizamos `main` para colocar a instância de `Config` retornada por `parse_config` em uma variável chamada `config`, e atualizamos o código que antes usava as variáveis separadas `query` e `file_path` para usar os campos na struct `Config`.
 

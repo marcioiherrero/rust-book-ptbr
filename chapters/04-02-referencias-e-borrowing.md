@@ -156,7 +156,7 @@ error: could not compile `ownership` (bin "ownership") due to 1 previous error
 
 Este erro diz que este código é inválido porque não podemos emprestar `s` como mutável mais de uma vez ao mesmo tempo. O primeiro empréstimo mutável está em `r1` e deve durar até ser usado no `println!`, mas entre a criação dessa referência mutável e seu uso, tentamos criar outra referência mutável em `r2` que empresta os mesmos dados que `r1`.
 
-A restrição que impede múltiplas referências mutáveis aos mesmos dados ao mesmo tempo permite mutação, mas de forma muito controlada. É algo com o qual novos Rustáceos têm dificuldade, porque a maioria das linguagens permite mutar quando quiser. O benefício de ter essa restrição é que o Rust pode prevenir _data races_ em tempo de compilação. Uma _data race_ é similar a uma condição de corrida (_race condition_) e acontece quando estes três comportamentos ocorrem:
+A restrição que impede múltiplas referências mutáveis aos mesmos dados ao mesmo tempo permite mutação, mas de forma muito controlada. É algo com o qual novos rustáceos têm dificuldade, porque a maioria das linguagens permite mutar quando quiser. O benefício de ter essa restrição é que o Rust pode prevenir _data races_ em tempo de compilação. Uma _data race_ é similar a uma condição de corrida (_race condition_) e acontece quando estes três comportamentos ocorrem:
 
 - Dois ou mais ponteiros acessam os mesmos dados ao mesmo tempo.
 - Pelo menos um dos ponteiros está sendo usado para escrever nos dados.

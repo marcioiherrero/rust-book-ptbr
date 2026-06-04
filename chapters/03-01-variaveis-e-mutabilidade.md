@@ -51,7 +51,7 @@ error: could not compile `variables` (bin "variables") due to 1 previous error
 Este exemplo mostra como o compilador ajuda você a encontrar erros nos seus programas.
 Erros de compilação podem ser frustrantes, mas, na prática, eles só querem dizer
 que seu programa ainda não está fazendo com segurança o que você quer que ele faça;
-eles _não_ significam que você seja um mau programador! Mesmo Rustáceoss experientes
+eles _não_ significam que você seja um mau programador! Mesmo rustáceos experientes
 continuam recebendo erros do compilador.
 
 Você recebeu a mensagem de erro `` cannot assign twice to immutable variable `x` ``
