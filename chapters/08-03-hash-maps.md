@@ -107,7 +107,7 @@ map.insert(field_name, field_value);
 
 Depois do `insert`, não dá para usar `field_name` e `field_value` — elas foram movidas para o hash map.
 
-Se inserirmos referências, os valores não são movidos. Porém, o que as referências apontam precisa permanecer válido enquanto o hash map existir. Veremos isso com mais detalhe em Validando referências com lifetimes, no Capítulo 10.
+Se inserirmos referências, os valores não são movidos. Porém, o que as referências apontam precisa permanecer válido enquanto o hash map existir. Veremos isso com mais detalhe em [Validando Referências com Lifetimes](/livro/cap10-03-validando-referencias-com-lifetimes), no Capítulo 10.
 
 ### Atualizando um hash map
 
