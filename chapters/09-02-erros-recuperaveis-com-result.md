@@ -170,7 +170,7 @@ use std::fs::File;
 
 fn main() {
     let greeting_file = File::open("hello.txt")
-        .expect("hello.txt should be included in this project");
+        .expect("hello.txt deve estar incluído neste projeto");
 }
 ```
 
@@ -178,7 +178,7 @@ Usamos `expect` como `unwrap`: devolve o handle ou entra em pânico. A mensagem 
 
 ```text
 thread 'main' panicked at src/main.rs:5:10:
-hello.txt should be included in this project: Os { code: 2, kind: NotFound, message: "No such file or directory" }
+hello.txt deve estar incluído neste projeto: Os { code: 2, kind: NotFound, message: "No such file or directory" }
 ```
 
 Em código de produção, rustáceos costumam preferir `expect` a `unwrap` e dar contexto sobre por que a operação deveria sempre funcionar. Se a suposição falhar, a depuração fica mais fácil.
@@ -258,7 +258,7 @@ Por exemplo, poderíamos fazer `read_username_from_file` retornar um `OurError` 
 
 Na Listagem 9-7, `?` em `File::open` coloca o valor de `Ok` em `username_file`; em erro, sai da função e repassa `Err`. O mesmo vale para `?` em `read_to_string`.
 
-`?` elimina boilerplate e simplifica a função. Dá para encurtar ainda mais encadeando métodos após `?`, como na Listagem 9-8.
+`?` elimina código repetitivo e simplifica a função. Dá para encurtar ainda mais encadeando métodos após `?`, como na Listagem 9-8.
 
 **Arquivo: src/main.rs**
 
@@ -346,7 +346,7 @@ error: could not compile `error-handling` (bin "error-handling") due to 1 previo
 
 Só é permitido usar `?` em funções que retornam `Result`, `Option` ou outro tipo que implementa `FromResidual`.
 
-Para corrigir: alterar o retorno da função para ser compatível com `?` (se não houver outra restrição), ou tratar o `Result` com `match` ou métodos de `Result`.
+Para corrigir, há duas opções: alterar o tipo de retorno da função para ser compatível com o valor em que você usa `?` (desde que nada mais impeça isso), ou tratar o `Result` com `match` ou com um dos métodos de `Result`, da forma que fizer sentido.
 
 A mensagem também diz que `?` funciona com `Option<T>`. Como em `Result`, só em função que retorna `Option`. Com `Option<T>`, se for `None`, a função retorna `None` na hora; se for `Some`, o valor interno segue e a função continua. A Listagem 9-11 encontra o último caractere da primeira linha de um texto.
 
