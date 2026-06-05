@@ -2,6 +2,8 @@
 title: "Melhorando tratamento de erros e modularidade"
 chapter_code: 12-03
 slug: melhorando-tratamento-de-erros-e-modularidade
+challenge_day: 15
+reading_minutes: 47
 ---
 
 # Refatorando para melhorar modularidade e tratamento de erros
@@ -10,7 +12,7 @@ Para melhorar nosso programa, vamos corrigir quatro problemas relacionados à es
 
 Esse problema também se conecta ao segundo: embora `query` e `file_path` sejam variáveis de configuração do nosso programa, variáveis como `contents` são usadas para executar a lógica do programa. Quanto mais longa `main` se tornar, mais variáveis precisaremos trazer para o escopo; quanto mais variáveis tivermos no escopo, mais difícil será acompanhar o propósito de cada uma. É melhor agrupar as variáveis de configuração em uma única estrutura para deixar claro qual é o propósito delas.
 
-O terceiro problema é que usamos `expect` para imprimir uma mensagem de erro quando a leitura do arquivo falha, mas a mensagem de erro apenas imprime `deveria ter conseguido ler o arquivo`. Ler um arquivo pode falhar de várias formas: por exemplo, o arquivo pode estar ausente, ou talvez não tenhamos permissão para abri-lo. Neste momento, independentemente da situação, imprimiríamos a mesma mensagem de erro para tudo, o que não daria nenhuma informação útil ao usuário!
+O terceiro problema é que usamos `expect` para imprimir uma mensagem de erro quando a leitura do arquivo falha, mas a mensagem de erro apenas imprime `Erro ao ler o arquivo`. Ler um arquivo pode falhar de várias formas: por exemplo, o arquivo pode estar ausente, ou talvez não tenhamos permissão para abri-lo. Neste momento, independentemente da situação, imprimiríamos a mesma mensagem de erro para tudo, o que não daria nenhuma informação útil ao usuário!
 
 O quarto problema é que usamos `expect` para lidar com um erro e, se o usuário executar nosso programa sem especificar argumentos suficientes, receberá um erro `index out of bounds` do Rust que não explica claramente o problema. Seria melhor se todo o código de tratamento de erros estivesse em um só lugar, para que futuros mantenedores tivessem apenas um ponto do código para consultar se a lógica de tratamento de erros precisasse mudar. Ter todo o código de tratamento de erros em um só lugar também ajudará a garantir que imprimamos mensagens significativas para nossos usuários finais.
 
@@ -52,7 +54,7 @@ fn main() {
     println!("No arquivo {file_path}");
 
     let contents = fs::read_to_string(file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
@@ -96,7 +98,7 @@ fn main() {
     println!("No arquivo {}", config.file_path);
 
     let contents = fs::read_to_string(config.file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
@@ -151,7 +153,7 @@ fn main() {
     println!("No arquivo {}", config.file_path);
 
     let contents = fs::read_to_string(config.file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
@@ -292,7 +294,7 @@ fn main() {
     println!("No arquivo {}", config.file_path);
 
     let contents = fs::read_to_string(config.file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
@@ -363,7 +365,7 @@ fn main() {
 
 fn run(config: Config) {
     let contents = fs::read_to_string(config.file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
