@@ -2,6 +2,8 @@
 title: "Escrevendo em stderr em vez de stdout"
 chapter_code: 12-06
 slug: escrevendo-em-stderr-em-vez-de-stdout
+challenge_day: 16
+reading_minutes: 4
 ---
 
 # Redirecionando erros para erro padrão
