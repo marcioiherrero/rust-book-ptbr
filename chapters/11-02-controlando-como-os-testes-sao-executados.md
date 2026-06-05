@@ -2,6 +2,8 @@
 title: "Controlando como os testes são executados"
 chapter_code: 11-02
 slug: controlando-como-os-testes-sao-executados
+challenge_day: 14
+reading_minutes: 7
 ---
 
 # Controlando como os testes são executados
