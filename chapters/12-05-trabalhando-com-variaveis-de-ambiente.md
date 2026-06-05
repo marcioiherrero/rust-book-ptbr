@@ -2,6 +2,8 @@
 title: "Trabalhando com variáveis de ambiente"
 chapter_code: 12-05
 slug: trabalhando-com-variaveis-de-ambiente
+challenge_day: 16
+reading_minutes: 15
 ---
 
 # Trabalhando com variáveis de ambiente
