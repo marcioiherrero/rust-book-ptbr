@@ -6,7 +6,7 @@ slug: lendo-um-arquivo
 
 # Lendo um Arquivo
 
-Agora adicionaremos funcionalidade para ler o arquivo especificado no argumento `file_path`. Primeiro, precisamos de um arquivo de exemplo para testar: usaremos um arquivo com uma pequena quantidade de texto em várias linhas com algumas palavras repetidas. A Listagem 12-3 tem um poema de Emily Dickinson que funcionará bem! Crie um arquivo chamado _poem.txt_ no nível raiz do seu projeto e insira o poema “I’m Nobody! Who are you?”
+Agora adicionaremos a funcionalidade para ler o arquivo especificado no argumento `file_path`. Primeiro, precisamos de um arquivo de exemplo para testar: usaremos um arquivo com uma pequena quantidade de texto distribuída em várias linhas, com algumas palavras repetidas. A Listagem 12-3 traz um poema de Emily Dickinson que servirá muito bem! Crie um arquivo chamado _poem.txt_ no nível raiz do seu projeto e insira o poema “I’m Nobody! Who are you?”
 
 **Arquivo: poem.txt**
 
@@ -24,9 +24,9 @@ To an admiring bog!
 
 <a id="listagem-12-3"></a>
 
-[Listagem 12-3](#listagem-12-3): Um poema de Emily Dickinson serve como bom caso de teste
+[Listagem 12-3](#listagem-12-3): Um poema de Emily Dickinson é um bom caso de teste
 
-Com o texto no lugar, edite _src/main.rs_ e adicione código para ler o arquivo, como mostrado na Listagem 12-4.
+Com o texto no lugar, edite _src/main.rs_ e adicione o código para ler o arquivo, como mostrado na Listagem 12-4.
 
 **Arquivo: src/main.rs**
 
@@ -58,7 +58,7 @@ Primeiro, trazemos para o escopo uma parte relevante da biblioteca padrão com u
 
 Em `main`, a nova instrução `fs::read_to_string` recebe o `file_path`, abre esse arquivo e retorna um valor do tipo `std::io::Result<String>` que contém o conteúdo do arquivo.
 
-Depois disso, adicionamos novamente uma instrução `println!` temporária que imprime o valor de `contents` após o arquivo ser lido, para podermos verificar que o programa está funcionando até aqui.
+Depois disso, adicionamos novamente uma instrução temporária `println!` que imprime o valor de `contents` depois que o arquivo é lido, para que possamos verificar que o programa está funcionando até aqui.
 
 Vamos executar este código com qualquer string como primeiro argumento de linha de comando (porque ainda não implementamos a parte de busca) e o arquivo _poem.txt_ como segundo argumento:
 
@@ -81,4 +81,4 @@ To tell your name the livelong day
 To an admiring bog!
 ```
 
-Ótimo! O código leu e depois imprimiu o conteúdo do arquivo. Mas o código tem algumas falhas. No momento, a função `main` tem várias responsabilidades: em geral, funções ficam mais claras e fáceis de manter se cada função for responsável por apenas uma ideia. O outro problema é que não estamos lidando com erros tão bem quanto poderíamos. O programa ainda é pequeno, então essas falhas não são um grande problema, mas à medida que o programa crescer, será mais difícil corrigi-las de forma limpa. É uma boa prática começar a refatorar cedo ao desenvolver um programa, porque é muito mais fácil refatorar quantidades menores de código. Faremos isso a seguir.
+Ótimo! O código leu e depois imprimiu o conteúdo do arquivo. Mas ele tem algumas falhas. Neste momento, a função `main` tem várias responsabilidades: em geral, funções ficam mais claras e mais fáceis de manter quando cada uma é responsável por apenas uma ideia. O outro problema é que não estamos tratando erros tão bem quanto poderíamos. O programa ainda é pequeno, então essas falhas não são um grande problema, mas, à medida que o programa crescer, ficará mais difícil corrigi-las de forma limpa. É uma boa prática começar a refatorar cedo durante o desenvolvimento de um programa, porque é muito mais fácil refatorar pequenas quantidades de código. Faremos isso a seguir.
