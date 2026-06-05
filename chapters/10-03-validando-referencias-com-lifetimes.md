@@ -315,14 +315,6 @@ A forma como você precisa especificar parâmetros de lifetime depende do que su
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "efghijklmnopqrstuvwxyz";
-
-    let result = longest(string1.as_str(), string2);
-    println!("A string mais longa é {result}");
-}
-
 fn longest<'a>(x: &'a str, y: &str) -> &'a str {
     x
 }
@@ -335,14 +327,6 @@ Ao retornar uma referência de uma função, o parâmetro de lifetime do tipo de
 **Arquivo: src/main.rs (Este código não compila!)**
 
 ```rust
-fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
-
-    let result = longest(string1.as_str(), string2);
-    println!("A string mais longa é {result}");
-}
-
 fn longest<'a>(x: &str, y: &str) -> &'a str {
     let result = String::from("string bem longa");
     result.as_str()
