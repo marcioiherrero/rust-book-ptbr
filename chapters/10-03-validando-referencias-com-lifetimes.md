@@ -2,6 +2,8 @@
 title: "Validando referências com lifetimes"
 chapter_code: 10-03
 slug: validando-referencias-com-lifetimes
+challenge_day: 13
+reading_minutes: 51
 ---
 
 # Validando referências com lifetimes
