@@ -2,6 +2,8 @@
 title: "Lendo um arquivo"
 chapter_code: 12-02
 slug: lendo-um-arquivo
+challenge_day: 15
+reading_minutes: 8
 ---
 
 # Lendo um arquivo
@@ -44,7 +46,7 @@ fn main() {
     println!("No arquivo {file_path}");
 
     let contents = fs::read_to_string(file_path)
-        .expect("deveria ter conseguido ler o arquivo");
+        .expect("Erro ao ler o arquivo");
 
     println!("Com o texto:\n{contents}");
 }
