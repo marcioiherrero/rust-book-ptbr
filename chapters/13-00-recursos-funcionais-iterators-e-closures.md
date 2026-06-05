@@ -2,6 +2,8 @@
 title: "Recursos funcionais: iterators e closures"
 chapter_code: 13-00
 slug: recursos-funcionais-iterators-e-closures
+challenge_day: 17
+reading_minutes: 2
 ---
 
 # Recursos de Linguagens Funcionais: Iterators e Closures
