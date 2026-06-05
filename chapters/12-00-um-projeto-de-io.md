@@ -2,6 +2,8 @@
 title: "Um projeto de I/O: construindo um programa de linha de comando"
 chapter_code: 12-00
 slug: um-projeto-de-io
+challenge_day: 15
+reading_minutes: 3
 ---
 
 # Um projeto de I/O: construindo um programa de linha de comando
