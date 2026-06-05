@@ -240,7 +240,7 @@ Vejamos como as anotações de lifetime restringem a função `longest` passando
 
 ```rust
 fn main() {
-    let string1 = String::from("string longa é longa");
+    let string1 = String::from("A string longa é longa");
 
     {
         let string2 = String::from("xyz");
@@ -249,9 +249,6 @@ fn main() {
     }
 }
 
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
-}
 ```
 
 <a id="listagem-10-22"></a>
