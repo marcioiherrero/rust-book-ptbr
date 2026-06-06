@@ -8,7 +8,7 @@ slug: workspaces-do-cargo
 
 No Capítulo 12, construímos um pacote que incluía um crate binário e um crate de biblioteca. Conforme seu projeto se desenvolve, você pode descobrir que o crate de biblioteca continua crescendo e quer dividir seu pacote ainda mais em vários crates de biblioteca. O Cargo oferece um recurso chamado _workspaces_ que pode ajudar a gerenciar vários pacotes relacionados desenvolvidos em conjunto.
 
-## Criando um Workspace
+## Criando um workspace
 
 Um _workspace_ é um conjunto de pacotes que compartilham o mesmo _Cargo.lock_ e diretório de saída. Vamos fazer um projeto usando um workspace — usaremos código trivial para podermos nos concentrar na estrutura do workspace. Há várias formas de estruturar um workspace; mostraremos apenas uma forma comum. Teremos um workspace contendo um binário e duas bibliotecas. O binário, que fornecerá a funcionalidade principal, dependerá das duas bibliotecas. Uma biblioteca fornecerá uma função `add_one` e a outra biblioteca uma função `add_two`. Esses três crates farão parte do mesmo workspace. Começaremos criando um novo diretório para o workspace:
 
@@ -56,7 +56,7 @@ Neste ponto, podemos compilar o workspace executando `cargo build`. Os arquivos 
 
 O workspace tem um diretório _target_ no nível superior para onde os artefatos compilados serão colocados; o pacote `adder` não tem seu próprio diretório _target_. Mesmo que executássemos `cargo build` de dentro do diretório _adder_, os artefatos compilados ainda iriam para _add/target_ em vez de _add/adder/target_. O Cargo estrutura o diretório _target_ em um workspace assim porque os crates em um workspace devem depender uns dos outros. Se cada crate tivesse seu próprio diretório _target_, cada crate teria que recompilar cada um dos outros crates no workspace para colocar os artefatos em seu próprio diretório _target_. Ao compartilhar um diretório _target_, os crates podem evitar recompilações desnecessárias.
 
-## Criando o Segundo Pacote no Workspace
+## Criando o segundo pacote no workspace
 
 Em seguida, vamos criar outro pacote membro no workspace e chamá-lo `add_one`. Gere um novo crate de biblioteca chamado `add_one`:
 
@@ -147,7 +147,7 @@ Hello, world! 10 plus one is 11!
 
 Isso executa o código em _adder/src/main.rs_, que depende do crate `add_one`.
 
-## Dependendo de um Pacote Externo
+## Dependendo de um pacote externo
 
 Observe que o workspace tem apenas um arquivo _Cargo.lock_ no nível superior, em vez de ter um _Cargo.lock_ no diretório de cada crate. Isso garante que todos os crates usem a mesma versão de todas as dependências. Se adicionarmos o pacote `rand` aos arquivos _adder/Cargo.toml_ e _add_one/Cargo.toml_, o Cargo resolverá ambos para uma versão de `rand` e registrará isso no único _Cargo.lock_. Fazer todos os crates no workspace usarem as mesmas dependências significa que os crates estarão sempre compatíveis uns com os outros. Vamos adicionar o crate `rand` à seção `[dependencies]` no arquivo _add_one/Cargo.toml_ para podermos usar o crate `rand` no crate `add_one`:
 
@@ -196,7 +196,7 @@ Para corrigir isso, edite o arquivo _Cargo.toml_ do pacote `adder` e indique que
 
 Se crates no workspace especificarem versões incompatíveis da mesma dependência, o Cargo resolverá cada uma delas, mas ainda tentará resolver o menor número possível de versões.
 
-## Adicionando um Teste a um Workspace
+## Adicionando um teste a um workspace
 
 Para outra melhoria, vamos adicionar um teste da função `add_one::add_one` dentro do crate `add_one`:
 

@@ -32,7 +32,7 @@ Poderíamos evitar bloquear a thread principal criando uma thread dedicada para 
 
 Antes de ver como async funciona na prática, porém, precisamos de um pequeno desvio para discutir as diferenças entre paralelismo e concorrência.
 
-## Paralelismo e Concorrência
+## Paralelismo e concorrência
 
 Até aqui tratamos paralelismo e concorrência como praticamente intercambiáveis. Agora precisamos distingui-los com mais precisão, porque as diferenças aparecerão conforme avançarmos.
 

@@ -10,7 +10,7 @@ Implementar a trait `Deref` permite personalizar o comportamento do _operador de
 
 Primeiro veremos como o operador de dereferência funciona com referências comuns. Depois, tentaremos definir um tipo personalizado que se comporta como `Box<T>` e veremos por que o operador de dereferência não funciona como uma referência em nosso tipo recém-definido. Exploraremos como implementar a trait `Deref` torna possível que smart pointers funcionem de formas semelhantes a referências. Em seguida, olharemos o recurso de coerção de deref do Rust e como ele nos permite trabalhar com referências ou smart pointers.
 
-### Seguindo a Referência até o Valor
+### Seguindo a referência até o valor
 
 Uma referência comum é um tipo de ponteiro, e uma forma de pensar em um ponteiro é como uma seta para um valor armazenado em outro lugar. Na Listagem 15-6, criamos uma referência a um valor `i32` e então usamos o operador de dereferência para seguir a referência até o valor.
 
@@ -52,7 +52,7 @@ error: could not compile `deref-example` (bin "deref-example") due to 1 previous
 
 Comparar um número e uma referência a um número não é permitido porque são tipos diferentes. Devemos usar o operador de dereferência para seguir a referência ao valor para o qual aponta.
 
-### Usando `Box<T>` como uma Referência
+### Usando `Box<T>` como uma referência
 
 Podemos reescrever o código da Listagem 15-6 para usar um `Box<T>` em vez de uma referência; o operador de dereferência usado no `Box<T>` na Listagem 15-7 funciona da mesma forma que o operador de dereferência usado na referência na Listagem 15-6.
 
@@ -74,7 +74,7 @@ fn main() {
 
 A principal diferença entre a Listagem 15-7 e a Listagem 15-6 é que aqui definimos `y` como uma instância de uma box apontando para uma cópia do valor de `x` em vez de uma referência apontando para o valor de `x`. Na última asserção, podemos usar o operador de dereferência para seguir o ponteiro da box da mesma forma que fizemos quando `y` era uma referência. Em seguida, exploraremos o que há de especial em `Box<T>` que nos permite usar o operador de dereferência definindo nosso próprio tipo de box.
 
-### Definindo Nosso Próprio Smart Pointer
+### Definindo nosso próprio smart pointer
 
 Vamos construir um tipo wrapper semelhante ao tipo `Box<T>` fornecido pela biblioteca padrão para experimentar como tipos smart pointer se comportam diferente de referências por padrão. Depois, veremos como adicionar a capacidade de usar o operador de dereferência.
 
@@ -145,7 +145,7 @@ error: could not compile `deref-example` (bin "deref-example") due to 1 previous
 
 Nosso tipo `MyBox<T>` não pode ser dereferenciado porque não implementamos essa capacidade em nosso tipo. Para habilitar dereferenciação com o operador `*`, implementamos a trait `Deref`.
 
-### Implementando a Trait `Deref`
+### Implementando a trait `Deref`
 
 Como discutido em Implementando uma trait em um tipo no Capítulo 10, para implementar uma trait precisamos fornecer implementações para os métodos exigidos da trait. A trait `Deref`, fornecida pela biblioteca padrão, exige que implementemos um método chamado `deref` que empresta `self` e retorna uma referência aos dados internos. A Listagem 15-10 contém uma implementação de `Deref` para adicionar à definição de `MyBox<T>`.
 
@@ -201,7 +201,7 @@ A razão pela qual o método `deref` retorna uma referência a um valor, e que a
 
 Note que o operador `*` é substituído por uma chamada ao método `deref` e então uma chamada ao operador `*` apenas uma vez, cada vez que usamos um `*` em nosso código. Como a substituição do operador `*` não recursa infinitamente, acabamos com dados do tipo `i32`, que corresponde ao `5` em `assert_eq!` na Listagem 15-9.
 
-### Usando Coerção de Deref em Funções e Métodos
+### Usando coerção de deref em funções e métodos
 
 _Coerção de deref_ converte uma referência a um tipo que implementa a trait `Deref` em uma referência a outro tipo. Por exemplo, coerção de deref pode converter `&String` em `&str` porque `String` implementa a trait `Deref` de forma que retorna `&str`. Coerção de deref é uma conveniência que o Rust realiza em argumentos para funções e métodos, e funciona apenas em tipos que implementam a trait `Deref`. Acontece automaticamente quando passamos uma referência ao valor de um tipo particular como argumento para uma função ou método cujo parâmetro não corresponde ao tipo na definição da função ou método. Uma sequência de chamadas ao método `deref` converte o tipo que fornecemos no tipo que o parâmetro precisa.
 
@@ -303,7 +303,7 @@ O `(*m)` dereferencia o `MyBox<String>` em um `String`. Então, o `&` e `[..]` t
 
 Quando a trait `Deref` é definida para os tipos envolvidos, o Rust analisará os tipos e usará `Deref::deref` quantas vezes forem necessárias para obter uma referência que corresponda ao tipo do parâmetro. O número de vezes que `Deref::deref` precisa ser inserido é resolvido em tempo de compilação, então não há penalidade em tempo de execução por aproveitar a coerção de deref!
 
-### Lidando com Coerção de Deref e Referências Mutáveis
+### Lidando com coerção de deref e referências mutáveis
 
 De forma semelhante a como você usa a trait `Deref` para substituir o operador `*` em referências imutáveis, pode usar a trait `DerefMut` para substituir o operador `*` em referências mutáveis.
 

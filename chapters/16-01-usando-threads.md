@@ -18,7 +18,7 @@ O Rust tenta mitigar os efeitos negativos do uso de threads, mas programar em um
 
 Linguagens de programação implementam threads de algumas formas diferentes, e muitos sistemas operacionais fornecem uma API que a linguagem pode chamar para criar novas threads. A biblioteca padrão do Rust usa um modelo de implementação de threads _1:1_, pelo qual um programa usa uma thread do sistema operacional por uma thread da linguagem. Há crates que implementam outros modelos de threading que fazem trocas diferentes em relação ao modelo 1:1. (O sistema async do Rust, que veremos no próximo capítulo, também fornece outra abordagem à concorrência.)
 
-## Criando uma Nova Thread com `spawn`
+## Criando uma nova thread com `spawn`
 
 Para criar uma nova thread, chamamos a função `thread::spawn` e passamos a ela uma closure (falamos sobre closures no Capítulo 13) contendo o código que queremos executar na nova thread. O exemplo na Listagem 16-1 imprime algum texto da thread principal e outro texto de uma nova thread.
 
@@ -65,7 +65,7 @@ As chamadas a `thread::sleep` forçam uma thread a parar sua execução por um c
 
 Se você executar este código e só vir saída da thread principal, ou não vir sobreposição, tente aumentar os números nos intervalos para criar mais oportunidades para o sistema operacional alternar entre as threads.
 
-## Esperando Todas as Threads Terminarem
+## Esperando todas as threads terminarem
 
 O código na Listagem 16-1 não só para a thread criada prematuramente na maioria das vezes porque a thread principal termina, mas como não há garantia sobre a ordem em que as threads executam, também não podemos garantir que a thread criada chegará a executar!
 
@@ -163,7 +163,7 @@ hi number 4 from the main thread!
 
 Detalhes pequenos, como onde `join` é chamado, podem afetar se suas threads executam ao mesmo tempo ou não.
 
-## Usando Closures `move` com Threads
+## Usando closures `move` com threads
 
 Costumamos usar a palavra-chave `move` com closures passadas a `thread::spawn` porque a closure então tomará ownership dos valores que usa do ambiente, transferindo assim a ownership desses valores de uma thread para outra. Em Capturando referências ou movendo ownership no Capítulo 13, discutimos `move` no contexto de closures. Agora nos concentraremos mais na interação entre `move` e `thread::spawn`.
 

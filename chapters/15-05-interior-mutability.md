@@ -12,7 +12,7 @@ Podemos usar tipos que usam o padrão de interior mutability apenas quando podem
 
 Vamos explorar este conceito olhando o tipo `RefCell<T>` que segue o padrão de interior mutability.
 
-## Impedindo as Regras de Borrowing em Tempo de Execução
+## Impedindo as regras de borrowing em tempo de execução
 
 Diferente de `Rc<T>`, o tipo `RefCell<T>` representa posse única sobre os dados que guarda. Então, o que torna `RefCell<T>` diferente de um tipo como `Box<T>`? Lembre-se das regras de borrowing que você aprendeu no Capítulo 4:
 
@@ -37,7 +37,7 @@ Aqui está um resumo das razões para escolher `Box<T>`, `Rc<T>` ou `RefCell<T>`
 
 Mutar o valor dentro de um valor imutável é o padrão de interior mutability. Vamos olhar uma situação em que interior mutability é útil e examinar como é possível.
 
-## Usando Interior Mutability
+## Usando interior mutability
 
 Uma consequência das regras de borrowing é que, quando você tem um valor imutável, não pode emprestá-lo mutavelmente. Por exemplo, este código não compilará:
 
@@ -74,7 +74,7 @@ No entanto, há situações em que seria útil que um valor se mutasse em seus m
 
 Vamos trabalhar com um exemplo prático onde podemos usar `RefCell<T>` para mutar um valor imutável e ver por que isso é útil.
 
-### Testando com Mock Objects
+### Testando com mock objects
 
 Às vezes, durante testes, um programador usará um tipo no lugar de outro tipo para observar comportamento particular e afirmar que está implementado corretamente. Este tipo substituto é chamado de _test double_. Pense nisso no sentido de um dublê de ação em cinema, onde uma pessoa entra e substitui um ator para fazer uma cena particularmente complicada. Test doubles substituem outros tipos quando executamos testes. _Mock objects_ são tipos específicos de test doubles que registram o que acontece durante um teste para que você possa afirmar que as ações corretas ocorreram.
 
@@ -336,7 +336,7 @@ A última mudança que temos que fazer está na asserção: para ver quantos ite
 
 Agora que você viu como usar `RefCell<T>`, vamos aprofundar como funciona!
 
-### Rastreando Empréstimos em Tempo de Execução
+### Rastreando empréstimos em tempo de execução
 
 Ao criar referências imutáveis e mutáveis, usamos a sintaxe `&` e `&mut`, respectivamente. Com `RefCell<T>`, usamos os métodos `borrow` e `borrow_mut`, que fazem parte da API segura que pertence a `RefCell<T>`. O método `borrow` retorna o tipo smart pointer `Ref<T>`, e `borrow_mut` retorna o tipo smart pointer `RefMut<T>`. Ambos os tipos implementam `Deref`, então podemos tratá-los como referências comuns.
 
@@ -461,7 +461,7 @@ Observe que o código entrou em pânico com a mensagem `already borrowed: Borrow
 
 Escolher detectar erros de borrowing em tempo de execução em vez de tempo de compilação, como fizemos aqui, significa que você potencialmente encontraria erros no seu código mais tarde no processo de desenvolvimento: possivelmente só quando seu código fosse implantado em produção. Além disso, seu código incorreria em uma pequena penalidade de desempenho em tempo de execução por rastrear os empréstimos em tempo de execução em vez de tempo de compilação. No entanto, usar `RefCell<T>` torna possível escrever um mock object que pode se modificar para rastrear as mensagens que viu enquanto você o usa em um contexto onde apenas valores imutáveis são permitidos. Você pode usar `RefCell<T>` apesar de suas trocas para obter mais funcionalidade do que referências comuns fornecem.
 
-## Permitindo Múltiplos Donos de Dados Mutáveis
+## Permitindo múltiplos donos de dados mutáveis
 
 Uma forma comum de usar `RefCell<T>` é em combinação com `Rc<T>`. Lembre-se de que `Rc<T>` permite ter vários donos de alguns dados, mas só dá acesso imutável a esses dados. Se você tem um `Rc<T>` que guarda um `RefCell<T>`, pode obter um valor que pode ter vários donos _e_ que você pode mutar!
 

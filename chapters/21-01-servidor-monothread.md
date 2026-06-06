@@ -12,7 +12,7 @@ Os dois principais protocolos envolvidos em servidores web são o _Hypertext Tra
 
 TCP é o protocolo de nível mais baixo que descreve os detalhes de como a informação vai de um servidor para outro, mas não especifica qual é essa informação. HTTP se constrói sobre TCP definindo o conteúdo das requisições e respostas. Tecnicamente é possível usar HTTP com outros protocolos, mas na grande maioria dos casos, HTTP envia seus dados sobre TCP. Trabalharemos com os bytes brutos de requisições e respostas TCP e HTTP.
 
-## Escutando a Conexão TCP
+## Escutando a conexão TCP
 
 Nosso servidor web precisa escutar uma conexão TCP, então essa é a primeira parte com a qual trabalharemos. A biblioteca padrão oferece um módulo `std::net` que nos permite fazer isso. Vamos criar um novo projeto da forma usual:
 
@@ -73,7 +73,7 @@ O fator importante é que obtivemos com sucesso um handle para uma conexão TCP!
 
 Lembre-se de parar o programa pressionando <kbd>Ctrl</kbd>+<kbd>C</kbd> quando terminar de executar uma versão particular do código. Em seguida, reinicie o programa invocando o comando `cargo run` depois de fazer cada conjunto de alterações no código para ter certeza de que está executando o código mais recente.
 
-## Lendo a Requisição
+## Lendo a requisição
 
 Vamos implementar a funcionalidade para ler a requisição do navegador! Para separar as preocupações de primeiro obter uma conexão e depois tomar alguma ação com a conexão, iniciaremos uma nova função para processar conexões. Nesta nova função `handle_connection`, leremos dados do stream TCP e os imprimiremos para que possamos ver os dados sendo enviados pelo navegador. Altere o código para ficar como na Listagem 21-2.
 
@@ -153,7 +153,7 @@ Vamos analisar esses dados de requisição para entender o que o navegador está
 <a id="a-closer-look-at-an-http-request"></a>
 <a id="looking-closer-at-an-http-request"></a>
 
-## Examinando Mais de Perto uma Requisição HTTP
+## Examinando mais de perto uma requisição HTTP
 
 HTTP é um protocolo baseado em texto, e uma requisição tem este formato:
 
@@ -177,7 +177,7 @@ Tente fazer uma requisição de um navegador diferente ou pedir um endereço dif
 
 Agora que sabemos o que o navegador está pedindo, vamos enviar alguns dados de volta!
 
-## Escrevendo uma Resposta
+## Escrevendo uma resposta
 
 Vamos implementar o envio de dados em resposta a uma requisição do cliente. Respostas têm o seguinte formato:
 
@@ -222,7 +222,7 @@ A primeira nova linha define a variável `response` que contém os dados da mens
 
 Com essas alterações, vamos executar nosso código e fazer uma requisição. Não estamos mais imprimindo nenhum dado no terminal, então não veremos nenhuma saída além da saída do Cargo. Quando você carregar _127.0.0.1:7878_ em um navegador web, deverá obter uma página em branco em vez de um erro. Você acabou de codificar manualmente o recebimento de uma requisição HTTP e o envio de uma resposta!
 
-## Retornando HTML Real
+## Retornando HTML real
 
 Vamos implementar a funcionalidade para retornar mais do que uma página em branco. Crie o novo arquivo _hello.html_ na raiz do diretório do seu projeto, não no diretório _src_. Você pode inserir qualquer HTML que quiser; a Listagem 21-4 mostra uma possibilidade.
 
@@ -298,7 +298,7 @@ Execute este código com `cargo run` e carregue _127.0.0.1:7878_ em seu navegado
 
 Atualmente, estamos ignorando os dados da requisição em `http_request` e apenas enviando de volta o conteúdo do arquivo HTML incondicionalmente. Isso significa que, se você tentar requisitar _127.0.0.1:7878/something-else_ em seu navegador, ainda receberá esta mesma resposta HTML. No momento, nosso servidor é muito limitado e não faz o que a maioria dos servidores web faz. Queremos personalizar nossas respostas dependendo da requisição e enviar o arquivo HTML de volta apenas para uma requisição bem formada para _/_.
 
-## Validando a Requisição e Respondendo Seletivamente
+## Validando a requisição e respondendo seletivamente
 
 No momento, nosso servidor web retornará o HTML no arquivo não importa o que o cliente tenha requisitado. Vamos adicionar funcionalidade para verificar se o navegador está requisitando _/_ antes de retornar o arquivo HTML e para retornar um erro se o navegador requisitar qualquer outra coisa. Para isso, precisamos modificar `handle_connection`, conforme mostrado na Listagem 21-6. Este novo código verifica o conteúdo da requisição recebida em relação ao que sabemos que uma requisição para _/_ se parece e adiciona blocos `if` e `else` para tratar requisições de forma diferente.
 

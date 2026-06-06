@@ -101,7 +101,7 @@ Got: hi
 
 Perfeito!
 
-## Transferindo Ownership Através de Channels
+## Transferindo ownership através de channels
 
 As regras de ownership desempenham um papel vital no envio de mensagens porque ajudam você a escrever código concorrente seguro. Prevenir erros em programação concorrente é a vantagem de pensar em ownership em todo o seu programa Rust. Vamos fazer um experimento para mostrar como channels e ownership trabalham juntos para prevenir problemas: tentaremos usar um valor `val` na thread criada _depois_ de tê-lo enviado pelo channel. Tente compilar o código da Listagem 16-9 para ver por que este código não é permitido.
 
@@ -152,7 +152,7 @@ error: could not compile `message-passing` (bin "message-passing") due to 1 prev
 
 Nosso erro de concorrência causou um erro em tempo de compilação. A função `send` toma ownership de seu parâmetro, e quando o valor é movido o receptor toma ownership dele. Isso nos impede de usar acidentalmente o valor novamente depois de enviá-lo; o sistema de ownership verifica que está tudo certo.
 
-## Enviando Vários Valores
+## Enviando vários valores
 
 O código da Listagem 16-8 compilou e executou, mas não mostrou claramente que duas threads separadas estavam conversando pelo channel.
 
@@ -207,7 +207,7 @@ Got: thread
 
 Como não temos código que pausa ou atrasa no loop `for` da thread principal, podemos dizer que a thread principal está esperando receber valores da thread criada.
 
-## Criando Vários Produtores
+## Criando vários produtores
 
 Mencionamos anteriormente que `mpsc` era um acrônimo de _multiple producer, single consumer_. Vamos colocar `mpsc` em uso e expandir o código da Listagem 16-10 para criar várias threads que enviam valores ao mesmo receptor. Podemos fazer isso clonando o transmissor, como mostrado na Listagem 16-11.
 

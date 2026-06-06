@@ -16,7 +16,7 @@ Outro motivo para Rust ter um alter ego _unsafe_ é que o hardware subjacente é
 
 <a id="unsafe-superpowers"></a>
 
-## Executando Superpoderes _unsafe_
+## Executando superpoderes _unsafe_
 
 Para mudar para _unsafe Rust_, use a palavra-chave `unsafe` e então inicie um novo bloco que contém o código _unsafe_. Você pode realizar cinco ações em _unsafe Rust_ que não pode em Rust seguro, que chamamos de _superpoderes unsafe_. Esses superpoderes incluem a capacidade de:
 
@@ -36,7 +36,7 @@ Para isolar código _unsafe_ o máximo possível, o ideal é encapsular esse có
 
 Vamos ver cada um dos cinco superpoderes _unsafe_ em sequência. Também veremos algumas abstrações que fornecem uma interface segura para código _unsafe_.
 
-## Desreferenciando um Ponteiro Bruto
+## Desreferenciando um ponteiro bruto
 
 No Capítulo 4, na seção “Referências dangling”, mencionamos que o compilador garante que referências sejam sempre válidas. _Unsafe Rust_ tem dois novos tipos chamados _ponteiros brutos_ que são semelhantes a referências. Como referências, ponteiros brutos podem ser imutáveis ou mutáveis e são escritos como `*const T` e `*mut T`, respectivamente. O asterisco não é o operador de desreferência; faz parte do nome do tipo. No contexto de ponteiros brutos, _imutável_ significa que o ponteiro não pode ser atribuído diretamente depois de ser desreferenciado.
 
@@ -113,7 +113,7 @@ Note também que nas Listagens 20-1 e 20-3 criamos ponteiros brutos `*const i32`
 
 Com todos esses perigos, por que usar ponteiros brutos? Um caso de uso importante é ao interagir com código C, como veremos na próxima seção. Outro caso é ao construir abstrações seguras que o borrow checker não entende. Apresentaremos funções _unsafe_ e depois veremos um exemplo de abstração segura que usa código _unsafe_.
 
-## Chamando uma Função ou Método _unsafe_
+## Chamando uma função ou método _unsafe_
 
 O segundo tipo de operação que você pode realizar em um bloco _unsafe_ é chamar funções _unsafe_. Funções e métodos _unsafe_ parecem exatamente com funções e métodos comuns, mas têm um `unsafe` extra antes do restante da definição. A palavra-chave `unsafe` neste contexto indica que a função tem requisitos que precisamos cumprir ao chamá-la, porque Rust não pode garantir que os atendemos. Ao chamar uma função _unsafe_ dentro de um bloco `unsafe`, estamos dizendo que lemos a documentação da função e assumimos a responsabilidade de cumprir os contratos da função.
 
@@ -152,7 +152,7 @@ Com o bloco `unsafe`, estamos afirmando a Rust que lemos a documentação da fun
 
 Para realizar operações _unsafe_ no corpo de uma função `unsafe`, você ainda precisa usar um bloco `unsafe`, assim como dentro de uma função comum, e o compilador avisará se você esquecer. Isso nos ajuda a manter blocos _unsafe_ o menor possível, já que operações _unsafe_ podem não ser necessárias em todo o corpo da função.
 
-### Criando uma Abstração Segura sobre Código _unsafe_
+### Criando uma abstração segura sobre código _unsafe_
 
 Só porque uma função contém código _unsafe_ não significa que precisamos marcar a função inteira como _unsafe_. Na verdade, envolver código _unsafe_ em uma função segura é uma abstração comum. Como exemplo, vamos estudar a função `split_at_mut` da biblioteca padrão, que exige código _unsafe_. Exploraremos como poderíamos implementá-la. Este método seguro é definido em slices mutáveis: recebe um slice e o divide em dois, separando no índice passado como argumento. A Listagem 20-4 mostra como usar `split_at_mut`.
 
@@ -278,7 +278,7 @@ fn main() {
 
 Não possuímos a memória neste local arbitrário, e não há garantia de que o slice que este código cria contenha valores `i32` válidos. Tentar usar `values` como se fosse um slice válido resulta em comportamento indefinido.
 
-### Usando Funções `extern` para Chamar Código Externo
+### Usando funções `extern` para chamar código externo
 
 Às vezes seu código Rust pode precisar interagir com código escrito em outra linguagem. Para isso, Rust tem a palavra-chave `extern`, que facilita a criação e o uso de uma _Foreign Function Interface (FFI)_, que é uma forma de uma linguagem de programação definir funções e permitir que outra linguagem (estrangeira) chame essas funções.
 
@@ -324,7 +324,7 @@ fn main() {
 
 Marcar uma função como `safe` não a torna inerentemente segura! Em vez disso, é como uma promessa que você faz a Rust de que ela é segura. Ainda é sua responsabilidade garantir que essa promessa seja cumprida!
 
-### Chamando Funções Rust a Partir de Outras Linguagens
+### Chamando funções Rust a partir de outras linguagens
 
 Também podemos usar `extern` para criar uma interface que permite que outras linguagens chamem funções Rust. Em vez de criar um bloco `extern` inteiro, adicionamos a palavra-chave `extern` e especificamos a ABI a usar logo antes da palavra-chave `fn` da função relevante. Também precisamos adicionar uma anotação `#[unsafe(no_mangle)]` para dizer ao compilador Rust para não fazer _mangling_ no nome desta função. _Mangling_ é quando um compilador altera o nome que demos a uma função para um nome diferente que contém mais informação para outras partes do processo de compilação consumirem, mas é menos legível para humanos. Cada compilador de linguagem de programação faz _mangling_ de nomes de forma ligeiramente diferente, então para uma função Rust ser nomeável por outras linguagens, precisamos desabilitar o _mangling_ de nomes do compilador Rust. Isso é _unsafe_ porque pode haver colisões de nomes entre bibliotecas sem o _mangling_ embutido, então é nossa responsabilidade garantir que o nome que escolhemos seja seguro de exportar sem _mangling_.
 
@@ -339,7 +339,7 @@ pub extern "C" fn call_from_c() {
 
 Este uso de `extern` exige `unsafe` apenas no atributo, não no bloco `extern`.
 
-## Acessando ou Modificando uma Variável Estática Mutável
+## Acessando ou modificando uma variável estática mutável
 
 Neste livro, ainda não falamos sobre variáveis globais, que Rust suporta, mas que podem ser problemáticas com as regras de ownership de Rust. Se duas threads acessam a mesma variável global mutável, pode ocorrer uma condição de corrida.
 
@@ -398,7 +398,7 @@ Além disso, o compilador nega por padrão qualquer tentativa de criar referênc
 
 Com dados mutáveis acessíveis globalmente, é difícil garantir que não haja condições de corrida, por isso Rust considera variáveis estáticas mutáveis _unsafe_. Quando possível, é preferível usar as técnicas de concorrência e smart pointers thread-safe que discutimos no Capítulo 16 para que o compilador verifique se o acesso a dados de threads diferentes é feito com segurança.
 
-## Implementando uma _Trait unsafe_
+## Implementando uma _trait unsafe_
 
 Podemos usar `unsafe` para implementar uma _trait unsafe_. Uma _trait_ é _unsafe_ quando pelo menos um de seus métodos tem algum invariante que o compilador não pode verificar. Declaramos que uma _trait_ é `unsafe` adicionando a palavra-chave `unsafe` antes de `trait` e marcando a implementação da _trait_ como `unsafe` também, como mostra a Listagem 20-12.
 
@@ -422,11 +422,11 @@ Ao usar `unsafe impl`, prometemos que manteremos os invariantes que o compilador
 
 Como exemplo, lembre-se das _traits_ marcadoras `Send` e `Sync` que discutimos na seção “Concorrência extensível com `Send` e `Sync`” do Capítulo 16: o compilador implementa essas _traits_ automaticamente se nossos tipos são compostos inteiramente de outros tipos que implementam `Send` e `Sync`. Se implementarmos um tipo que contém um tipo que não implementa `Send` ou `Sync`, como ponteiros brutos, e quisermos marcar esse tipo como `Send` ou `Sync`, precisamos usar `unsafe`. Rust não pode verificar que nosso tipo mantém as garantias de que pode ser enviado com segurança entre threads ou acessado de várias threads; portanto, precisamos fazer essas verificações manualmente e indicar isso com `unsafe`.
 
-## Acessando Campos de uma `union`
+## Acessando campos de uma `union`
 
 A ação final que funciona apenas com `unsafe` é acessar campos de uma _union_. Uma _union_ é semelhante a uma `struct`, mas apenas um campo declarado é usado em uma instância particular de cada vez. _Unions_ são usadas principalmente para interagir com _unions_ em código C. Acessar campos de _union_ é _unsafe_ porque Rust não pode garantir o tipo dos dados atualmente armazenados na instância da _union_. Você pode aprender mais sobre _unions_ [na Referência do Rust](https://doc.rust-lang.org/reference/items/unions.html).
 
-## Usando Miri para Verificar Código _unsafe_
+## Usando Miri para verificar código _unsafe_
 
 Ao escrever código _unsafe_, você pode querer verificar se o que escreveu realmente é seguro e correto. Uma das melhores formas de fazer isso é usar Miri, uma ferramenta oficial do Rust para detectar comportamento indefinido. Enquanto o borrow checker é uma ferramenta _estática_ que funciona em tempo de compilação, Miri é uma ferramenta _dinâmica_ que funciona em tempo de execução. Ela verifica seu código executando seu programa, ou sua suíte de testes, e detectando quando você viola as regras que ela entende sobre como Rust deve funcionar.
 
@@ -481,7 +481,7 @@ Você pode aprender mais sobre Miri [em seu repositório no GitHub](https://gith
 
 <a id="when-to-use-unsafe-code"></a>
 
-## Usando Código _unsafe_ Corretamente
+## Usando código _unsafe_ corretamente
 
 Usar `unsafe` para usar um dos cinco superpoderes que acabamos de discutir não está errado nem é desaprovado, mas é mais difícil acertar código _unsafe_ porque o compilador não pode ajudar a manter a segurança de memória. Quando você tiver motivo para usar código _unsafe_, pode fazê-lo, e ter a anotação explícita `unsafe` facilita rastrear a origem dos problemas quando eles ocorrem. Sempre que escrever código _unsafe_, você pode usar Miri para ajudar a ter mais confiança de que o código que escreveu mantém as regras de Rust.
 

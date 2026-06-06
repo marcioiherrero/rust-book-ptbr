@@ -18,7 +18,7 @@ Ao escrever Rust async, usamos `async` e `await` na maior parte do tempo. O Rust
 
 Tudo isso pode parecer abstrato, então vamos escrever nosso primeiro programa async: um pequeno _web scraper_. Passaremos duas URLs pela linha de comando, buscaremos ambas de forma concorrente e retornaremos o resultado da que terminar primeiro. O exemplo terá bastante sintaxe nova, mas explicaremos o que for preciso ao longo do caminho.
 
-## Nosso Primeiro Programa Async
+## Nosso primeiro programa async
 
 Para manter o foco do capítulo em aprender async em vez de juntar peças do ecossistema, criamos o crate `trpl` (`trpl` é abreviação de “The Rust Programming Language”). Ele reexporta os tipos, traits e funções que você precisa, principalmente dos crates [`futures`](https://crates.io/crates/futures) e [`tokio`](https://tokio.rs). O crate `futures` é um lar oficial de experimentação em Rust para código async, e foi onde a trait `Future` foi originalmente desenhada. Tokio é o runtime async mais usado em Rust hoje, especialmente em aplicações web. Há outros runtimes excelentes, e alguns podem ser mais adequados ao seu caso. Usamos o crate `tokio` por baixo do `trpl` porque é bem testado e amplamente usado.
 
@@ -197,7 +197,7 @@ Agora fica claro por que `main` não pode ser `async` na Listagem 17-3: algo ter
 
 > **Nota:** Alguns runtimes oferecem macros para `async fn main()`. Elas reescrevem para um `fn main` normal que faz o equivalente à Listagem 17-4 com `trpl::block_on`.
 
-### Correndo duas URLs de forma concorrente
+### Correndo duas urls de forma concorrente
 
 Na Listagem 17-5, chamamos `page_title` para duas URLs e corremos com `trpl::select`, que devolve a future que terminar primeiro.
 

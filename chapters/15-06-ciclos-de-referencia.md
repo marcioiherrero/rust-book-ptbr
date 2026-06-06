@@ -8,7 +8,7 @@ slug: ciclos-de-referencia-podem-vazar-memoria
 
 As garantias de segurança de memória do Rust tornam difícil, mas não impossível, criar acidentalmente memória que nunca é limpa (conhecida como _memory leak_). Impedir vazamentos de memória por completo não é uma das garantias do Rust, o que significa que vazamentos de memória são memory safe em Rust. Podemos ver que o Rust permite vazamentos de memória usando `Rc<T>` e `RefCell<T>`: é possível criar referências em que itens se referem uns aos outros em um ciclo. Isso cria vazamentos de memória porque a contagem de referências de cada item no ciclo nunca chegará a 0, e os valores nunca serão descartados.
 
-## Criando um Ciclo de Referência
+## Criando um ciclo de referência
 
 Vamos ver como um ciclo de referência pode acontecer e como evitá-lo, começando com a definição do enum `List` e um método `tail` na Listagem 15-25.
 
@@ -130,7 +130,7 @@ Criar ciclos de referência não é feito facilmente, mas também não é imposs
 
 Outra solução para evitar ciclos de referência é reorganizar suas estruturas de dados para que algumas referências expressem ownership e outras não. Como resultado, você pode ter ciclos feitos de alguns relacionamentos de ownership e alguns relacionamentos sem ownership, e apenas os relacionamentos de ownership afetam se um valor pode ser descartado. Na Listagem 15-25, sempre queremos que variantes `Cons` possuam sua lista, então reorganizar a estrutura de dados não é possível. Vamos olhar um exemplo usando grafos feitos de nós pais e nós filhos para ver quando relacionamentos sem ownership são uma forma apropriada de prevenir ciclos de referência.
 
-## Prevenindo Ciclos de Referência Usando `Weak<T>`
+## Prevenindo ciclos de referência usando `Weak<T>`
 
 Até agora, demonstramos que chamar `Rc::clone` aumenta o `strong_count` de uma instância `Rc<T>`, e uma instância `Rc<T>` só é limpa se seu `strong_count` for 0. Você também pode criar uma referência fraca ao valor dentro de uma instância `Rc<T>` chamando `Rc::downgrade` e passando uma referência ao `Rc<T>`. _Referências fortes_ são como você compartilha ownership de uma instância `Rc<T>`. _Referências fracas_ não expressam um relacionamento de ownership, e sua contagem não afeta quando uma instância `Rc<T>` é limpa. Elas não causarão um ciclo de referência, porque qualquer ciclo envolvendo algumas referências fracas será quebrado quando a contagem de referências fortes dos valores envolvidos for 0.
 
@@ -140,7 +140,7 @@ Como o valor que `Weak<T>` referencia pode ter sido descartado, para fazer qualq
 
 Como exemplo, em vez de usar uma lista cujos itens conhecem apenas o próximo item, criaremos uma árvore cujos itens conhecem seus itens filhos _e_ seus itens pais.
 
-### Criando uma Estrutura de Dados em Árvore
+### Criando uma estrutura de dados em árvore
 
 Para começar, construiremos uma árvore com nós que conhecem seus nós filhos. Criaremos uma struct chamada `Node` que guarda seu próprio valor `i32` bem como referências aos seus valores `Node` filhos:
 
@@ -192,7 +192,7 @@ fn main() {
 
 Clonamos o `Rc<Node>` em `leaf` e armazenamos isso em `branch`, o que significa que o `Node` em `leaf` agora tem dois donos: `leaf` e `branch`. Podemos ir de `branch` para `leaf` através de `branch.children`, mas não há como ir de `leaf` para `branch`. A razão é que `leaf` não tem referência a `branch` e não sabe que estão relacionados. Queremos que `leaf` saiba que `branch` é seu pai. Faremos isso a seguir.
 
-### Adicionando uma Referência de um Filho ao Seu Pai
+### Adicionando uma referência de um filho ao seu pai
 
 Para fazer o nó filho estar ciente de seu pai, precisamos adicionar um campo `parent` à nossa definição de struct `Node`. O problema está em decidir qual deve ser o tipo de `parent`. Sabemos que não pode conter um `Rc<T>`, porque isso criaria um ciclo de referência com `leaf.parent` apontando para `branch` e `branch.children` apontando para `leaf`, o que faria seus valores `strong_count` nunca serem 0.
 
@@ -274,7 +274,7 @@ children: RefCell { value: [] } }] } })
 
 A falta de saída infinita indica que este código não criou um ciclo de referência. Também podemos dizer isso olhando os valores que obtemos de chamar `Rc::strong_count` e `Rc::weak_count`.
 
-### Visualizando Mudanças em `strong_count` e `weak_count`
+### Visualizando mudanças em `strong_count` e `weak_count`
 
 Vamos olhar como os valores `strong_count` e `weak_count` das instâncias `Rc<Node>` mudam criando um novo escopo interno e movendo a criação de `branch` para esse escopo. Ao fazer isso, podemos ver o que acontece quando `branch` é criado e depois descartado quando sai de escopo. As modificações são mostradas na Listagem 15-29.
 

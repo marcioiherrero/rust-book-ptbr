@@ -14,7 +14,7 @@ Usamos macros como `println!` ao longo deste livro, mas não exploramos completa
 
 Falaremos sobre cada um deles por turno, mas primeiro, vamos ver por que precisamos de macros quando já temos funções.
 
-## A Diferença Entre Macros e Funções
+## A diferença entre macros e funções
 
 Fundamentalmente, macros são uma forma de escrever código que escreve outro código, o que é conhecido como _metaprogramação_. No [Apêndice C](/livro/cap22-03-traits-derivaveis), discutimos o atributo `derive`, que gera uma implementação de várias traits para você. Também usamos as macros `println!` e `vec!` ao longo do livro. Todas essas macros _expandem_ para produzir mais código do que o código que você escreveu manualmente.
 
@@ -28,7 +28,7 @@ Outra diferença importante entre macros e funções é que você deve definir m
 
 <a id="declarative-macros-with-macro_rules-for-general-metaprogramming"></a>
 
-## Macros Declarativas para Metaprogramação Geral
+## Macros declarativas para metaprogramação geral
 
 A forma mais amplamente usada de macros em Rust é a _macro declarativa_. Elas também são às vezes referidas como “macros by example”, “macros `macro_rules!`” ou simplesmente “macros”. Em sua essência, macros declarativas permitem que você escreva algo semelhante a uma expressão `match` do Rust. Como discutido no Capítulo 6, expressões `match` são estruturas de controle que recebem uma expressão, comparam o valor resultante da expressão com padrões e então executam o código associado ao padrão correspondente. Macros também comparam um valor com padrões que estão associados a código particular: nesta situação, o valor é o código-fonte literal Rust passado para a macro; os padrões são comparados com a estrutura desse código-fonte; e o código associado a cada padrão, quando corresponde, substitui o código passado para a macro. Tudo isso acontece durante a compilação.
 
@@ -95,7 +95,7 @@ Definimos uma macro que pode receber qualquer número de argumentos de qualquer 
 
 Para aprender mais sobre como escrever macros, consulte a documentação online ou outros recursos, como [“The Little Book of Rust Macros”][tlborm] iniciado por Daniel Keep e continuado por Lukas Wirth.
 
-## Macros Procedurais para Gerar Código a Partir de Atributos
+## Macros procedurais para gerar código a partir de atributos
 
 A segunda forma de macros é a macro procedural, que age mais como uma função (e é um tipo de procedimento). _Macros procedurais_ aceitam algum código como entrada, operam nesse código e produzem algum código como saída, em vez de corresponder a padrões e substituir o código por outro código como fazem as macros declarativas. Os três tipos de macros procedurais são `derive` personalizado, semelhante a atributo e semelhante a função, e todos funcionam de forma semelhante.
 
@@ -121,7 +121,7 @@ Vamos olhar os diferentes tipos de macros procedurais. Começaremos com uma macr
 
 <a id="how-to-write-a-custom-derive-macro"></a>
 
-## Macros `derive` Personalizadas
+## Macros `derive` personalizadas
 
 Vamos criar um crate chamado `hello_macro` que define uma trait chamada `HelloMacro` com uma função associada chamada `hello_macro`. Em vez de fazer nossos usuários implementarem a trait `HelloMacro` para cada um de seus tipos, forneceremos uma macro procedural para que os usuários possam anotar seu tipo com `#[derive(HelloMacro)]` para obter uma implementação padrão da função `hello_macro`. A implementação padrão imprimirá `Hello, Macro! My name is TypeName!` onde `TypeName` é o nome do tipo no qual esta trait foi definida. Em outras palavras, escreveremos um crate que permite que outro programador escreva código como o da Listagem 20-37 usando nosso crate.
 
@@ -319,7 +319,7 @@ Coloque o código da Listagem 20-37 em _src/main.rs_ e execute `cargo run`: deve
 
 Em seguida, vamos explorar como os outros tipos de macros procedurais diferem das macros `derive` personalizadas.
 
-## Macros Semelhantes a Atributos
+## Macros semelhantes a atributos
 
 Macros semelhantes a atributos são semelhantes a macros `derive` personalizadas, mas em vez de gerar código para o atributo `derive`, permitem que você crie novos atributos. Elas também são mais flexíveis: `derive` funciona apenas para structs e enums; atributos podem ser aplicados a outros itens também, como funções. Aqui está um exemplo de uso de uma macro semelhante a atributo. Digamos que você tem um atributo chamado `route` que anota funções ao usar um framework de aplicação web:
 
@@ -339,7 +339,7 @@ Aqui, temos dois parâmetros do tipo `TokenStream`. O primeiro é para o conteú
 
 Fora isso, macros semelhantes a atributos funcionam da mesma forma que macros `derive` personalizadas: você cria um crate com o tipo de crate `proc-macro` e implementa uma função que gera o código que você quer!
 
-## Macros Semelhantes a Funções
+## Macros semelhantes a funções
 
 Macros semelhantes a funções definem macros que parecem chamadas de função. De forma semelhante às macros `macro_rules!`, elas são mais flexíveis que funções; por exemplo, podem receber um número desconhecido de argumentos. Porém, macros `macro_rules!` só podem ser definidas usando a sintaxe semelhante a `match` que discutimos na seção [Macros declarativas para metaprogramação geral](#declarative-macros-with-macro_rules-for-general-metaprogramming) anteriormente. Macros semelhantes a funções recebem um parâmetro `TokenStream`, e sua definição manipula esse `TokenStream` usando código Rust como os outros dois tipos de macros procedurais fazem. Um exemplo de macro semelhante a função é uma macro `sql!` que poderia ser chamada assim:
 

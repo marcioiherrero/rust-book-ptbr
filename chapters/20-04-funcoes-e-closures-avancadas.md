@@ -8,7 +8,7 @@ slug: funcoes-e-closures-avancadas
 
 Esta seção explora alguns recursos avançados relacionados a funções e closures, incluindo ponteiros de função e retorno de closures.
 
-## Ponteiros de Função
+## Ponteiros de função
 
 Já falamos sobre como passar closures para funções; você também pode passar funções regulares para funções! Essa técnica é útil quando você quer passar uma função que já definiu em vez de definir uma nova closure. Funções sofrem coerção para o tipo `fn` (com _f_ minúsculo), que não deve ser confundido com a trait de closure `Fn`. O tipo `fn` é chamado de _ponteiro de função_. Passar funções com ponteiros de função permitirá que você use funções como argumentos para outras funções.
 
@@ -101,7 +101,7 @@ fn main() {
 
 Aqui, criamos instâncias de `Status::Value` usando cada valor `u32` no intervalo sobre o qual `map` é chamado, usando a função inicializadora de `Status::Value`. Algumas pessoas preferem este estilo e outras preferem usar closures. Elas compilam para o mesmo código, então use o estilo que for mais claro para você.
 
-## Retornando Closures
+## Retornando closures
 
 Closures são representadas por traits, o que significa que você não pode retornar closures diretamente. Na maioria dos casos em que você pode querer retornar uma trait, pode em vez disso usar o tipo concreto que implementa a trait como valor de retorno da função. Porém, você normalmente não pode fazer isso com closures porque elas não têm um tipo concreto que seja retornável; você não tem permissão para usar o ponteiro de função `fn` como tipo de retorno se a closure capturar quaisquer valores de seu escopo, por exemplo.
 

@@ -12,7 +12,7 @@ A seguir, implementaremos a trait `Drop` para chamar `join` em cada uma das thre
 
 Uma coisa a observar enquanto avançamos: nada disso afeta as partes do código que lidam com a execução dos closures, então tudo aqui seria o mesmo se estivéssemos usando um pool de threads para um runtime async.
 
-## Implementando a Trait `Drop` em `ThreadPool`
+## Implementando a trait `Drop` em `ThreadPool`
 
 Vamos começar implementando `Drop` em nosso pool de threads. Quando o pool for descartado, nossas threads devem todas fazer join para garantir que terminem seu trabalho. A Listagem 21-22 mostra uma primeira tentativa de implementação de `Drop`; este código ainda não funcionará completamente.
 
@@ -80,7 +80,7 @@ impl Drop for ThreadPool {
 
 Isso resolve o erro de compilador e não requer nenhuma outra alteração em nosso código. Observe que, como `drop` pode ser chamado ao entrar em pânico, o `unwrap` também pode entrar em pânico e causar um pânico duplo, o que imediatamente trava o programa e encerra qualquer limpeza em andamento. Isso é aceitável para um programa de exemplo, mas não é recomendado para código de produção.
 
-## Sinalizando às Threads para Parar de Escutar por Trabalhos
+## Sinalizando às threads para parar de escutar por trabalhos
 
 Com todas as alterações que fizemos, nosso código compila sem nenhum aviso. No entanto, a má notícia é que este código ainda não funciona da forma que queremos. A chave é a lógica nos closures executados pelas threads das instâncias `Worker`: no momento, chamamos `join`, mas isso não encerrará as threads, porque elas fazem `loop` para sempre procurando por trabalhos. Se tentarmos descartar nosso `ThreadPool` com nossa implementação atual de `drop`, a thread principal ficará bloqueada para sempre, esperando a primeira thread terminar.
 

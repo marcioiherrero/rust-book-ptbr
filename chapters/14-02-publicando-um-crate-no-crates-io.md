@@ -10,7 +10,7 @@ Usamos pacotes de [crates.io](https://crates.io/) como dependências do nosso pr
 
 O Rust e o Cargo têm recursos que tornam seu pacote publicado mais fácil de encontrar e usar. Falaremos de alguns desses recursos a seguir e depois explicaremos como publicar um pacote.
 
-## Escrevendo Comentários de Documentação Úteis
+## Escrevendo comentários de documentação úteis
 
 Documentar seus pacotes com precisão ajuda outros usuários a saber como e quando usá-los, então vale a pena investir tempo escrevendo documentação. No Capítulo 3, discutimos como comentar código Rust usando duas barras, `//`. O Rust também tem um tipo particular de comentário para documentação, convenientemente chamado de _comentário de documentação_, que gera documentação HTML. O HTML exibe o conteúdo dos comentários de documentação para itens de API pública destinados a programadores interessados em saber como _usar_ seu crate, em oposição a como seu crate é _implementado_.
 
@@ -46,7 +46,7 @@ Por conveniência, executar `cargo doc --open` compilará o HTML da documentaç�
 
 *Figura 14-1: A documentação HTML da função `add_one`*
 
-### Seções Comumente Usadas
+### Seções comumente usadas
 
 Usamos o título Markdown `# Examples` na Listagem 14-1 para criar uma seção no HTML com o título “Examples”. Aqui estão outras seções que autores de crates costumam usar em sua documentação:
 
@@ -56,7 +56,7 @@ Usamos o título Markdown `# Examples` na Listagem 14-1 para criar uma seção n
 
 A maioria dos comentários de documentação não precisa de todas essas seções, mas esta é uma boa lista de verificação para lembrar os aspectos do seu código que os usuários terão interesse em conhecer.
 
-### Comentários de Documentação como Testes
+### Comentários de documentação como testes
 
 Adicionar blocos de código de exemplo nos seus comentários de documentação pode ajudar a demonstrar como usar sua biblioteca e tem um bônus adicional: executar `cargo test` executará os exemplos de código na sua documentação como testes! Nada é melhor do que documentação com exemplos. Mas nada é pior do que exemplos que não funcionam porque o código mudou desde que a documentação foi escrita. Se executarmos `cargo test` com a documentação da função `add_one` da Listagem 14-1, veremos uma seção nos resultados dos testes parecida com isto:
 
@@ -71,7 +71,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 Agora, se mudarmos a função ou o exemplo para que o `assert_eq!` no exemplo entre em pânico, e executarmos `cargo test` novamente, veremos que os doc tests detectam que o exemplo e o código estão fora de sincronia!
 
-### Comentários de Itens Contidos
+### Comentários de itens contidos
 
 O estilo de comentário de documentação `//!` adiciona documentação ao item que _contém_ os comentários, em vez dos itens _seguintes_ aos comentários. Normalmente usamos esses comentários de documentação dentro do arquivo raiz do crate (_src/lib.rs_ por convenção) ou dentro de um módulo para documentar o crate ou o módulo como um todo.
 
@@ -114,7 +114,7 @@ Comentários de documentação dentro de itens são úteis especialmente para de
 
 *Figura 14-2: A documentação renderizada de `my_crate`, incluindo o comentário que descreve o crate como um todo*
 
-## Exportando uma API Pública Conveniente
+## Exportando uma API pública conveniente
 
 A estrutura da sua API pública é uma consideração importante ao publicar um crate. Pessoas que usam seu crate estão menos familiarizadas com a estrutura do que você e podem ter dificuldade em encontrar as partes que querem usar se seu crate tiver uma hierarquia de módulos grande.
 
@@ -264,7 +264,7 @@ Em casos em que há muitos módulos aninhados, reexportar os tipos no nível sup
 
 Criar uma estrutura de API pública útil é mais arte do que ciência, e você pode iterar para encontrar a API que funciona melhor para seus usuários. Escolher `pub use` dá flexibilidade em como estrutura seu crate internamente e desacopla essa estrutura interna do que você apresenta aos seus usuários. Olhe o código de alguns crates que você instalou para ver se a estrutura interna deles difere da API pública.
 
-## Configurando uma Conta no Crates.io
+## Configurando uma conta no Crates.io
 
 Antes de publicar qualquer crate, você precisa criar uma conta em [crates.io](https://crates.io/) e obter um token de API. Para isso, visite a página inicial em [crates.io](https://crates.io/) e faça login via conta GitHub. (A conta GitHub é atualmente um requisito, mas o site pode suportar outras formas de criar conta no futuro.) Depois de logado, visite as configurações da sua conta em [https://crates.io/me/](https://crates.io/me/) e recupere sua chave de API. Em seguida, execute o comando `cargo login` e cole sua chave de API quando solicitado, assim:
 
@@ -275,7 +275,7 @@ abcdefghijklmnopqrstuvwxyz012345
 
 Este comando informará o Cargo do seu token de API e o armazenará localmente em _~/.cargo/credentials.toml_. Note que este token é um segredo: não o compartilhe com ninguém. Se compartilhar com alguém por qualquer motivo, você deve revogá-lo e gerar um novo token em [crates.io](https://crates.io/).
 
-## Adicionando Metadados a um Novo Crate
+## Adicionando metadados a um novo crate
 
 Digamos que você tem um crate que quer publicar. Antes de publicar, precisará adicionar alguns metadados na seção `[package]` do arquivo _Cargo.toml_ do crate.
 
@@ -360,11 +360,11 @@ You may press ctrl-c to skip waiting; the crate should be available shortly.
 
 Parabéns! Você agora compartilhou seu código com a comunidade Rust, e qualquer pessoa pode facilmente adicionar seu crate como dependência de seu projeto.
 
-## Publicando uma Nova Versão de um Crate Existente
+## Publicando uma nova versão de um crate existente
 
 Quando você fez mudanças no seu crate e está pronto para lançar uma nova versão, altera o valor `version` especificado no seu _Cargo.toml_ e republica. Use as [regras de Versionamento Semântico](https://semver.org/) para decidir qual é o próximo número de versão apropriado, com base nos tipos de mudanças que fez. Depois, execute `cargo publish` para enviar a nova versão.
 
-## Depreciando Versões do Crates.io
+## Depreciando versões do Crates.io
 
 Embora você não possa remover versões anteriores de um crate, pode impedir que projetos futuros as adicionem como nova dependência. Isso é útil quando uma versão de crate está quebrada por algum motivo. Nesses casos, o Cargo suporta _yank_ de uma versão de crate.
 

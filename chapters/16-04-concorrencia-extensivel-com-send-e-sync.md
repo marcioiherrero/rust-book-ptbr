@@ -10,7 +10,7 @@ Curiosamente, quase todo recurso de concorrência que falamos neste capítulo fe
 
 No entanto, entre os conceitos-chave de concorrência embutidos na linguagem em vez da biblioteca padrão estão as traits `Send` e `Sync` do módulo `std::marker`.
 
-## Transferindo Ownership Entre Threads
+## Transferindo ownership entre threads
 
 A trait marcador `Send` indica que a ownership de valores do tipo que implementa `Send` pode ser transferida entre threads. Quase todo tipo Rust implementa `Send`, mas há algumas exceções, incluindo `Rc<T>`: este não pode implementar `Send` porque, se você clonasse um valor `Rc<T>` e tentasse transferir a ownership do clone para outra thread, ambas as threads poderiam atualizar a contagem de referências ao mesmo tempo. Por isso, `Rc<T>` é implementado para uso em situações de thread única, onde você não quer pagar a penalidade de desempenho de thread-safety.
 
@@ -18,13 +18,13 @@ Portanto, o sistema de tipos e os trait bounds do Rust garantem que você nunca 
 
 Qualquer tipo composto inteiramente de tipos `Send` é automaticamente marcado como `Send` também. Quase todos os tipos primitivos são `Send`, exceto ponteiros brutos, que discutiremos no Capítulo 20.
 
-## Acessando a Partir de Várias Threads
+## Acessando a partir de várias threads
 
 A trait marcador `Sync` indica que é seguro que o tipo que implementa `Sync` seja referenciado a partir de várias threads. Em outras palavras, qualquer tipo `T` implementa `Sync` se `&T` (uma referência imutável a `T`) implementa `Send`, o que significa que a referência pode ser enviada com segurança para outra thread. Semelhante a `Send`, tipos primitivos implementam `Sync`, e tipos compostos inteiramente de tipos que implementam `Sync` também implementam `Sync`.
 
 O smart pointer `Rc<T>` também não implementa `Sync` pelas mesmas razões pelas quais não implementa `Send`. O tipo `RefCell<T>` (que falamos no Capítulo 15) e a família de tipos relacionados `Cell<T>` não implementam `Sync`. A implementação de verificação de borrowing que `RefCell<T>` faz em tempo de execução não é thread-safe. O smart pointer `Mutex<T>` implementa `Sync` e pode ser usado para compartilhar acesso com várias threads, como você viu em Acesso compartilhado a `Mutex<T>`.
 
-## Implementar `Send` e `Sync` Manualmente É Unsafe
+## Implementar `Send` e `Sync` manualmente é unsafe
 
 Como tipos compostos inteiramente de outros tipos que implementam as traits `Send` e `Sync` também implementam automaticamente `Send` e `Sync`, não precisamos implementar essas traits manualmente. Como traits marcador, elas nem têm métodos para implementar. São apenas úteis para impor invariantes relacionados à concorrência.
 

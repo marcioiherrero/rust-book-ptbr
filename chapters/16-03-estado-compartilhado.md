@@ -12,7 +12,7 @@ Como seria comunicar compartilhando memória? Além disso, por que entusiastas d
 
 De certa forma, channels em qualquer linguagem de programação são semelhantes a ownership única porque, depois de transferir um valor por um channel, você não deve mais usar esse valor. Concorrência de memória compartilhada é como múltipla ownership: várias threads podem acessar o mesmo local de memória ao mesmo tempo. Como você viu no Capítulo 15, onde smart pointers tornaram múltipla ownership possível, múltipla ownership pode adicionar complexidade porque esses diferentes donos precisam ser gerenciados. O sistema de tipos e as regras de ownership do Rust ajudam muito a fazer essa gestão corretamente. Como exemplo, vamos olhar mutexes, um dos primitivos de concorrência mais comuns para memória compartilhada.
 
-## Controlando Acesso com Mutexes
+## Controlando acesso com mutexes
 
 _Mutex_ é abreviação de _mutual exclusion_ (exclusão mútua): um mutex permite que apenas uma thread acesse alguns dados em um dado momento. Para acessar os dados em um mutex, uma thread deve primeiro sinalizar que quer acesso pedindo para adquirir o _lock_ do mutex. O _lock_ é uma estrutura de dados que faz parte do mutex e rastreia quem tem acesso exclusivo aos dados no momento. Portanto, diz-se que o mutex _guarda_ os dados que contém por meio do sistema de locking.
 
