@@ -2,6 +2,8 @@
 title: "Instalando binários com `cargo install`"
 chapter_code: 14-04
 slug: instalando-binarios-com-cargo-install
+challenge_day: 18
+reading_minutes: 2
 ---
 
 # Instalando binários com `cargo install`

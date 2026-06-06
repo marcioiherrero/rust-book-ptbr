@@ -2,6 +2,8 @@
 title: "Estendendo o Cargo"
 chapter_code: 14-05
 slug: estendendo-o-cargo
+challenge_day: 18
+reading_minutes: 1
 ---
 
 # Estendendo o Cargo com comandos personalizados
