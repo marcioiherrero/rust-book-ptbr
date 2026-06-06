@@ -2,6 +2,8 @@
 title: "Closures"
 chapter_code: 13-01
 slug: closures
+challenge_day: 17
+reading_minutes: 25
 ---
 
 # Closures
