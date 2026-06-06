@@ -2,6 +2,8 @@
 title: "Processando uma série de itens com iterators"
 chapter_code: 13-02
 slug: processando-uma-serie-de-itens-com-iterators
+challenge_day: 17
+reading_minutes: 13
 ---
 
 # Processando uma série de itens com iterators
