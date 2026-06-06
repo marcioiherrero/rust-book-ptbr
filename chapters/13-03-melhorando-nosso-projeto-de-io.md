@@ -2,6 +2,8 @@
 title: "Melhorando nosso projeto de I/O"
 chapter_code: 13-03
 slug: melhorando-nosso-projeto-de-io
+challenge_day: 17
+reading_minutes: 9
 ---
 
 # Melhorando nosso projeto de I/O
