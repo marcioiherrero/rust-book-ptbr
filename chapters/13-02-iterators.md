@@ -13,11 +13,9 @@ Em Rust, iterators são _lazy_ (preguiçosos), o que significa que não têm efe
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let v1 = vec![1, 2, 3];
+let v1 = vec![1, 2, 3];
 
-    let v1_iter = v1.iter();
-}
+let v1_iter = v1.iter();
 ```
 
 <a id="listagem-13-10"></a>
@@ -31,14 +29,12 @@ No exemplo da Listagem 13-11, separamos a criação do iterator do uso do iterat
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let v1 = vec![1, 2, 3];
+let v1 = vec![1, 2, 3];
 
-    let v1_iter = v1.iter();
+let v1_iter = v1.iter();
 
-    for val in v1_iter {
-        println!("Got: {val}");
-    }
+for val in v1_iter {
+    println!("Got: {val}");
 }
 ```
 
@@ -73,19 +69,16 @@ Podemos chamar o método `next` em iterators diretamente; a Listagem 13-12 demon
 **Arquivo: src/lib.rs**
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn iterator_demonstration() {
-        let v1 = vec![1, 2, 3];
+#[test]
+fn iterator_demonstration() {
+    let v1 = vec![1, 2, 3];
 
-        let mut v1_iter = v1.iter();
+    let mut v1_iter = v1.iter();
 
-        assert_eq!(v1_iter.next(), Some(&1));
-        assert_eq!(v1_iter.next(), Some(&2));
-        assert_eq!(v1_iter.next(), Some(&3));
-        assert_eq!(v1_iter.next(), None);
-    }
+    assert_eq!(v1_iter.next(), Some(&1));
+    assert_eq!(v1_iter.next(), Some(&2));
+    assert_eq!(v1_iter.next(), Some(&3));
+    assert_eq!(v1_iter.next(), None);
 }
 ```
 
@@ -106,18 +99,15 @@ Métodos que chamam `next` são chamados de _adapters consumidores_ porque cham�
 **Arquivo: src/lib.rs**
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn iterator_sum() {
-        let v1 = vec![1, 2, 3];
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
 
-        let v1_iter = v1.iter();
+    let v1_iter = v1.iter();
 
-        let total: i32 = v1_iter.sum();
+    let total: i32 = v1_iter.sum();
 
-        assert_eq!(total, 6);
-    }
+    assert_eq!(total, 6);
 }
 ```
 
@@ -136,11 +126,9 @@ A Listagem 13-14 mostra um exemplo de chamada ao adapter de iterator `map`, que 
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let v1: Vec<i32> = vec![1, 2, 3];
+let v1: Vec<i32> = vec![1, 2, 3];
 
-    v1.iter().map(|x| x + 1);
-}
+v1.iter().map(|x| x + 1);
 ```
 
 <a id="listagem-13-14"></a>
@@ -179,13 +167,11 @@ Na Listagem 13-15, coletamos os resultados de iterar sobre o iterator retornado 
 **Arquivo: src/main.rs**
 
 ```rust
-fn main() {
-    let v1: Vec<i32> = vec![1, 2, 3];
+let v1: Vec<i32> = vec![1, 2, 3];
 
-    let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
 
-    assert_eq!(v2, vec![2, 3, 4]);
-}
+assert_eq!(v2, vec![2, 3, 4]);
 ```
 
 <a id="listagem-13-15"></a>
