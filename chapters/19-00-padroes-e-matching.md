@@ -4,7 +4,7 @@ chapter_code: 19-00
 slug: padroes-e-matching
 ---
 
-# Padrões e Matching
+# Padrões e matching
 
 Padrões são uma sintaxe especial em Rust para casar com a estrutura de tipos, tanto complexos quanto simples. Usar padrões em conjunto com expressões `match` e outras construções dá a você mais controle sobre o fluxo de controle de um programa. Um padrão consiste em alguma combinação dos seguintes elementos:
 

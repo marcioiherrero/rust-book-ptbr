@@ -4,7 +4,7 @@ chapter_code: 15-02
 slug: tratando-smart-pointers-como-referencias-com-a-trait-deref
 ---
 
-# Tratando Smart Pointers como Referências Comuns
+# Tratando smart pointers como referências comuns com a trait `Deref`
 
 Implementar a trait `Deref` permite personalizar o comportamento do _operador de dereferência_ `*` (não confundir com o operador de multiplicação ou glob). Ao implementar `Deref` de forma que um smart pointer possa ser tratado como uma referência comum, você pode escrever código que opera em referências e usar esse código com smart pointers também.
 

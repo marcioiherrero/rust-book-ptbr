@@ -4,7 +4,7 @@ chapter_code: 21-00
 slug: projeto-final-um-servidor-web
 ---
 
-# Projeto Final: Construindo um Servidor Web Multithread
+# Projeto final: construindo um servidor web multithread
 
 Foi uma longa jornada, mas chegamos ao fim do livro. Neste capítulo, construiremos mais um projeto juntos para demonstrar alguns dos conceitos que cobrimos nos capítulos finais, além de recapitular algumas lições anteriores.
 

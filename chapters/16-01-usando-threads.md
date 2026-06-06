@@ -4,7 +4,7 @@ chapter_code: 16-01
 slug: usando-threads-para-executar-codigo-simultaneamente
 ---
 
-# Usando Threads para Executar Código Simultaneamente
+# Usando threads para executar código simultaneamente
 
 Na maioria dos sistemas operacionais atuais, o código de um programa executado é executado em um _processo_, e o sistema operacional gerencia vários processos de uma vez. Dentro de um programa, você também pode ter partes independentes que executam simultaneamente. Os recursos que executam essas partes independentes são chamados de _threads_. Por exemplo, um servidor web pode ter várias threads para poder responder a mais de uma requisição ao mesmo tempo.
 

@@ -4,7 +4,7 @@ chapter_code: 21-03
 slug: encerramento-gracioso-e-limpeza
 ---
 
-# Encerramento Gracioso e Limpeza
+# Encerramento gracioso e limpeza
 
 O código da Listagem 21-20 está respondendo a requisições de forma assíncrona por meio do uso de um pool de threads, como pretendíamos. Recebemos alguns avisos sobre os campos `workers`, `id` e `thread` que não estamos usando de forma direta, o que nos lembra que não estamos limpando nada. Quando usamos o método menos elegante <kbd>Ctrl</kbd>+<kbd>C</kbd> para interromper a thread principal, todas as outras threads também são paradas imediatamente, mesmo que estejam no meio de atender uma requisição.
 

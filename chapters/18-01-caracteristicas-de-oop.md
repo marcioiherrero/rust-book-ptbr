@@ -4,7 +4,7 @@ chapter_code: 18-01
 slug: caracteristicas-de-linguagens-orientadas-a-objetos
 ---
 
-# Características de Linguagens Orientadas a Objetos
+# Características de linguagens orientadas a objetos
 
 Não há consenso na comunidade sobre quais recursos uma linguagem precisa ter para ser considerada orientada a objetos. Rust é influenciada por muitos paradigmas, incluindo POO; por exemplo, exploramos recursos vindos da programação funcional no Capítulo 13. Argumentavelmente, linguagens POO compartilham certas características — objetos, encapsulamento e herança. Vejamos o que cada uma significa e se Rust as suporta.
 

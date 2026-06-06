@@ -4,7 +4,7 @@ chapter_code: 20-00
 slug: recursos-avancados
 ---
 
-# Recursos Avançados
+# Recursos avançados
 
 Até aqui, você aprendeu as partes mais usadas da linguagem de programação Rust. Antes de fazermos mais um projeto, no Capítulo 21, veremos alguns aspectos da linguagem que você pode encontrar de vez em quando, mas talvez não use todos os dias. Você pode usar este capítulo como referência quando encontrar algo desconhecido. Os recursos cobertos aqui são úteis em situações bem específicas. Embora você possa não recorrer a eles com frequência, queremos garantir que você tenha uma visão de todos os recursos que Rust oferece.
 

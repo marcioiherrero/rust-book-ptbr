@@ -4,7 +4,7 @@ chapter_code: 19-03
 slug: sintaxe-de-padroes
 ---
 
-# Sintaxe de Padrões
+# Sintaxe de padrões
 
 Nesta seção, reunimos toda a sintaxe válida em padrões e discutimos por que e quando você pode querer usar cada uma.
 

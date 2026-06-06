@@ -4,7 +4,7 @@ chapter_code: 16-04
 slug: concorrencia-extensivel-com-send-e-sync
 ---
 
-# Concorrência Extensível com `Send` e `Sync`
+# Concorrência extensível com `Send` e `Sync`
 
 Curiosamente, quase todo recurso de concorrência que falamos neste capítulo fez parte da biblioteca padrão, não da linguagem. Suas opções para lidar com concorrência não se limitam à linguagem ou à biblioteca padrão; você pode escrever seus próprios recursos de concorrência ou usar os escritos por outros.
 

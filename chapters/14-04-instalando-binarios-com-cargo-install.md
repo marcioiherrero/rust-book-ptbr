@@ -4,7 +4,7 @@ chapter_code: 14-04
 slug: instalando-binarios-com-cargo-install
 ---
 
-# Instalando Binários com `cargo install`
+# Instalando binários com `cargo install`
 
 O comando `cargo install` permite instalar e usar crates binários localmente. Isso não pretende substituir pacotes do sistema; é uma forma conveniente para desenvolvedores Rust instalarem ferramentas que outras pessoas compartilharam em [crates.io](https://crates.io/). Note que você só pode instalar pacotes que tenham targets binários. Um _target binário_ é o programa executável criado se o crate tiver um arquivo _src/main.rs_ ou outro arquivo especificado como binário, em oposição a um target de biblioteca que não é executável por si só, mas é adequado para incluir em outros programas. Em geral, crates têm informação no arquivo README sobre se o crate é uma biblioteca, tem um target binário ou ambos.
 

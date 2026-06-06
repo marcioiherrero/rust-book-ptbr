@@ -4,7 +4,7 @@ chapter_code: 16-02
 slug: transferir-dados-entre-threads-com-passagem-de-mensagens
 ---
 
-# Transferir Dados Entre Threads com Passagem de Mensagens
+# Transferir dados entre threads com passagem de mensagens
 
 Uma abordagem cada vez mais popular para garantir concorrência segura é a passagem de mensagens, em que threads ou atores se comunicam enviando mensagens umas às outras contendo dados. Aqui está a ideia em um slogan da [documentação da linguagem Go](https://golang.org/doc/effective_go.html#concurrency): “Não comunique compartilhando memória; em vez disso, compartilhe memória comunicando.”
 

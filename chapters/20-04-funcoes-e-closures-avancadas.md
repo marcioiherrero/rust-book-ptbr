@@ -1,10 +1,10 @@
 ---
-title: "Funções e Closures Avançadas"
+title: "Funções e closures avançadas"
 chapter_code: 20-04
 slug: funcoes-e-closures-avancadas
 ---
 
-# Funções e Closures Avançadas
+# Funções e closures avançadas
 
 Esta seção explora alguns recursos avançados relacionados a funções e closures, incluindo ponteiros de função e retorno de closures.
 

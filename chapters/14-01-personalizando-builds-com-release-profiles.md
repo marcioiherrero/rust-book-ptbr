@@ -4,7 +4,7 @@ chapter_code: 14-01
 slug: personalizando-builds-com-release-profiles
 ---
 
-# Personalizando Builds com Release Profiles
+# Personalizando builds com release profiles
 
 Em Rust, _release profiles_ são perfis predefinidos e personalizáveis com configurações diferentes que permitem ao programador ter mais controle sobre várias opções de compilação de código. Cada perfil é configurado independentemente dos outros.
 

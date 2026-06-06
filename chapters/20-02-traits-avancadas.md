@@ -4,7 +4,7 @@ chapter_code: 20-02
 slug: traits-avancadas
 ---
 
-# Traits Avançadas
+# Traits avançadas
 
 Vimos traits pela primeira vez na seção Definindo comportamento compartilhado com traits do Capítulo 10, mas não entramos nos detalhes mais avançados. Agora que você sabe mais sobre Rust, podemos ir ao que interessa.
 

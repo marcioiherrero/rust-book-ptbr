@@ -4,7 +4,7 @@ chapter_code: 21-02
 slug: servidor-multithread
 ---
 
-# Servidor Multithread
+# Servidor multithread
 
 <!-- Old headings. Do not remove or links may break. -->
 

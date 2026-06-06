@@ -4,7 +4,7 @@ chapter_code: 18-03
 slug: implementando-um-padrao-de-design-orientado-a-objetos
 ---
 
-# Implementando um Padrão de Design Orientado a Objetos
+# Implementando um padrão de design orientado a objetos
 
 O _padrão state_ é um padrão de design orientado a objetos. A ideia é definir estados internos possíveis para um valor, representados por _objetos de estado_; o comportamento muda conforme o estado. Trabalharemos com um post de blog cuja struct guarda estado entre “rascunho”, “revisão” e “publicado”.
 

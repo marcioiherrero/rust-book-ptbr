@@ -4,7 +4,7 @@ chapter_code: 17-04
 slug: streams-futures-em-sequencia
 ---
 
-# Streams: Futures em Sequência
+# Streams: futures em sequência
 
 Lembre o receptor do channel async em Enviando dados entre duas tarefas com passagem de mensagens: `recv` produz uma sequência de itens ao longo do tempo. Isso é um _stream_ — padrão mais geral: fila, chunks de arquivo grandes demais para RAM, dados de rede chegando aos poucos. Streams são futures; combinam-se com outras futures (lotes de eventos, timeout em operações longas, throttle na UI).
 

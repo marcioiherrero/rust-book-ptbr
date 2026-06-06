@@ -4,7 +4,7 @@ chapter_code: 17-02
 slug: aplicando-concorrencia-com-async
 ---
 
-# Aplicando Concorrência com Async
+# Aplicando concorrência com async
 
 Nesta seção, aplicamos async a alguns dos mesmos desafios de concorrência que enfrentamos com threads no Capítulo 16. Como já discutimos muitas ideias lá, focamos no que muda entre threads e futures.
 

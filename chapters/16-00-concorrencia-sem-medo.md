@@ -4,7 +4,7 @@ chapter_code: 16-00
 slug: concorrencia-sem-medo
 ---
 
-# Concorrência sem Medo
+# Concorrência sem medo
 
 Lidar com programação concorrente de forma segura e eficiente é outro dos grandes objetivos do Rust. _Programação concorrente_, em que partes diferentes de um programa executam de forma independente, e _programação paralela_, em que partes diferentes de um programa executam ao mesmo tempo, estão se tornando cada vez mais importantes à medida que mais computadores aproveitam seus vários processadores. Historicamente, programar nesses contextos foi difícil e propenso a erros. O Rust espera mudar isso.
 

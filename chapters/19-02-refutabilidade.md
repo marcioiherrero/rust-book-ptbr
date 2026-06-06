@@ -4,7 +4,7 @@ chapter_code: 19-02
 slug: refutabilidade-se-um-padrao-pode-falhar-ao-casar
 ---
 
-# Refutabilidade: Se um Padrão Pode Falhar ao Casar
+# Refutabilidade: se um padrão pode falhar ao casar
 
 Padrões vêm em duas formas: refutáveis e irrefutáveis. Padrões que casarão com qualquer valor possível passado são _irrefutáveis_. Um exemplo seria `x` na instrução `let x = 5;`, porque `x` casa com qualquer coisa e, portanto, não pode falhar ao casar. Padrões que podem falhar ao casar para algum valor possível são _refutáveis_. Um exemplo seria `Some(x)` na expressão `if let Some(x) = a_value`, porque se o valor na variável `a_value` for `None` em vez de `Some`, o padrão `Some(x)` não casará.
 

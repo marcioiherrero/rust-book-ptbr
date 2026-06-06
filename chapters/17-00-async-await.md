@@ -1,10 +1,10 @@
 ---
-title: "Fundamentos de programação assíncrona: Async, Await, Futures e Streams"
+title: "Fundamentos de programação assíncrona: async, await, futures e streams"
 chapter_code: 17-00
 slug: fundamentos-de-programacao-assincrona-async-await-futures-e-streams
 ---
 
-# Fundamentos de Programação Assíncrona: Async, Await, Futures e Streams
+# Fundamentos de programação assíncrona: async, await, futures e streams
 
 Muitas operações que pedimos ao computador podem demorar para terminar. Seria bom poder fazer outra coisa enquanto esperamos esses processos de longa duração. Os computadores modernos oferecem duas técnicas para trabalhar em mais de uma operação ao mesmo tempo: paralelismo e concorrência. A lógica dos nossos programas, porém, é escrita de forma em grande parte linear. Gostaríamos de poder especificar as operações que um programa deve realizar e os pontos em que uma função poderia pausar e outra parte do programa executar no lugar, sem precisar definir de antemão exatamente a ordem e a maneira como cada trecho de código deve executar. _Programação assíncrona_ é uma abstração que nos permite expressar o código em termos de possíveis pontos de pausa e resultados futuros, cuidando dos detalhes de coordenação por nós.
 

@@ -4,7 +4,7 @@ chapter_code: 16-03
 slug: estado-compartilhado
 ---
 
-# Concorrência de Estado Compartilhado
+# Concorrência de estado compartilhado
 
 Passagem de mensagens é uma boa forma de lidar com concorrência, mas não é a única. Outro método seria várias threads acessarem os mesmos dados compartilhados. Considere novamente parte do slogan da documentação da linguagem Go: “Não comunique compartilhando memória.”
 

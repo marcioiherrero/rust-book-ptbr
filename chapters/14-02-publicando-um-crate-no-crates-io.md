@@ -4,7 +4,7 @@ chapter_code: 14-02
 slug: publicando-um-crate-no-crates-io
 ---
 
-# Publicando um Crate no Crates.io
+# Publicando um crate no Crates.io
 
 Usamos pacotes de [crates.io](https://crates.io/) como dependências do nosso projeto, mas você também pode compartilhar seu código com outras pessoas publicando seus próprios pacotes. O registro de crates em [crates.io](https://crates.io/) distribui o código-fonte dos seus pacotes, então ele hospeda principalmente código open source.
 

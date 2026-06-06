@@ -4,7 +4,7 @@ chapter_code: 21-01
 slug: servidor-monothread
 ---
 
-# Construindo um Servidor Web Monothread
+# Construindo um servidor web monothread
 
 Começaremos fazendo um servidor web monothread funcionar. Antes de começarmos, vamos dar uma visão geral rápida dos protocolos envolvidos na construção de servidores web. Os detalhes desses protocolos estão além do escopo deste livro, mas uma breve visão geral lhe dará as informações de que precisa.
 

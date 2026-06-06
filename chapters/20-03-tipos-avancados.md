@@ -4,7 +4,7 @@ chapter_code: 20-03
 slug: tipos-avancados
 ---
 
-# Tipos Avançados
+# Tipos avançados
 
 O sistema de tipos de Rust tem recursos que mencionamos, mas ainda não discutimos. Começaremos com newtypes em geral e por que são úteis como tipos. Depois veremos aliases de tipo, parecidos com newtypes mas com semântica ligeiramente diferente. Também discutiremos o tipo `!` e tipos de tamanho dinâmico.
 

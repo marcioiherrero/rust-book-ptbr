@@ -4,7 +4,7 @@ chapter_code: 17-03
 slug: mais-sobre-futures
 ---
 
-# Entregando Controle ao Runtime
+# Entregando controle ao runtime
 
 Lembre-se de Nosso primeiro programa async: em cada ponto de await, o Rust dá ao runtime chance de pausar a tarefa e mudar para outra se a future aguardada não estiver pronta. O inverso também vale: Rust _só_ pausa blocos async e devolve controle ao runtime em pontos de await. Tudo entre awaits é síncrono.
 

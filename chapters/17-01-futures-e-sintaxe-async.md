@@ -4,7 +4,7 @@ chapter_code: 17-01
 slug: futures-e-a-sintaxe-async
 ---
 
-# Futures e a Sintaxe Async
+# Futures e a sintaxe async
 
 Os elementos centrais da programação assíncrona em Rust são _futures_ e as palavras-chave `async` e `await`.
 

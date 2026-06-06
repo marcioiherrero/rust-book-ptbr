@@ -4,7 +4,7 @@ chapter_code: 18-02
 slug: usando-trait-objects-para-abstrair-comportamento-compartilhado
 ---
 
-# Usando Trait Objects para Abstrair Comportamento Compartilhado
+# Usando trait objects para abstrair comportamento compartilhado
 
 No Capítulo 8, vetores só armazenam um tipo. Na Listagem 8-9 usamos o enum `SpreadsheetCell` com variantes para inteiros, floats e texto — tipos diferentes na mesma linha. Funciona quando o conjunto de tipos é fixo em tempo de compilação.
 

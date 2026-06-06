@@ -4,7 +4,7 @@ chapter_code: 19-01
 slug: todos-os-lugares-onde-padroes-podem-ser-usados
 ---
 
-# Todos os Lugares Onde Padrões Podem Ser Usados
+# Todos os lugares onde padrões podem ser usados
 
 Padrões aparecem em vários lugares em Rust, e você já os usou bastante sem perceber! Esta seção discute todos os lugares onde padrões são válidos.
 

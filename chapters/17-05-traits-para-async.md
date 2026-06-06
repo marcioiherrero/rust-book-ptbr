@@ -4,7 +4,7 @@ chapter_code: 17-05
 slug: um-olhar-mais-de-perto-nas-traits-para-async
 ---
 
-# Um Olhar Mais de Perto nas Traits para Async
+# Um olhar mais de perto nas traits para async
 
 Ao longo do capítulo usamos `Future`, `Stream` e `StreamExt` de várias formas. Evitamos detalhes de implementação — suficiente para o dia a dia. Às vezes você precisa entender `Pin` e `Unpin`; esta seção cobre o essencial. O mergulho profundo fica para outra documentação.
 

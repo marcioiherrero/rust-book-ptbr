@@ -4,7 +4,7 @@ chapter_code: 20-01
 slug: rust-unsafe
 ---
 
-# Rust Unsafe
+# Rust unsafe
 
 Todo o código que discutimos até aqui teve as garantias de segurança de memória de Rust aplicadas em tempo de compilação. No entanto, Rust tem uma segunda linguagem escondida dentro dela que não aplica essas garantias de segurança de memória: ela se chama _unsafe Rust_ e funciona como Rust comum, mas nos dá superpoderes extras.
 

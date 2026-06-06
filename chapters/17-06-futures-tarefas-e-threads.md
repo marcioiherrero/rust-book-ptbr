@@ -4,7 +4,7 @@ chapter_code: 17-06
 slug: juntando-tudo-futures-tarefas-e-threads
 ---
 
-# Juntando Tudo: Futures, Tarefas e Threads
+# Juntando tudo: futures, tarefas e threads
 
 Como vimos no Capítulo 16, threads são uma abordagem à concorrência. Neste capítulo vimos outra: async com futures e streams. Quando escolher uma ou outra? Depende — e muitas vezes não é threads _ou_ async, e sim _e_.
 

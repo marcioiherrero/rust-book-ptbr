@@ -4,7 +4,7 @@ chapter_code: 14-05
 slug: estendendo-o-cargo
 ---
 
-# Estendendo o Cargo com Comandos Personalizados
+# Estendendo o Cargo com comandos personalizados
 
 O Cargo foi projetado para que você possa estendê-lo com novos subcomandos sem precisar modificá-lo. Se um binário no seu `$PATH` se chama `cargo-something`, você pode executá-lo como se fosse um subcomando do Cargo executando `cargo something`. Comandos personalizados assim também aparecem listados quando você executa `cargo --list`. Poder usar `cargo install` para instalar extensões e depois executá-las como as ferramentas integradas do Cargo é um benefício super conveniente do design do Cargo!
 

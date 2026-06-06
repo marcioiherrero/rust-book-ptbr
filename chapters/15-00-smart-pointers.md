@@ -4,7 +4,7 @@ chapter_code: 15-00
 slug: smart-pointers
 ---
 
-# Smart Pointers
+# Smart pointers
 
 Um ponteiro é um conceito geral para uma variável que contém um endereço na memória. Esse endereço se refere, ou “aponta para”, algum outro dado. O tipo mais comum de ponteiro em Rust é uma referência, que você aprendeu no Capítulo 4. Referências são indicadas pelo símbolo `&` e emprestam o valor para o qual apontam. Elas não têm capacidades especiais além de se referir a dados, e não têm overhead.
 
