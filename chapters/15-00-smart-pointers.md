@@ -2,6 +2,8 @@
 title: "Smart pointers"
 chapter_code: 15-00
 slug: smart-pointers
+challenge_day: 19
+reading_minutes: 3
 ---
 
 # Smart pointers
