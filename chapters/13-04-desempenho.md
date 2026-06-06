@@ -2,6 +2,8 @@
 title: "Desempenho em loops vs. iterators"
 chapter_code: 13-04
 slug: desempenho-em-loops-vs-iterators
+challenge_day: 17
+reading_minutes: 3
 ---
 
 # Desempenho em loops vs. iterators
