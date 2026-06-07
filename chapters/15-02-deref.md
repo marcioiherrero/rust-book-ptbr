@@ -2,6 +2,8 @@
 title: "Tratando smart pointers como referências comuns com a trait `Deref`"
 chapter_code: 15-02
 slug: tratando-smart-pointers-como-referencias-com-a-trait-deref
+challenge_day: 19
+reading_minutes: 16
 ---
 
 # Tratando smart pointers como referências comuns com a trait `Deref`
