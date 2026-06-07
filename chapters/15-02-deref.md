@@ -92,8 +92,6 @@ impl<T> MyBox<T> {
         MyBox(x)
     }
 }
-
-fn main() {}
 ```
 
 <a id="listagem-15-8"></a>
@@ -215,8 +213,6 @@ Para ver a coerção de deref em ação, usaremos o tipo `MyBox<T>` que definimo
 fn hello(name: &str) {
     println!("Hello, {name}!");
 }
-
-fn main() {}
 ```
 
 <a id="listagem-15-11"></a>
@@ -228,28 +224,6 @@ Podemos chamar a função `hello` com um string slice como argumento, como `hell
 **Arquivo: src/main.rs**
 
 ```rust
-use std::ops::Deref;
-
-impl<T> Deref for MyBox<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
-
-struct MyBox<T>(T);
-
-impl<T> MyBox<T> {
-    fn new(x: T) -> MyBox<T> {
-        MyBox(x)
-    }
-}
-
-fn hello(name: &str) {
-    println!("Hello, {name}!");
-}
-
 fn main() {
     let m = MyBox::new(String::from("Rust"));
     hello(&m);
@@ -267,28 +241,6 @@ Se o Rust não implementasse coerção de deref, teríamos que escrever o códig
 **Arquivo: src/main.rs**
 
 ```rust
-use std::ops::Deref;
-
-impl<T> Deref for MyBox<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
-
-struct MyBox<T>(T);
-
-impl<T> MyBox<T> {
-    fn new(x: T) -> MyBox<T> {
-        MyBox(x)
-    }
-}
-
-fn hello(name: &str) {
-    println!("Hello, {name}!");
-}
-
 fn main() {
     let m = MyBox::new(String::from("Rust"));
     hello(&(*m)[..]);
