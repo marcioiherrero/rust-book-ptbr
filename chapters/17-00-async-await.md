@@ -2,7 +2,7 @@
 title: "Fundamentos de programação assíncrona: async, await, futures e streams"
 chapter_code: 17-00
 slug: fundamentos-de-programacao-assincrona-async-await-futures-e-streams
-challenge_day: 21
+challenge_day: 22
 reading_minutes: 10
 ---
 
