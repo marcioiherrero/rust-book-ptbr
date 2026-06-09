@@ -2,6 +2,8 @@
 title: "Transferir dados entre threads com passagem de mensagens"
 chapter_code: 16-02
 slug: transferir-dados-entre-threads-com-passagem-de-mensagens
+challenge_day: 21
+reading_minutes: 13
 ---
 
 # Transferir dados entre threads com passagem de mensagens
