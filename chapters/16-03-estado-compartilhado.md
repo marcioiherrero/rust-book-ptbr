@@ -10,20 +10,20 @@ Passagem de mensagens é uma boa forma de lidar com concorrência, mas não é a
 
 Como seria comunicar compartilhando memória? Além disso, por que entusiastas de passagem de mensagens alertam contra o uso de compartilhamento de memória?
 
-De certa forma, channels em qualquer linguagem de programação são semelhantes a ownership única porque, depois de transferir um valor por um channel, você não deve mais usar esse valor. Concorrência de memória compartilhada é como múltipla ownership: várias threads podem acessar o mesmo local de memória ao mesmo tempo. Como você viu no Capítulo 15, onde smart pointers tornaram múltipla ownership possível, múltipla ownership pode adicionar complexidade porque esses diferentes donos precisam ser gerenciados. O sistema de tipos e as regras de ownership do Rust ajudam muito a fazer essa gestão corretamente. Como exemplo, vamos olhar mutexes, um dos primitivos de concorrência mais comuns para memória compartilhada.
+De certa forma, channels em qualquer linguagem de programação são semelhantes a ownership única porque, depois de transferir um valor por um channel, você não deve mais usar esse valor. Concorrência de memória compartilhada é como múltipla ownership: várias threads podem acessar o mesmo local de memória ao mesmo tempo. Como você viu no Capítulo 15, onde smart pointers tornaram múltipla ownership possível, múltipla ownership pode adicionar complexidade porque esses diferentes donos precisam ser gerenciados. O sistema de tipos e as regras de ownership do Rust ajudam muito a fazer essa gestão corretamente. Como exemplo, vamos olhar mutex, um dos primitivos de concorrência mais comuns para memória compartilhada.
 
-## Controlando acesso com mutexes
+## Controlando acesso com mutex
 
 _Mutex_ é abreviação de _mutual exclusion_ (exclusão mútua): um mutex permite que apenas uma thread acesse alguns dados em um dado momento. Para acessar os dados em um mutex, uma thread deve primeiro sinalizar que quer acesso pedindo para adquirir o _lock_ do mutex. O _lock_ é uma estrutura de dados que faz parte do mutex e rastreia quem tem acesso exclusivo aos dados no momento. Portanto, diz-se que o mutex _guarda_ os dados que contém por meio do sistema de locking.
 
-Mutexes têm fama de serem difíceis de usar porque você precisa lembrar duas regras:
+Mutex têm fama de serem difíceis de usar porque você precisa lembrar duas regras:
 
 1. Você deve tentar adquirir o lock antes de usar os dados.
 2. Quando terminar com os dados que o mutex guarda, deve liberar o lock para que outras threads possam adquiri-lo.
 
 Como metáfora do mundo real para um mutex, imagine um painel de discussão em uma conferência com apenas um microfone. Antes de um palestrante falar, ele precisa pedir ou sinalizar que quer usar o microfone. Quando obtém o microfone, pode falar pelo tempo que quiser e então entregar o microfone ao próximo palestrante que pedir para falar. Se um palestrante esquecer de entregar o microfone quando terminar, ninguém mais consegue falar. Se a gestão do microfone compartilhado der errado, o painel não funcionará como planejado!
 
-Gerenciar mutexes pode ser incrivelmente difícil de acertar, por isso tantas pessoas preferem channels. No entanto, graças ao sistema de tipos e às regras de ownership do Rust, você não pode errar ao fazer lock e unlock.
+Gerenciar mutex pode ser incrivelmente difícil de acertar, por isso tantas pessoas preferem channels. No entanto, graças ao sistema de tipos e às regras de ownership do Rust, você não pode errar ao fazer lock e unlock.
 
 ### A API de `Mutex<T>`
 
@@ -260,6 +260,6 @@ Note que, se você está fazendo operações numéricas simples, há tipos mais 
 
 Você pode ter notado que `counter` é imutável, mas que conseguimos obter uma referência mutável ao valor interno; isso significa que `Mutex<T>` fornece mutabilidade interior, como a família `Cell`. Da mesma forma que usamos `RefCell<T>` no Capítulo 15 para permitir mutar conteúdos dentro de um `Rc<T>`, usamos `Mutex<T>` para mutar conteúdos dentro de um `Arc<T>`.
 
-Outro detalhe a notar é que o Rust não pode protegê-lo de todos os tipos de erros lógicos quando você usa `Mutex<T>`. Lembre-se do Capítulo 15 de que usar `Rc<T>` trazia o risco de criar ciclos de referência, em que dois valores `Rc<T>` se referem um ao outro, causando vazamentos de memória. Da mesma forma, `Mutex<T>` traz o risco de criar _deadlocks_. Estes ocorrem quando uma operação precisa fazer lock em dois recursos e duas threads adquiriram cada uma um dos locks, fazendo-as esperar uma pela outra para sempre. Se você se interessar por deadlocks, tente criar um programa Rust que tenha um deadlock; depois, pesquise estratégias de mitigação de deadlock para mutexes em qualquer linguagem e tente implementá-las em Rust. A documentação da API da biblioteca padrão para `Mutex<T>` e `MutexGuard` oferece informações úteis.
+Outro detalhe a notar é que o Rust não pode protegê-lo de todos os tipos de erros lógicos quando você usa `Mutex<T>`. Lembre-se do Capítulo 15 de que usar `Rc<T>` trazia o risco de criar ciclos de referência, em que dois valores `Rc<T>` se referem um ao outro, causando vazamentos de memória. Da mesma forma, `Mutex<T>` traz o risco de criar _deadlocks_. Estes ocorrem quando uma operação precisa fazer lock em dois recursos e duas threads adquiriram cada uma um dos locks, fazendo-as esperar uma pela outra para sempre. Se você se interessar por deadlocks, tente criar um programa Rust que tenha um deadlock; depois, pesquise estratégias de mitigação de deadlock para mutex em qualquer linguagem e tente implementá-las em Rust. A documentação da API da biblioteca padrão para `Mutex<T>` e `MutexGuard` oferece informações úteis.
 
 Encerraremos este capítulo falando sobre as traits `Send` e `Sync` e como podemos usá-las com tipos personalizados.
