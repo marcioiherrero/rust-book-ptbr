@@ -2,6 +2,8 @@
 title: "Usando threads para executar código simultaneamente"
 chapter_code: 16-01
 slug: usando-threads-para-executar-codigo-simultaneamente
+challenge_day: 21
+reading_minutes: 13
 ---
 
 # Usando threads para executar código simultaneamente
