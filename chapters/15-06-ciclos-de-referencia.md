@@ -46,25 +46,6 @@ Na Listagem 15-26, estamos adicionando uma função `main` que usa as definiçõ
 **Arquivo: src/main.rs**
 
 ```rust
-use crate::List::{Cons, Nil};
-use std::cell::RefCell;
-use std::rc::Rc;
-
-#[derive(Debug)]
-enum List {
-    Cons(i32, RefCell<Rc<List>>),
-    Nil,
-}
-
-impl List {
-    fn tail(&self) -> Option<&RefCell<Rc<List>>> {
-        match self {
-            Cons(_, item) => Some(item),
-            Nil => None,
-        }
-    }
-}
-
 fn main() {
     let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
 
@@ -162,15 +143,6 @@ Em seguida, usaremos nossa definição de struct e criaremos uma instância `Nod
 **Arquivo: src/main.rs**
 
 ```rust
-use std::cell::RefCell;
-use std::rc::Rc;
-
-#[derive(Debug)]
-struct Node {
-    value: i32,
-    children: RefCell<Vec<Rc<Node>>>,
-}
-
 fn main() {
     let leaf = Rc::new(Node {
         value: 3,
@@ -217,16 +189,6 @@ Um nó poderá se referir ao seu nó pai, mas não possui o pai. Na Listagem 15-
 **Arquivo: src/main.rs**
 
 ```rust
-use std::cell::RefCell;
-use std::rc::{Rc, Weak};
-
-#[derive(Debug)]
-struct Node {
-    value: i32,
-    parent: RefCell<Weak<Node>>,
-    children: RefCell<Vec<Rc<Node>>>,
-}
-
 fn main() {
     let leaf = Rc::new(Node {
         value: 3,
@@ -279,16 +241,6 @@ Vamos olhar como os valores `strong_count` e `weak_count` das instâncias `Rc<No
 **Arquivo: src/main.rs**
 
 ```rust
-use std::cell::RefCell;
-use std::rc::{Rc, Weak};
-
-#[derive(Debug)]
-struct Node {
-    value: i32,
-    parent: RefCell<Weak<Node>>,
-    children: RefCell<Vec<Rc<Node>>>,
-}
-
 fn main() {
     let leaf = Rc::new(Node {
         value: 3,
