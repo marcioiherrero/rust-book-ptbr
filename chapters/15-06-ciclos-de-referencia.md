@@ -2,6 +2,8 @@
 title: "Ciclos de referência podem vazar memória"
 chapter_code: 15-06
 slug: ciclos-de-referencia-podem-vazar-memoria
+challenge_day: 20
+reading_minutes: 16
 ---
 
 # Ciclos de referência podem vazar memória
