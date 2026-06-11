@@ -2,6 +2,8 @@
 title: "Aplicando concorrência com async"
 chapter_code: 17-02
 slug: aplicando-concorrencia-com-async
+challenge_day: 22
+reading_minutes: 20
 ---
 
 # Aplicando concorrência com async
