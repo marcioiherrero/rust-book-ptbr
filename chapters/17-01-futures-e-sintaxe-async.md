@@ -2,6 +2,8 @@
 title: "Futures e a sintaxe async"
 chapter_code: 17-01
 slug: futures-e-a-sintaxe-async
+challenge_day: 22
+reading_minutes: 13
 ---
 
 # Futures e a sintaxe async
