@@ -1,24 +1,24 @@
 ---
-title: "Strings"
+title: "Armazenando Texto Codificado em UTF-8 com Strings"
 chapter_code: 08-02
 slug: strings
 challenge_day: 10
 reading_minutes: 17
 ---
 
-# Armazenando texto codificado em UTF-8 com strings
+# Armazenando Texto Codificado em UTF-8 com Strings
 
 Falamos sobre strings no Capítulo 4; agora vamos mergulhar mais fundo. Rustáceos iniciantes costumam travar em strings por três motivos combinados: a tendência do Rust de tornar potenciais erros visíveis, strings serem uma estrutura de dados mais complexa do que muitos programadores imaginam, e UTF-8. Juntos, esses fatores podem parecer intimidantes quando você vem de outras linguagens.
 
 Abordamos strings no contexto de coleções porque elas são implementadas como uma coleção de bytes, com métodos extras para trabalhar com esse conteúdo como texto. Nesta seção, veremos as operações comuns a todo tipo de coleção — criar, atualizar e ler — aplicadas a `String`. Também veremos o que torna `String` diferente das demais coleções: indexar uma `String` é complicado porque pessoas e computadores interpretam esses dados de formas distintas.
 
-### Definindo strings
+### Definindo Strings
 
 Primeiro, vamos definir o que queremos dizer com _string_. O Rust tem apenas um tipo string no núcleo da linguagem: a fatia de string `str`, geralmente usada na forma emprestada `&str`. No Capítulo 4, vimos fatias de string — referências a dados de texto codificados em UTF-8 armazenados em outro lugar. Literais de string, por exemplo, ficam no binário do programa e, portanto, são fatias de string.
 
 O tipo `String`, fornecido pela biblioteca padrão (e não embutido no núcleo da linguagem), é uma string UTF-8 expansível, mutável e com ownership. Quando rustáceos falam em “strings” em Rust, podem estar se referindo tanto a `String` quanto a `&str` — não apenas a um dos dois. Embora esta seção foque em `String`, ambos os tipos aparecem o tempo todo na biblioteca padrão, e tanto `String` quanto fatias de string usam codificação UTF-8.
 
-### Criando uma nova string
+### Criando uma Nova String
 
 Muitas operações disponíveis em `Vec<T>` também funcionam com `String`, porque `String` é, na prática, um wrapper em torno de um vetor de bytes, com garantias, restrições e capacidades extras. A função `new`, usada para criar uma instância, é um exemplo que se comporta igual nos dois tipos — veja a Listagem 8-11.
 
@@ -89,7 +89,7 @@ let hello = String::from("Hola");
 
 Todos esses são valores `String` válidos.
 
-### Atualizando uma string
+### Atualizando uma String
 
 Uma `String` pode crescer e mudar de conteúdo — como um `Vec<T>` — quando você adiciona mais dados. Também dá para concatenar valores `String` com o operador `+` ou com a macro `format!`.
 
@@ -196,7 +196,7 @@ let s = format!("{s1}-{s2}-{s3}");
 
 Esse código também define `s` como `tic-tac-toe`. A macro `format!` funciona como `println!`, mas em vez de imprimir na tela, retorna uma `String`. A versão com `format!` é bem mais legível — e o código gerado usa referências, então a chamada não toma ownership de nenhum parâmetro.
 
-### Indexando em strings
+### Indexando em Strings
 
 Em muitas linguagens, acessar caracteres individuais por índice é comum e válido. Em Rust, porém, usar sintaxe de indexação em uma `String` gera erro. Veja o código inválido da Listagem 8-19.
 
@@ -236,7 +236,7 @@ error: could not compile `collections` (bin "collections") due to 1 previous err
 
 O próprio erro deixa claro: strings em Rust não suportam indexação. Mas por quê? Para responder, precisamos ver como o Rust armazena strings na memória.
 
-#### Representação interna
+#### Representação Interna
 
 Uma `String` é um wrapper em torno de um `Vec<u8>`. Vamos olhar alguns exemplos UTF-8 da Listagem 8-14. Primeiro:
 
@@ -263,7 +263,7 @@ Você já sabe que `answer` não será `З`, a primeira letra. Em UTF-8, o prime
 
 Para evitar valores inesperados e bugs difíceis de detectar, o Rust simplesmente não compila esse código — e elimina cedo o mal-entendido no desenvolvimento.
 
-#### Bytes, valores escalares e grapheme clusters
+#### Bytes, Valores Escalares e Grapheme Clusters
 
 Há três formas relevantes de olhar strings em Rust: como bytes, como valores escalares e como *grapheme clusters* — o que o Unicode define como a unidade mais próxima do que o usuário enxerga como uma _letra_ na tela.
 
@@ -290,7 +290,7 @@ O Rust oferece formas distintas de interpretar os dados brutos de uma string par
 
 Outro motivo pelo qual o Rust não permite indexar uma `String` para obter um caractere: indexação deveria ser O(1). Com `String`, isso não é garantido — o Rust precisaria percorrer o conteúdo desde o início até o índice para contar quantos caracteres válidos existem.
 
-### Fatiando strings
+### Fatiando Strings
 
 Indexar uma string costuma ser má ideia porque não fica claro o que a operação deveria retornar: um byte, um caractere, um *grapheme cluster* ou uma fatia de string. Se você realmente precisar de índices para criar fatias, o Rust exige que seja mais específico.
 
@@ -319,7 +319,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 Tenha cuidado ao criar fatias de string com intervalos — isso pode derrubar o programa.
 
-### Iterando sobre strings
+### Iterando Sobre Strings
 
 A melhor forma de trabalhar com pedaços de string é deixar explícito se você quer caracteres ou bytes. Para valores escalares Unicode individuais, use `chars`. Chamar `chars` em “Зд” separa e retorna dois valores `char`; dá para iterar sobre o resultado:
 
@@ -357,7 +357,7 @@ Lembre-se: um valor escalar Unicode válido pode ocupar mais de 1 byte.
 
 Obter *grapheme clusters* — como no Devanagari — é complexo; a biblioteca padrão não oferece isso. Há crates em [crates.io](https://crates.io/) se você precisar dessa funcionalidade.
 
-### Lidando com as complexidades de strings
+### Lidando com as Complexidades de Strings
 
 Resumindo: strings são complicadas. Cada linguagem decide como expor essa complexidade ao programador. O Rust optou por tornar o tratamento correto de `String` o comportamento padrão — o que exige pensar em UTF-8 desde cedo. Essa escolha deixa a complexidade mais visível do que em outras linguagens, mas evita erros com caracteres não ASCII mais adiante no desenvolvimento.
 
