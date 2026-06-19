@@ -8,7 +8,7 @@ reading_minutes: 17
 
 # Armazenando texto codificado em UTF-8 com strings
 
-Falamos sobre strings no Capítulo 4; agora vamos mergulhar mais fundo. Rustáceos iniciantes costumam travar em strings por três motivos combinados: a tendência do Rust de tornar visíveis erros potenciais, strings serem uma estrutura de dados mais complexa do que muitos programadores imaginam, e UTF-8. Juntos, esses fatores podem parecer intimidantes quando você vem de outras linguagens.
+Falamos sobre strings no Capítulo 4; agora vamos mergulhar mais fundo. Rustáceos iniciantes costumam travar em strings por três motivos combinados: a tendência do Rust de tornar potenciais erros visíveis, strings serem uma estrutura de dados mais complexa do que muitos programadores imaginam, e UTF-8. Juntos, esses fatores podem parecer intimidantes quando você vem de outras linguagens.
 
 Abordamos strings no contexto de coleções porque elas são implementadas como uma coleção de bytes, com métodos extras para trabalhar com esse conteúdo como texto. Nesta seção, veremos as operações comuns a todo tipo de coleção — criar, atualizar e ler — aplicadas a `String`. Também veremos o que torna `String` diferente das demais coleções: indexar uma `String` é complicado porque pessoas e computadores interpretam esses dados de formas distintas.
 
@@ -261,7 +261,7 @@ let answer = &hello[0];
 
 Você já sabe que `answer` não será `З`, a primeira letra. Em UTF-8, o primeiro byte de `З` é `208` e o segundo é `151` — então `answer` pareceria ser `208`, mas `208` sozinho não é um caractere válido. Devolver `208` provavelmente não é o que o usuário espera ao pedir a primeira letra; ainda assim, é tudo o que o Rust tem no índice de byte 0. Na prática, ninguém quer o valor bruto do byte — nem em strings só com letras latinas: se `&"hi"[0]` fosse válido e retornasse o byte, viria `104`, não `h`.
 
-Para evitar valores inesperados e bugs difíceis de detectar, o Rust simplesmente não compila esse código — e elimina o mal-entendido cedo no desenvolvimento.
+Para evitar valores inesperados e bugs difíceis de detectar, o Rust simplesmente não compila esse código — e elimina cedo o mal-entendido no desenvolvimento.
 
 #### Bytes, valores escalares e grapheme clusters
 
