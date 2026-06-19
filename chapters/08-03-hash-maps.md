@@ -14,7 +14,7 @@ Hash maps são úteis quando você quer buscar dados não por índice (como em v
 
 Nesta seção, veremos a API básica de hash maps — mas há muito mais nas funções que a biblioteca padrão define em `HashMap<K, V>`. Como sempre, consulte a documentação para saber mais.
 
-### Criando um novo hash map
+### Criando um novo Hash Map
 
 Uma forma de criar um hash map vazio é chamar `new` e adicionar elementos com `insert`. Na Listagem 8-20, acompanhamos a pontuação de duas equipes, _Blue_ e _Yellow_: Blue começa com 10 pontos e Yellow com 50.
 
@@ -37,7 +37,7 @@ Repare que precisamos importar `HashMap` com `use`, do módulo `collections` da 
 
 Como vetores, hash maps armazenam dados na heap. Este `HashMap` tem chaves `String` e valores `i32`. Também como vetores, hash maps são homogêneos: todas as chaves devem ser do mesmo tipo, e todos os valores também.
 
-### Acessando valores em um hash map
+### Acessando valores em um Hash Map
 
 Para obter um valor, passamos a chave ao método `get`, como na Listagem 8-21.
 
@@ -85,7 +85,7 @@ Yellow: 50
 Blue: 10
 ```
 
-### Gerenciando ownership em hash maps
+### Gerenciando ownership em Hash Maps
 
 Para tipos que implementam a trait `Copy`, como `i32`, os valores são copiados para o hash map. Para tipos com ownership, como `String`, os valores são movidos — e o hash map passa a ser dono deles, como na Listagem 8-22.
 
@@ -111,13 +111,13 @@ Depois do `insert`, não dá para usar `field_name` e `field_value` — elas for
 
 Se inserirmos referências, os valores não são movidos. Porém, o que as referências apontam precisa permanecer válido enquanto o hash map existir. Veremos isso com mais detalhe em [Validando Referências com Lifetimes](/livro/cap10-03-validando-referencias-com-lifetimes), no Capítulo 10.
 
-### Atualizando um hash map
+### Atualizando um Hash Map
 
 O número de pares chave-valor pode crescer, mas cada chave única só pode ter um valor por vez (o contrário não vale: Blue e Yellow podem ter o mesmo valor `10` no hash map `scores`).
 
 Ao alterar dados num hash map, você precisa decidir o que fazer quando a chave já tem valor. Pode substituir o antigo pelo novo, descartando o anterior. Pode manter o antigo e ignorar o novo — inserindo só se a chave _não_ tiver valor. Ou pode combinar os dois. Vejamos cada caso.
 
-#### Sobrescrevendo um valor
+#### Sobrescrevendo um Valor
 
 Se inserirmos uma chave com um valor e depois inserirmos a mesma chave com outro valor, o valor associado é substituído. Na Listagem 8-23, `insert` é chamado duas vezes, mas o hash map fica com um único par — ambas as vezes para a chave da equipe Blue.
 
@@ -140,7 +140,7 @@ println!("{scores:?}");
 
 Esse código imprime `{"Blue": 25}`. O valor original, `10`, foi sobrescrito.
 
-#### Adicionando chave e valor só se a chave não existir
+#### Adicionando Chave e Valor só se a Chave não Existir
 
 É comum verificar se uma chave já tem valor e agir assim: se existir, manter o valor atual; se não existir, inserir chave e valor.
 
@@ -168,7 +168,7 @@ println!("{scores:?}");
 
 Executar a Listagem 8-24 imprime `{"Yellow": 50, "Blue": 10}`. A primeira chamada a `entry` insere Yellow com `50`, porque ainda não havia valor. A segunda não altera nada: Blue já tinha `10`.
 
-#### Atualizando um valor com base no antigo
+#### Atualizando um Valor com base no Valor Antigo
 
 Outro uso frequente é ler o valor de uma chave e atualizá-lo a partir do anterior. A Listagem 8-25 conta quantas vezes cada palavra aparece num texto: palavras são chaves e o valor é incrementado a cada ocorrência. Na primeira vez que vemos uma palavra, inserimos `0`.
 
@@ -197,7 +197,7 @@ Esse código imprime `{"world": 2, "hello": 1, "wonderful": 1}`. A ordem pode va
 
 `split_whitespace` retorna um iterador sobre subslices de `text`, separadas por espaço em branco. `or_insert` retorna uma referência mutável (`&mut V`) ao valor da chave. Guardamos essa referência em `count`; para alterar o valor, desreferenciamos `count` com `*`. A referência mutável sai de escopo no fim do loop `for`, então as alterações respeitam as regras de borrowing.
 
-### Funções de hash
+### Funções de Hashing
 
 Por padrão, `HashMap` usa _SipHash_, que oferece resistência a ataques de negação de serviço (DoS) em tabelas hash. Não é o algoritmo mais rápido, mas a troca — um pouco menos de desempenho por mais segurança — costuma valer a pena. Se, ao analisar o desempenho do código, a função padrão for lenta demais, dá para trocar especificando outro hasher. Um _hasher_ é um tipo que implementa a trait `BuildHasher`. Veremos traits e implementação no Capítulo 10. Não é preciso implementar um hasher do zero: em [crates.io](https://crates.io/) há crates com hashers para vários algoritmos comuns.
 
@@ -211,4 +211,4 @@ Vetores, strings e hash maps cobrem boa parte do que você precisa para armazena
 
 A documentação da API da biblioteca padrão descreve métodos úteis em vetores, strings e hash maps para esses exercícios.
 
-Os programas estão ficando mais complexos — e operações podem falhar. É hora de falar sobre tratamento de erros. Vamos a isso em seguida!
+Estamos entrando em programas mais complexos — nos quais as operações podem falhar, por isso, é o momento perfeito para discutirmos o tratamento de erros. Faremos isso a seguir!
