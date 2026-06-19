@@ -1,16 +1,16 @@
 ---
-title: "Vetores"
+title: "Armazenando Listas de Valores com Vetores"
 chapter_code: 08-01
 slug: vetores
 challenge_day: 10
 reading_minutes: 17
 ---
 
-# Armazenando listas de valores com vetores
+# Armazenando Listas de Valores com Vetores
 
 O primeiro tipo de coleção que veremos é `Vec<T>`, também conhecido como vetor. Com vetores, você armazena vários valores numa única estrutura de dados, com todos eles dispostos lado a lado na memória. Eles só aceitam valores do mesmo tipo. São úteis quando você tem uma lista de itens — as linhas de um arquivo de texto, os preços no carrinho de compras, e assim por diante.
 
-### Criando um novo vetor
+### Criando um Novo Vetor
 
 Para criar um vetor vazio, usamos a função `Vec::new`, como na Listagem 8-1.
 
@@ -40,7 +40,7 @@ let v = vec![1, 2, 3];
 
 Como os valores iniciais são `i32`, o Rust infere que `v` é um `Vec<i32>` e a anotação de tipo não é necessária. Em seguida, veremos como modificar um vetor.
 
-### Atualizando um vetor
+### Atualizando um Vetor
 
 Para criar um vetor e ir adicionando elementos, usamos o método `push`, como na Listagem 8-3.
 
@@ -61,7 +61,7 @@ v.push(8);
 
 Como em qualquer variável, se quisermos alterar o valor, precisamos declará-la mutável com `mut`, como vimos no Capítulo 3. Os números que inserimos são todos `i32`, e o Rust infere isso pelos dados — não precisamos da anotação `Vec<i32>`.
 
-### Lendo elementos de um vetor
+### Lendo Elementos de Vetores
 
 Há duas formas de referenciar um valor armazenado em um vetor: pela indexação ou pelo método `get`. Nos exemplos a seguir, anotamos os tipos retornados para deixar o código mais claro.
 
@@ -150,7 +150,7 @@ O código da Listagem 8-6 parece que deveria funcionar: por que uma referência 
 
 > **Nota:** Para saber mais sobre os detalhes de implementação do tipo `Vec<T>`, consulte o [_Rustonomicon_](https://doc.rust-lang.org/nomicon/vec/vec.html).
 
-### Iterando sobre os valores em um vetor
+### Iterando Sobre os Valores em um Vetor
 
 Para acessar cada elemento de um vetor em sequência, percorremos todos eles em um loop, em vez de ir índice por índice. A Listagem 8-7 mostra como usar um loop `for` para obter referências imutáveis a cada elemento de um vetor de `i32` e imprimi-los.
 
@@ -186,7 +186,7 @@ Para alterar o valor referenciado, usamos o operador de dereferência `*` para c
 
 Iterar sobre um vetor — de forma imutável ou mutável — é seguro graças às regras do borrow checker. Se tentássemos inserir ou remover itens dentro dos loops `for` das Listagens 8-7 e 8-8, o compilador emitiria um erro parecido com o da Listagem 8-6. A referência ao vetor mantida pelo loop impede modificar o vetor inteiro ao mesmo tempo.
 
-### Usando um enum para armazenar vários tipos
+### Usando um Enum para Armazenar Vários Tipos
 
 Vetores só aceitam valores do mesmo tipo — o que pode ser limitante. Há casos em que você precisa guardar itens de tipos diferentes numa mesma lista. Felizmente, as variantes de um enum pertencem ao mesmo tipo enum; quando precisamos de um tipo único para representar elementos distintos, podemos definir e usar um enum.
 
@@ -218,7 +218,7 @@ Se você não conhece de antemão o conjunto completo de tipos que o programa re
 
 Agora que vimos algumas das formas mais comuns de usar vetores, vale revisar a [documentação da API](https://doc.rust-lang.org/std/vec/struct.Vec.html): a biblioteca padrão define muitos métodos úteis em `Vec<T>`. Além de `push`, por exemplo, o método `pop` remove e devolve o último elemento.
 
-### Descartar um vetor descarta seus elementos
+### Descartando um Vetor Descarta seus Elementos
 
 Como qualquer outra `struct`, um vetor é descartado quando sai de escopo, como na Listagem 8-10.
 
