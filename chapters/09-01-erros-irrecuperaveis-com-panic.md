@@ -8,20 +8,21 @@ reading_minutes: 7
 
 # Erros irrecuperáveis com `panic!`
 
-Às vezes algo dá errado no código e não há o que fazer. Nesses casos, o Rust oferece a macro `panic!`. Na prática, há duas formas de provocar um pânico: tomar uma ação que faz o programa entrar em pânico (como acessar um array além do fim) ou chamar `panic!` explicitamente. Em ambos os casos, o programa entra em pânico. Por padrão, isso imprime uma mensagem de falha, faz _unwind_, limpa a stack e encerra. Com uma variável de ambiente, você também pode pedir ao Rust que exiba a call stack quando o pânico ocorrer — o que facilita localizar a origem.
+Às vezes, coisas ruins acontecem no seu código e não há nada que você possa fazer a respeito. Nesses casos, Rust possui a macro `panic!`. Na prática, há duas maneiras de causar um pânico: executando uma ação que faz o código entrar em pânico (como acessar um array além do seu limite) ou chamando a macro `panic!` explicitamente. Em ambos os casos, causamos um pânico no programa. Por padrão, esses pânicos imprimem uma mensagem de falha, desfazem, limpam a stack e encerram o programa. Por meio de uma variável de ambiente, você também pode fazer com que o Rust exiba a pilha de chamadas quando um pânico ocorre, facilitando rastrear a origem do problema.
 
-> ### Fazendo unwind da stack ou abortando em resposta a um pânico
+> ### Desfazendo a Pilha ou Abortando em Resposta a um Pânico
 >
-> Por padrão, quando ocorre um pânico, o programa começa a fazer _unwind_: o Rust percorre a stack de volta e limpa os dados de cada função encontrada. Percorrer e limpar, porém, dá trabalho. Por isso o Rust permite _abortar_ imediatamente — encerrar o programa sem limpar.
+> Por padrão, quando um pânico ocorre, o programa começa a desfazer a pilha (unwinding), o que significa que o Rust percorre a pilha de volta e limpa os dados de cada função que encontra. No entanto, percorrer e limpar tudo dá muito trabalho. Por isso, o Rust permite que você escolha a alternativa de abortar imediatamente, o que encerra o programa sem realizar a limpeza.
 >
-> A memória usada pelo programa passa a ser liberada pelo sistema operacional. Se você precisa de um binário o menor possível, pode trocar unwind por abort no pânico adicionando `panic = 'abort'` nas seções `[profile]` adequadas do _Cargo.toml_. Por exemplo, para abortar em pânico no modo release:
+> A memória que o programa estava usando precisará então ser limpa pelo sistema operacional. Se no seu projeto você precisar que o binário resultante seja o menor possível, você pode trocar o unwinding pelo abort em caso de pânico, adicionando `panic = 'abort'` nas seções `[profile]` apropriadas do seu arquivo _Cargo.toml_. Por exemplo, se quiser abortar em caso de pânico no modo release, adicione o seguinte:
+>
 >
 > ```toml
 > [profile.release]
 > panic = 'abort'
 > ```
 
-Vamos chamar `panic!` num programa simples:
+Vamos tentar chamar `panic!` em um programa simples:
 
 **Arquivo: src/main.rs (Este código entra em pânico!)**
 
@@ -31,7 +32,7 @@ fn main() {
 }
 ```
 
-Ao executar, você verá algo assim:
+Ao executar o programa, você verá algo assim:
 
 ```console
 $ cargo run
@@ -44,11 +45,11 @@ crash and burn
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-A chamada a `panic!` produz a mensagem nas duas últimas linhas. A primeira traz a mensagem de pânico e o ponto no código-fonte: _src/main.rs:2:5_ indica a segunda linha, quinto caractere do arquivo _src/main.rs_.
+A chamada a `panic!` causa a mensagem de erro contida nas duas últimas linhas. A primeira linha mostra nossa mensagem de pânico e o local no código-fonte onde o pânico ocorreu: _src/main.rs:2:5_ indica que é a segunda linha, quinto caractere do nosso arquivo _src/main.rs_.
 
-Neste caso, a linha indicada é do nosso código — ao ir até ela, vemos a chamada a `panic!`. Em outros casos, o `panic!` pode estar em código que o nosso chama; o arquivo e a linha reportados serão de outra pessoa, onde a macro é invocada, e não da linha do nosso código que levou ao pânico.
+Nesse caso, a linha indicada faz parte do nosso código e, se formos até ela, veremos a chamada da macro `panic!`. Em outros casos, a chamada a `panic!` pode estar no código que o nosso código chama, e o nome do arquivo e o número da linha relatados na mensagem de erro serão de código de outra pessoa, onde a macro `panic!` é chamada, e não da linha do nosso código que eventualmente levou à chamada de `panic!`.
 
-O backtrace das funções envolvidas ajuda a achar a parte do nosso código que causou o problema. Para entender como usá-lo, vejamos outro exemplo: um `panic!` vindo de uma biblioteca por causa de um bug no nosso código, em vez de uma chamada direta à macro. A Listagem 9-1 tenta acessar um índice de vetor fora do intervalo válido.
+Podemos usar o backtrace das funções de onde veio a chamada a panic! para descobrir a parte do nosso código que está causando o problema. Para entender como usar um backtrace de `panic!`, vejamos outro exemplo e observemos como é quando a chamada a `panic!` vem de uma biblioteca por causa de um bug no nosso código, em vez de vir diretamente do nosso código chamando a macro. A Listagem 9-1 tem um código que tenta acessar um índice em um vetor além do intervalo de índices válidos.
 
 **Arquivo: src/main.rs (Este código entra em pânico!)**
 
@@ -62,13 +63,13 @@ fn main() {
 
 <a id="listagem-9-1"></a>
 
-[Listagem 9-1](#listagem-9-1): Tentando acessar um elemento além do fim de um vetor, o que provoca uma chamada a `panic!`
+[Listagem 9-1](#listagem-9-1): Tentativa de acessar um elemento além do fim de um vetor, o que causará uma chamada a `panic!`
 
-Aqui tentamos acessar o 100º elemento do vetor (índice 99, porque a indexação começa em zero), mas o vetor só tem três. Nessa situação, o Rust entra em pânico. `[]` deveria devolver um elemento — mas com índice inválido não há retorno correto possível.
+Aqui, estamos tentando acessar o 100º elemento do nosso vetor (que está no índice 99, pois a indexação começa em zero), mas o vetor tem apenas três elementos. Nessa situação, o Rust entrará em pânico. O uso de `[]` deveria retornar um elemento, mas se você passar um índice inválido, não há nenhum elemento que o Rust pudesse retornar que fosse correto.
 
-Em C, ler além do fim de uma estrutura de dados é comportamento indefinido. Você pode obter o que estiver na memória na posição correspondente ao elemento, mesmo que essa memória não pertença à estrutura. Isso se chama _buffer overread_ e pode gerar vulnerabilidades se um atacante manipular o índice para ler dados que não deveria, armazenados depois da estrutura.
+Em C, tentar ler além do fim de uma estrutura de dados é um comportamento indefinido. Você pode obter o que estiver na localização de memória que corresponderia àquele elemento na estrutura de dados, mesmo que essa memória não pertença a essa estrutura. Isso é chamado de _buffer overread_ e pode levar a vulnerabilidades de segurança se um atacante conseguir manipular o índice de forma a ler dados que não deveria acessar, armazenados após a estrutura de dados.
 
-Para proteger o programa, o Rust interrompe a execução ao tentar ler um índice inexistente. Vejamos na prática:
+Para proteger seu programa contra esse tipo de vulnerabilidade, se você tentar ler um elemento em um índice que não existe, o Rust interromperá a execução e se recusará a continuar. Vamos experimentar e ver:
 
 ```console
 $ cargo run
@@ -81,13 +82,13 @@ index out of bounds: the len is 3 but the index is 99
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-O erro aponta para a linha 4 do _main.rs_, onde acessamos o índice 99 de `v`.
+Esse erro aponta para a linha 4 do nosso _main.rs_, onde tentamos acessar o índice 99 do vetor `v`.
 
-A linha `note:` informa que podemos definir `RUST_BACKTRACE` para obter um backtrace do que levou ao erro. Um _backtrace_ é a lista de funções chamadas até aquele ponto. Em Rust, funciona como em outras linguagens: comece pelo topo e leia até encontrar arquivos que você escreveu — aí está a origem do problema. Acima disso, código que o seu chamou; abaixo, código que chamou o seu. Essas linhas podem incluir o núcleo do Rust, a biblioteca padrão ou crates que você usa. Vamos definir `RUST_BACKTRACE` com qualquer valor diferente de `0`. A Listagem 9-2 mostra saída parecida com a que você verá.
+A linha com `note:` nos informa que podemos definir a variável de ambiente `RUST_BACKTRACE` para obter um backtrace do que exatamente aconteceu para causar o erro. Um _backtrace_ é uma lista de todas as funções que foram chamadas até aquele ponto. Os backtraces em Rust funcionam como em outras linguagens: a chave para lê-lo é começar pelo topo e ler até encontrar arquivos que você escreveu. Esse é o ponto onde o problema se originou. As linhas acima desse ponto são código que o seu código chamou; as linhas abaixo são código que chamou o seu código. Essas linhas antes e depois podem incluir código do núcleo do Rust, código da biblioteca padrão ou crates que você está usando. Vamos tentar obter um backtrace definindo a variável de ambiente `RUST_BACKTRACE` com qualquer valor diferente de `0`. A Listagem 9-2 mostra uma saída semelhante ao que você verá.
 
 <a id="listagem-9-2"></a>
 
-[Listagem 9-2](#listagem-9-2): Backtrace gerado por `panic!` com a variável de ambiente `RUST_BACKTRACE` definida
+[Listagem 9-2](#listagem-9-2): O backtrace gerado por uma chamada a `panic!` exibido quando a variável de ambiente `RUST_BACKTRACE` está definida
 
 ```console
 $ RUST_BACKTRACE=1 cargo run
@@ -112,9 +113,8 @@ stack backtrace:
              at file:///home/.rustup/toolchains/1.85/lib/rustlib/src/rust/library/core/src/ops/function.rs:250:5
 note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
 ```
+São muitas informações! A saída exata que você vê pode ser diferente dependendo do seu sistema operacional e da versão do Rust. Para obter backtraces com essas informações, os símbolos de depuração devem estar habilitados. Os símbolos de depuração são habilitados por padrão ao usar `cargo build` ou `cargo run` sem a flag `--release`, como fizemos aqui.
 
-É bastante saída! O resultado exato pode variar conforme o sistema operacional e a versão do Rust. Para backtraces com esse nível de detalhe, os símbolos de depuração precisam estar habilitados — o que é o padrão em `cargo build` ou `cargo run` sem `--release`, como aqui.
+Na saída da Listagem 9-2, a linha 6 do backtrace aponta para a linha no nosso projeto que está causando o problema: linha 4 de _src/main.rs_. Se não quisermos que nosso programa entre em pânico, devemos começar nossa investigação pelo local apontado pela primeira linha que menciona um arquivo que escrevemos. Na Listagem 9-1, onde deliberadamente escrevemos um código que entraria em pânico, a maneira de corrigir o pânico é não solicitar um elemento além do intervalo dos índices do vetor. Quando seu código entrar em pânico no futuro, você precisará descobrir que ação o código está executando com quais valores para causar o pânico e o que o código deveria fazer em vez disso.
 
-Na Listagem 9-2, a linha 6 do backtrace aponta para o problema no nosso projeto: linha 4 de _src/main.rs_. Se não queremos pânico, a investigação começa na primeira linha que menciona um arquivo nosso. Na Listagem 9-1, onde provocamos o pânico de propósito, a correção é simples: não pedir um elemento fora do intervalo do vetor. Quando o código entrar em pânico no futuro, será preciso descobrir qual ação, com quais valores, causou o pânico — e o que deveria acontecer em vez disso.
-
-Voltaremos a `panic!` — e a quando usar ou não `panic!` para tratar erros — na seção [Panic ou Não Panic](/livro/cap09-03-panic-ou-nao-panic), mais adiante neste capítulo. Em seguida, veremos como se recuperar de um erro com `Result`.
+Voltaremos a `panic!` e quando devemos e não devemos usá-los para tratar condições de erros na seção [Usar panic! ou não usar panic!](/livro/cap09-03-panic-ou-nao-panic), mais adiante neste capítulo. A seguir veremos como se recuperar de um erro usando `Result`.
